@@ -46,12 +46,12 @@
   };
 </script>
 
-  <meta name="description" content="刷题ing">
+  <meta name="description" content="JACTF刷题ing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JACTF misc wp">
 <meta property="og:url" content="http://yoursite.com/2020/02/03/JACTF%20misc%20wp/index.html">
 <meta property="og:site_name" content="ChanCherry&#39;s Blog">
-<meta property="og:description" content="刷题ing">
+<meta property="og:description" content="JACTF刷题ing">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190813180751934.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019081318103098.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
@@ -62,7 +62,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019081521055615.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190816141214580.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2020-02-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-02-03T08:03:48.350Z">
+<meta property="article:modified_time" content="2020-02-03T09:11:05.528Z">
 <meta property="article:author" content="ChanCherry">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190813180751934.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
@@ -214,7 +214,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:03:48" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：17:11:05" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,7 +239,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>刷题ing</p>
+        <p>JACTF刷题ing</p>
 <a id="more"></a>
 <h1 id="0x00-该死的温柔"><a href="#0x00-该死的温柔" class="headerlink" title="0x00 该死的温柔"></a>0x00 该死的温柔</h1><p>查看属性，guess，呃呃，看了大佬博客，才知道是guess隐写，在kali上用outguess还原即可。<br>先安装一下outguess， kail终端命令输入git clone <a href="https://github.com/crorvick/outguess，" target="_blank" rel="noopener">https://github.com/crorvick/outguess，</a><br>安装包随即下载到文件夹。双击打开文件夹，右键点击空白区域选终端打开。随后输入以下命令./configure &amp;&amp; make &amp;&amp; make install 进行安装。<br>用outguess -help查看命令参数，之后用outguess -k ‘guess’ -r flag.jpg flag.txt，将jpg里面隐藏的flag信息写到flag.txt文件中，打开即可得到jactf{jactf_guess_steganography}。</p>
 <p><strong>题目之外来说一说outguess图片隐写软件</strong>：<br>加密：<br>outguess -k “my secret key” -d flag.txt demo.jpg out.jpg<br>加密之后，demo.jpg会覆盖out.jpg,<br>flag.txt中的内容是要隐藏的东西</p>
@@ -325,10 +325,13 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/HTTP%E5%8D%8F%E8%AE%AE/" rel="next" title="HTTP协议">
-      HTTP协议 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/HTTP%E5%8D%8F%E8%AE%AE/" rel="prev" title="HTTP协议">
+      <i class="fa fa-chevron-left"></i> HTTP协议
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/03/Bugku%20web1/" rel="next" title="Bugku web1">
+      Bugku web1 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -451,8 +454,7 @@
       </div>
 	  
 	  <div id="music163player">
-		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28312036&auto=1&height=66">
-		</iframe>
+	    
 	  </div>
 
     </div>
@@ -487,7 +489,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共35.5k字</span>
+  <span class="post-count">博客全站共35.6k字</span>
 </div>
 
         

