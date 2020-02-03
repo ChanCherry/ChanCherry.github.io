@@ -523,84 +523,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Referer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/Referer/" class="post-title-link" itemprop="url">Referer</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:58:15" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">Web安全</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>HTTP Referer</strong>是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p>
-<h2 id="Referer的作用"><a href="#Referer的作用" class="headerlink" title="Referer的作用"></a>Referer的作用</h2><p>1.防盗链<br>我在<code>www.google.com</code>里有一个<code>www.baidu.com</code>链接，那么点击这个   <code>www.baidu.com</code>，它的header信息里就有：</p>
-<pre><code>Referer=http://www.google.com</code></pre><p>那么可以利用这个来防止盗链了，比如我只允许我自己的网站访问我自己的图片服务器，那我的域名是<strong><strong>，那么图片服务器每次取到Referer来判断一下是不是我自己的域名</strong></strong>，如果是就继续访问，不是就拦截。<br>还有将这个http请求发给服务器后，如果服务器要求必须是某个地址或者某几个地址才能访问，而你发送的referer不符合他的要求，就会拦截或者跳转到他要求的地址，然后再通过这个地址进行访问。</p>
-<p>2.防止恶意请求。<br>比如静态请求是<em>.html结尾的，动态请求是</em>.shtml，那么由此可以这么用，所有的*.shtml请求，必须 Referer  为我自己的网站。</p>
-<pre><code>Referer=http://www.google.com</code></pre><h2 id="空Referer"><a href="#空Referer" class="headerlink" title="空Referer"></a>空Referer</h2><p> 空Referer即，Referer  头部的内容为空，或者，一个 HTTP  请求中根本不包含 Referer 头部。根据Referer的定义，它的作用是指示一个请求是从哪里链接过来，那么当一个<em>请求并不是由链接触发产生的</em>，那么自然也就不需要指定这个请求的链接来源。<br>比如，直接在浏览器的地址栏中输入一个资源的URL地址，那么这种请求是不会包含 Referer  字段的，因为这是一个“凭空产生”的 HTTP  请求，并不是从一个地方链接过去的。<br>允许 Referer  为空，意味着你允许比如浏览器直接访问，就是空。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -766,6 +688,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Referer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/Referer/" class="post-title-link" itemprop="url">Referer</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:58:15" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>HTTP Referer</strong>是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p>
+<h2 id="Referer的作用"><a href="#Referer的作用" class="headerlink" title="Referer的作用"></a>Referer的作用</h2><p>1.防盗链<br>我在<code>www.google.com</code>里有一个<code>www.baidu.com</code>链接，那么点击这个   <code>www.baidu.com</code>，它的header信息里就有：</p>
+<pre><code>Referer=http://www.google.com</code></pre><p>那么可以利用这个来防止盗链了，比如我只允许我自己的网站访问我自己的图片服务器，那我的域名是<strong><strong>，那么图片服务器每次取到Referer来判断一下是不是我自己的域名</strong></strong>，如果是就继续访问，不是就拦截。<br>还有将这个http请求发给服务器后，如果服务器要求必须是某个地址或者某几个地址才能访问，而你发送的referer不符合他的要求，就会拦截或者跳转到他要求的地址，然后再通过这个地址进行访问。</p>
+<p>2.防止恶意请求。<br>比如静态请求是<em>.html结尾的，动态请求是</em>.shtml，那么由此可以这么用，所有的*.shtml请求，必须 Referer  为我自己的网站。</p>
+<pre><code>Referer=http://www.google.com</code></pre><h2 id="空Referer"><a href="#空Referer" class="headerlink" title="空Referer"></a>空Referer</h2><p> 空Referer即，Referer  头部的内容为空，或者，一个 HTTP  请求中根本不包含 Referer 头部。根据Referer的定义，它的作用是指示一个请求是从哪里链接过来，那么当一个<em>请求并不是由链接触发产生的</em>，那么自然也就不需要指定这个请求的链接来源。<br>比如，直接在浏览器的地址栏中输入一个资源的URL地址，那么这种请求是不会包含 Referer  字段的，因为这是一个“凭空产生”的 HTTP  请求，并不是从一个地方链接过去的。<br>允许 Referer  为空，意味着你允许比如浏览器直接访问，就是空。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Cookie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -831,6 +831,84 @@
 
 <p>在安全性方面：当您访问使用会话并在您自己的计算机上创建cookie的站点时，建议服务器端的会话机制更安全，因为它不会任意读取客户端存储的信息。</p>
 <p>文章参照了下面两篇文章，可以好好学习一下。<br><a href="https://baijiahao.baidu.com/s?id=1612804856429135825&wfr=spider&for=pc" target="_blank" rel="noopener">官方解析cookies和session的区别</a><br><a href="https://www.cnblogs.com/wangpei/p/4884840.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangpei/p/4884840.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/robots%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/robots%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">robots协议</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:58:36" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>晚上刷ctf时，做到一题，关于robots的，作为小白的我，丝毫不会，就查了一下。</p>
+<p>robots.txt文件是一个文本文件，使用任何一个常见的文本编辑器，比如Windows系统自带的Notepad，就可以创建和编辑它 。robots.txt是一个协议，而不是一个命令。robots.txt是搜索引擎中访问网站的时候要查看的第一个文件。robots.txt文件告诉蜘蛛程序在服务器上什么文件是可以被查看的。当 一个搜索蜘蛛访问一个站点时，它会首先检查该站点根目录下是否存在robots.txt，如果存在，搜索机器人就会按照该文件中的内容来确定访问的范围；如果该文件不存在，所有的搜索蜘蛛将能够访问网站上所有没有被口令保护的页面。</p>
+<p>点开网址什么都没有，看教程说要用dirsearch扫目录脚本，又百度了一下。。。</p>
+<p>dirsearch是一个基于python的命令行工具，旨在暴力扫描页面结构，包括网页中的目录和文件。</p>
+<p>在kali中用以下命令即可使用：(kali中自带python环境）<br>git clone <a href="https://github.com/maurosoria/dirsearch.git" target="_blank" rel="noopener">https://github.com/maurosoria/dirsearch.git</a><br>cd dirsearch/<br>./dirsearch.py -u 目标网址 -e *<br>果然扫到了robots.txt，emmm，尴尬的是，不会访问该文件，后来大神指点，在网址链接后面加上robots.txt即可访问，表示学到了，?终于得到了flag.</p>
 
       
     </div>
@@ -991,84 +1069,6 @@
 <h2 id="HTTP-Request-Header-请求头"><a href="#HTTP-Request-Header-请求头" class="headerlink" title="HTTP Request Header 请求头"></a>HTTP Request Header 请求头</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">Accept：指定客户端能够接收的内容类型。</span><br><span class="line"></span><br><span class="line">Accept-Charset：浏览器可以接受的字符编码集。</span><br><span class="line"></span><br><span class="line">Accept-Encoding：指定浏览器可以支持的web服务器返回内容压缩编码类型。</span><br><span class="line"></span><br><span class="line">Accept-Language：浏览器可接受的语言。</span><br><span class="line"></span><br><span class="line">Accept-Ranges：可以请求网页实体的一个或者多个子范围字段。</span><br><span class="line"></span><br><span class="line">AuthorizationHTTP：授权的授权证书。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Cache</span>-Control：指定请求和响应遵循的缓存机制。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Connection</span>：表示是否需要持久连接。（<span class="keyword">HTTP</span> <span class="number">1.1</span>默认进行持久连接）</span><br><span class="line"></span><br><span class="line">CookieHTTP：请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Length</span>：请求的内容长度。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Type</span>：请求的与实体对应的MIME信息。</span><br><span class="line"></span><br><span class="line"><span class="built_in">Date</span>：请求发送的日期和时间。</span><br><span class="line"></span><br><span class="line">Expect：请求的特定的服务器行为。</span><br><span class="line"></span><br><span class="line"><span class="keyword">From</span>：发出请求的用户的Email。</span><br><span class="line"></span><br><span class="line">Host：指定请求的服务器的域名和端口号。</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span>-<span class="keyword">Match</span>：只有请求内容与实体相匹配才有效。</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span>-Modified-Since：如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回<span class="number">304</span>代码。</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span>-<span class="keyword">None</span>-<span class="keyword">Match</span>：如果内容未改变返回<span class="number">304</span>代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变。</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span>-<span class="keyword">Range</span>：如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span>-Unmodified-Since：只在实体在指定时间之后未被修改才请求成功。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Max</span>-Forwards：限制信息通过代理和网关传送的时间。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Pragma</span>：用来包含实现特定的指令。</span><br><span class="line"></span><br><span class="line">Proxy-Authorization：连接到代理的授权证书。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Range</span>：只请求实体的一部分，指定范围。</span><br><span class="line"></span><br><span class="line">Referer：先前网页的地址，当前请求网页紧随其后,即来路。</span><br><span class="line"></span><br><span class="line">TE：客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Upgrade</span>：向服务器指定某种传输协议以便服务器进行转换（如果支持。</span><br><span class="line"></span><br><span class="line"><span class="keyword">User</span>-AgentUser-<span class="keyword">Agent</span>：的内容包含发出请求的用户信息。</span><br><span class="line"></span><br><span class="line">Via：通知中间网关或代理服务器地址，通信协议。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Warning</span>：关于消息实体的警告信息</span><br></pre></td></tr></table></figure>
 <h2 id="HTTP-Responses-Header-响应头"><a href="#HTTP-Responses-Header-响应头" class="headerlink" title="HTTP Responses Header 响应头"></a>HTTP Responses Header 响应头</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">Accept-Ranges：表明服务器是否支持指定范围请求及哪种类型的分段请求。</span><br><span class="line"></span><br><span class="line">Age：从原始服务器到代理缓存形成的估算时间（以秒计，非负）。</span><br><span class="line"></span><br><span class="line">Allow：对某网络资源的有效的请求行为，不允许则返回405。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Cache</span>-Control：告诉所有的缓存机制是否可以缓存及哪种类型。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-Encodingweb：服务器支持的返回内容压缩编码类型。。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Language</span>：响应体的语言。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Length</span>：响应体的长度。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-Location：请求资源可替代的备用的另一地址。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">MD5</span>：返回资源的<span class="keyword">MD5</span>校验值。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Range</span>：在整个返回体中本部分的字节位置。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Type</span>：返回内容的MIME类型。</span><br><span class="line"></span><br><span class="line"><span class="built_in">Date</span>：原始服务器消息发出的时间。</span><br><span class="line"></span><br><span class="line">ETag：请求变量的实体标签的当前值。</span><br><span class="line"></span><br><span class="line">Expires：响应过期的日期和时间。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Last</span>-Modified：请求资源的最后修改时间。</span><br><span class="line"></span><br><span class="line">Location：用来重定向接收方到非请求<span class="keyword">URL</span>的位置来完成请求或标识新的资源。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Pragma</span>：包括实现特定的指令，它可应用到响应链上的任何接收方。</span><br><span class="line"></span><br><span class="line">Proxy-Authenticate：它指出认证方案和可应用到代理的该<span class="keyword">URL</span>上的参数。</span><br><span class="line"></span><br><span class="line"><span class="keyword">refresh</span>：应用于重定向或一个新的资源被创造，在<span class="number">5</span>秒之后重定向（由网景提出，被大部分浏览器支持）</span><br><span class="line"></span><br><span class="line">Retry-<span class="keyword">After</span>：如果实体暂时不可取，通知客户端在指定时间之后再次尝试。</span><br><span class="line"></span><br><span class="line">Serverweb：服务器软件名称。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Set</span>-Cookie：设置<span class="keyword">Http</span> Cookie。</span><br><span class="line"></span><br><span class="line">Trailer：指出头域在分块传输编码的尾部存在。</span><br><span class="line"></span><br><span class="line">Transfer-<span class="keyword">Encoding</span>：文件传输编码。</span><br><span class="line"></span><br><span class="line">Vary：告诉下游代理是使用缓存响应还是从原始服务器请求。</span><br><span class="line"></span><br><span class="line">Via：告知代理客户端响应是通过哪里发送的。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Warning</span>：警告实体可能存在的问题。</span><br><span class="line"></span><br><span class="line">WWW-Authenticate：表明客户端请求实体应该使用的授权方案。</span><br></pre></td></tr></table></figure>
 <p>附上原文链接：<br><a href="https://www.jianshu.com/p/60063b692a3f" target="_blank" rel="noopener">https://www.jianshu.com/p/60063b692a3f</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/robots%E5%8D%8F%E8%AE%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/robots%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">robots协议</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:58:36" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">Web安全</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>晚上刷ctf时，做到一题，关于robots的，作为小白的我，丝毫不会，就查了一下。</p>
-<p>robots.txt文件是一个文本文件，使用任何一个常见的文本编辑器，比如Windows系统自带的Notepad，就可以创建和编辑它 。robots.txt是一个协议，而不是一个命令。robots.txt是搜索引擎中访问网站的时候要查看的第一个文件。robots.txt文件告诉蜘蛛程序在服务器上什么文件是可以被查看的。当 一个搜索蜘蛛访问一个站点时，它会首先检查该站点根目录下是否存在robots.txt，如果存在，搜索机器人就会按照该文件中的内容来确定访问的范围；如果该文件不存在，所有的搜索蜘蛛将能够访问网站上所有没有被口令保护的页面。</p>
-<p>点开网址什么都没有，看教程说要用dirsearch扫目录脚本，又百度了一下。。。</p>
-<p>dirsearch是一个基于python的命令行工具，旨在暴力扫描页面结构，包括网页中的目录和文件。</p>
-<p>在kali中用以下命令即可使用：(kali中自带python环境）<br>git clone <a href="https://github.com/maurosoria/dirsearch.git" target="_blank" rel="noopener">https://github.com/maurosoria/dirsearch.git</a><br>cd dirsearch/<br>./dirsearch.py -u 目标网址 -e *<br>果然扫到了robots.txt，emmm，尴尬的是，不会访问该文件，后来大神指点，在网址链接后面加上robots.txt即可访问，表示学到了，?终于得到了flag.</p>
 
       
     </div>
@@ -1295,5 +1295,5 @@
    <script type="text/javascript" src="/js/src/fireworks.js"></script>
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

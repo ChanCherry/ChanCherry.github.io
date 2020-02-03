@@ -94,30 +94,6 @@
   </entry>
   
   <entry>
-    <title>Referer</title>
-    <link href="http://yoursite.com/2020/02/03/Referer/"/>
-    <id>http://yoursite.com/2020/02/03/Referer/</id>
-    <published>2020-02-02T16:00:00.000Z</published>
-    <updated>2020-02-03T04:58:15.040Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>HTTP Referer</strong>是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p><h2 id="Referer的作用"><a href="#Referer的作用" class="headerlink" title="Referer的作用"></a>Referer的作用</h2><p>1.防盗链<br>我在<code>www.google.com</code>里有一个<code>www.baidu.com</code>链接，那么点击这个   <code>www.baidu.com</code>，它的header信息里就有：</p><pre><code>Referer=http://www.google.com</code></pre><p>那么可以利用这个来防止盗链了，比如我只允许我自己的网站访问我自己的图片服务器，那我的域名是<strong><strong>，那么图片服务器每次取到Referer来判断一下是不是我自己的域名</strong></strong>，如果是就继续访问，不是就拦截。<br>还有将这个http请求发给服务器后，如果服务器要求必须是某个地址或者某几个地址才能访问，而你发送的referer不符合他的要求，就会拦截或者跳转到他要求的地址，然后再通过这个地址进行访问。</p><p>2.防止恶意请求。<br>比如静态请求是<em>.html结尾的，动态请求是</em>.shtml，那么由此可以这么用，所有的*.shtml请求，必须 Referer  为我自己的网站。</p><pre><code>Referer=http://www.google.com</code></pre><h2 id="空Referer"><a href="#空Referer" class="headerlink" title="空Referer"></a>空Referer</h2><p> 空Referer即，Referer  头部的内容为空，或者，一个 HTTP  请求中根本不包含 Referer 头部。根据Referer的定义，它的作用是指示一个请求是从哪里链接过来，那么当一个<em>请求并不是由链接触发产生的</em>，那么自然也就不需要指定这个请求的链接来源。<br>比如，直接在浏览器的地址栏中输入一个资源的URL地址，那么这种请求是不会包含 Referer  字段的，因为这是一个“凭空产生”的 HTTP  请求，并不是从一个地方链接过去的。<br>允许 Referer  为空，意味着你允许比如浏览器直接访问，就是空。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;strong&gt;HTTP Referer&lt;/strong&gt;是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HT
-      
-    
-    </summary>
-    
-    
-      <category term="Web安全" scheme="http://yoursite.com/categories/Web%E5%AE%89%E5%85%A8/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>Java中的序列化和反序列化</title>
     <link href="http://yoursite.com/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
     <id>http://yoursite.com/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</id>
@@ -166,6 +142,30 @@
   </entry>
   
   <entry>
+    <title>Referer</title>
+    <link href="http://yoursite.com/2020/02/03/Referer/"/>
+    <id>http://yoursite.com/2020/02/03/Referer/</id>
+    <published>2020-02-02T16:00:00.000Z</published>
+    <updated>2020-02-03T04:58:15.040Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>HTTP Referer</strong>是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p><h2 id="Referer的作用"><a href="#Referer的作用" class="headerlink" title="Referer的作用"></a>Referer的作用</h2><p>1.防盗链<br>我在<code>www.google.com</code>里有一个<code>www.baidu.com</code>链接，那么点击这个   <code>www.baidu.com</code>，它的header信息里就有：</p><pre><code>Referer=http://www.google.com</code></pre><p>那么可以利用这个来防止盗链了，比如我只允许我自己的网站访问我自己的图片服务器，那我的域名是<strong><strong>，那么图片服务器每次取到Referer来判断一下是不是我自己的域名</strong></strong>，如果是就继续访问，不是就拦截。<br>还有将这个http请求发给服务器后，如果服务器要求必须是某个地址或者某几个地址才能访问，而你发送的referer不符合他的要求，就会拦截或者跳转到他要求的地址，然后再通过这个地址进行访问。</p><p>2.防止恶意请求。<br>比如静态请求是<em>.html结尾的，动态请求是</em>.shtml，那么由此可以这么用，所有的*.shtml请求，必须 Referer  为我自己的网站。</p><pre><code>Referer=http://www.google.com</code></pre><h2 id="空Referer"><a href="#空Referer" class="headerlink" title="空Referer"></a>空Referer</h2><p> 空Referer即，Referer  头部的内容为空，或者，一个 HTTP  请求中根本不包含 Referer 头部。根据Referer的定义，它的作用是指示一个请求是从哪里链接过来，那么当一个<em>请求并不是由链接触发产生的</em>，那么自然也就不需要指定这个请求的链接来源。<br>比如，直接在浏览器的地址栏中输入一个资源的URL地址，那么这种请求是不会包含 Referer  字段的，因为这是一个“凭空产生”的 HTTP  请求，并不是从一个地方链接过去的。<br>允许 Referer  为空，意味着你允许比如浏览器直接访问，就是空。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;HTTP Referer&lt;/strong&gt;是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HT
+      
+    
+    </summary>
+    
+    
+      <category term="Web安全" scheme="http://yoursite.com/categories/Web%E5%AE%89%E5%85%A8/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Cookie</title>
     <link href="http://yoursite.com/2020/02/03/Cookie/"/>
     <id>http://yoursite.com/2020/02/03/Cookie/</id>
@@ -180,6 +180,31 @@
       
         &lt;h1 id=&quot;Cookie&quot;&gt;&lt;a href=&quot;#Cookie&quot; class=&quot;headerlink&quot; title=&quot;Cookie&quot;&gt;&lt;/a&gt;Cookie&lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;Cookie 可以翻译为“小甜品，小饼干” ，Cookie 在网络系统中几乎无 处
+      
+    
+    </summary>
+    
+    
+      <category term="Web安全" scheme="http://yoursite.com/categories/Web%E5%AE%89%E5%85%A8/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>robots协议</title>
+    <link href="http://yoursite.com/2020/02/03/robots%E5%8D%8F%E8%AE%AE/"/>
+    <id>http://yoursite.com/2020/02/03/robots%E5%8D%8F%E8%AE%AE/</id>
+    <published>2020-02-02T16:00:00.000Z</published>
+    <updated>2020-02-03T04:58:36.241Z</updated>
+    
+    <content type="html"><![CDATA[<p>晚上刷ctf时，做到一题，关于robots的，作为小白的我，丝毫不会，就查了一下。</p><p>robots.txt文件是一个文本文件，使用任何一个常见的文本编辑器，比如Windows系统自带的Notepad，就可以创建和编辑它 。robots.txt是一个协议，而不是一个命令。robots.txt是搜索引擎中访问网站的时候要查看的第一个文件。robots.txt文件告诉蜘蛛程序在服务器上什么文件是可以被查看的。当 一个搜索蜘蛛访问一个站点时，它会首先检查该站点根目录下是否存在robots.txt，如果存在，搜索机器人就会按照该文件中的内容来确定访问的范围；如果该文件不存在，所有的搜索蜘蛛将能够访问网站上所有没有被口令保护的页面。</p><p>点开网址什么都没有，看教程说要用dirsearch扫目录脚本，又百度了一下。。。</p><p>dirsearch是一个基于python的命令行工具，旨在暴力扫描页面结构，包括网页中的目录和文件。</p><p>在kali中用以下命令即可使用：(kali中自带python环境）<br>git clone <a href="https://github.com/maurosoria/dirsearch.git" target="_blank" rel="noopener">https://github.com/maurosoria/dirsearch.git</a><br>cd dirsearch/<br>./dirsearch.py -u 目标网址 -e *<br>果然扫到了robots.txt，emmm，尴尬的是，不会访问该文件，后来大神指点，在网址链接后面加上robots.txt即可访问，表示学到了，?终于得到了flag.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;晚上刷ctf时，做到一题，关于robots的，作为小白的我，丝毫不会，就查了一下。&lt;/p&gt;
+&lt;p&gt;robots.txt文件是一个文本文件，使用任何一个常见的文本编辑器，比如Windows系统自带的Notepad，就可以创建和编辑它 。robots.txt是一个协议，而不是一
       
     
     </summary>
@@ -229,31 +254,6 @@
       
         &lt;p&gt;好久没刷题了，今天竟然发现自己傻了，连http请求头都不太清楚了，凉了凉了，赶紧百度一波，然后记下来，下次不能再忘了，下面是转载大佬的文章。&lt;/p&gt;
 &lt;h1 id=&quot;http请求头组成&quot;&gt;&lt;a href=&quot;#http请求头组成&quot; class=&quot;headerlink&quot; tit
-      
-    
-    </summary>
-    
-    
-      <category term="Web安全" scheme="http://yoursite.com/categories/Web%E5%AE%89%E5%85%A8/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>robots协议</title>
-    <link href="http://yoursite.com/2020/02/03/robots%E5%8D%8F%E8%AE%AE/"/>
-    <id>http://yoursite.com/2020/02/03/robots%E5%8D%8F%E8%AE%AE/</id>
-    <published>2020-02-02T16:00:00.000Z</published>
-    <updated>2020-02-03T04:58:36.241Z</updated>
-    
-    <content type="html"><![CDATA[<p>晚上刷ctf时，做到一题，关于robots的，作为小白的我，丝毫不会，就查了一下。</p><p>robots.txt文件是一个文本文件，使用任何一个常见的文本编辑器，比如Windows系统自带的Notepad，就可以创建和编辑它 。robots.txt是一个协议，而不是一个命令。robots.txt是搜索引擎中访问网站的时候要查看的第一个文件。robots.txt文件告诉蜘蛛程序在服务器上什么文件是可以被查看的。当 一个搜索蜘蛛访问一个站点时，它会首先检查该站点根目录下是否存在robots.txt，如果存在，搜索机器人就会按照该文件中的内容来确定访问的范围；如果该文件不存在，所有的搜索蜘蛛将能够访问网站上所有没有被口令保护的页面。</p><p>点开网址什么都没有，看教程说要用dirsearch扫目录脚本，又百度了一下。。。</p><p>dirsearch是一个基于python的命令行工具，旨在暴力扫描页面结构，包括网页中的目录和文件。</p><p>在kali中用以下命令即可使用：(kali中自带python环境）<br>git clone <a href="https://github.com/maurosoria/dirsearch.git" target="_blank" rel="noopener">https://github.com/maurosoria/dirsearch.git</a><br>cd dirsearch/<br>./dirsearch.py -u 目标网址 -e *<br>果然扫到了robots.txt，emmm，尴尬的是，不会访问该文件，后来大神指点，在网址链接后面加上robots.txt即可访问，表示学到了，?终于得到了flag.</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;晚上刷ctf时，做到一题，关于robots的，作为小白的我，丝毫不会，就查了一下。&lt;/p&gt;
-&lt;p&gt;robots.txt文件是一个文本文件，使用任何一个常见的文本编辑器，比如Windows系统自带的Notepad，就可以创建和编辑它 。robots.txt是一个协议，而不是一
       
     
     </summary>
