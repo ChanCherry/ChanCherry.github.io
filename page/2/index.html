@@ -178,6 +178,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/JACTF%20web%E7%AD%BE%E5%88%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/JACTF%20web%E7%AD%BE%E5%88%B0/" class="post-title-link" itemprop="url">JACTF web签到</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:01:45" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF WP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>首先查看源代码，发现3719372767312836781.js可能会有点东西。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>签到<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./3719372767312836781.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>The requested URL /eighteen8.php was not found on this server.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Additionally, a 404 Not Found</span><br><span class="line">    error was encountered while trying to use an ErrorDocument to handle the request.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span></span><br><span class="line">呀，小伙子不错啊，还可以找到这里，是个人才。</span><br><span class="line"></span><br><span class="line">but，flag不在这里，不过还是在这个页面内，你自己看一看。</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>点开看看，</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.fromCharCode(102,108,97,103,58,102,108,97,103,95,105,115,95,118,101,114,121,95,101,97,115,121)</span><br></pre></td></tr></table></figure>
+<p>很明显102是“f”的ASCII码，于是用python编写一个脚本，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"> </span><br><span class="line">s = [<span class="number">102</span>,<span class="number">108</span>,<span class="number">97</span>,<span class="number">103</span>,<span class="number">58</span>,<span class="number">102</span>,<span class="number">108</span>,<span class="number">97</span>,<span class="number">103</span>,<span class="number">95</span>,<span class="number">105</span>,<span class="number">115</span>,<span class="number">95</span>,<span class="number">118</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">121</span>,<span class="number">95</span>,<span class="number">101</span>,<span class="number">97</span>,<span class="number">115</span>,<span class="number">121</span>]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">    k = chr(i)</span><br><span class="line">    flag += k</span><br><span class="line">print(<span class="string">"web签到的flag是"</span>,flag)</span><br></pre></td></tr></table></figure>
+<p>得到flag:flag_is_very_easy</p>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Moctf%20Web/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -508,7 +588,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/PHP%E4%BC%AA%E5%8D%8F%E8%AE%AE/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/X-Forwarded-For/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -522,7 +602,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/03/PHP%E4%BC%AA%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">PHP伪协议</a>
+            <a href="/2020/02/03/X-Forwarded-For/" class="post-title-link" itemprop="url">X-Forwarded-For</a>
         </h1>
 
         <div class="post-meta">
@@ -533,7 +613,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:57:59" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:59:06" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -558,54 +638,107 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>感觉web里面还会经常遇到php伪协议的，总结一下。</p>
-<p>php支持的协议如下：</p>
+          <p>简称<strong>XFF头</strong>，是一个扩展头，它代表客户端也就是HTTP的请求端真实的IP，只有在通过了HTTP 代理或者负载均衡服务器时才会添加该项（百度百科：用来识别通过HTTP代理或负载均衡方式连接到Web服务器的<strong>客户端最原始的IP地址</strong>的<strong>HTTP请求头字段</strong>）。<br>X-Forwarded-For请求头格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For:client,proxy1,proxy2</span><br></pre></td></tr></table></figure>
+<p>格式比较简单，首先是离服务端最远的设备IP，然后就是每一级代理设备的IP。如果一个HTTP请求到达服务器之前，经过了三个代理Proxy1、Proxy2、Proxy3，IP分别为IP1、IP2、IP3，用户真实IP是IP0，那么根据XFF标准，服务器最终会收到下面的信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For:IP0,IP1,IP2</span><br></pre></td></tr></table></figure>
+<p>Proxy3直连服务器，它会给XFF追加IP2，帮Proxy2转发请求。列表中并没有 IP3，IP3 可以在服务端通过 $ remote_address 字段获得。我们知道 HTTP 连接基于 TCP 连接，HTTP 协议中没有 IP 的概念，$remote_address 来自 TCP 连接，表示与服务端建立 TCP 连接的设备 IP，在这个例子里就是 IP3。<br>详细分析一下，这样的结果是经过这样的流程而形成的：</p>
 <ol>
-<li>file:// — 访问本地文件系统</li>
-<li>http://— 访问Http(s)网址</li>
-<li>ftp://— 访问ftp(s) urls</li>
-<li>php:// — 访问各个输入/输出流（I/O streams）</li>
-<li>zlib:// — 压缩流</li>
-<li>data:// — 数据（RFC 2397）</li>
-<li>glob:// — 查找匹配的文件路径模式</li>
-<li>phar:// — PHP 归档</li>
-<li>ssh2:// — Secure Shell 2</li>
-<li>rar:// — RAR</li>
-<li>ogg:// — 音频流</li>
-<li>expect:// — 处理交互式的流<h1 id="环境概要"><a href="#环境概要" class="headerlink" title="环境概要"></a>环境概要</h1>PHP.ini:</li>
+<li>用户IP0—&gt; 代理Proxy1（IP1），Proxy1记录用户IP0，并将请求转发给Proxy2时，带上一个Http Header <code>X-Forwarded-For: IP0</code>。</li>
+<li>Proxy2收到请求后读取到请求有 X-Forwarded-For: IP0，然后Proxy2 继续把链接上来的Proxy1 IP追加到 X-Forwarded-For 上面，构造出X-Forwarded-For: IP0, IP1，继续转发请求给Proxy 3。</li>
+<li>同理，Proxy3 按照第二部构造出 X-Forwarded-For: IP0, IP1, IP2,转发给真正的服务器，比如nginx，nginx收到了http请求，里面就是 X-Forwarded-For: IP0, IP1, IP2 这样的结果。所以Proxy 3 的IP3，不会出现在这里。</li>
+<li>nginx 获取Proxy3的IP 能通过$ remote_address获取到，因为这个<br>$ remote_address就是真正建立TCP链接的IP，这个不能伪造，是直接产生链接的IP。$remote_address 无法伪造，因为建立 TCP 连接需要三次握手，如果伪造了源 IP，无法建立 TCP 连接，更不会有后面的 HTTP 请求。</li>
 </ol>
-<p>allow_url_fopen：默认为on  ，该选项为on便是激活了url 形式的 fopen封装协议，使得可以访问 url 对象文件等。</p>
-<p>allow_url_include：  默认为off，不允许url里的封装协议访问对象文件。</p>
-<h1 id="0x00-是否截断问题"><a href="#0x00-是否截断问题" class="headerlink" title="0x00 是否截断问题:"></a>0x00 是否截断问题:</h1><h2 id="不需要截断"><a href="#不需要截断" class="headerlink" title="不需要截断"></a>不需要截断</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>($_GET[<span class="string">'file'</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="需要截断"><a href="#需要截断" class="headerlink" title="需要截断"></a>需要截断</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>($_GET[<span class="string">'file'</span>].<span class="string">'.php'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h1 id="0x01-allow-url-fopen与allow-url-include是否开启的问题："><a href="#0x01-allow-url-fopen与allow-url-include是否开启的问题：" class="headerlink" title="0x01 allow_url_fopen与allow_url_include是否开启的问题："></a>0x01 allow_url_fopen与allow_url_include是否开启的问题：</h1><h2 id="file-协议"><a href="#file-协议" class="headerlink" title="file://协议"></a>file://协议</h2><p>file:// 用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受allow_url_fopen与allow_url_include的影响。</p>
-<p>使用方法：<br>file:// [文件的绝对路径和文件名]<br><img src="https://img-blog.csdnimg.cn/20191009204203130.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="php-协议"><a href="#php-协议" class="headerlink" title="php://协议"></a>php://协议</h2><p>条件：<br>不需要开启allow_url_fopen，仅php://input、 php://stdin、 php://memory 和 php://temp 需要开启allow_url_include。</p>
-<p>php:// 访问各个输入/输出流（I/O streams），在CTF中经常使用的是php://filter和php://input，<strong>php://filter用于读取源码</strong>，<strong>php://input用于执行php代码</strong>。</p>
-<hr>
-<p><strong>php://filter</strong> 读取源代码并进行base64编码输出，不然会直接当做php代码执行就看不到源代码内容了。<br>例如，有时url会传入<code>?file=php://filter/read=convert.base64-encode/resource=./cmd.php</code></p>
-<p>PHP.ini：<br>php://filter在双off的情况下也可以正常使用；</p>
-<p>allow_url_fopen ：off/on<br>allow_url_include：off/on</p>
-<hr>
-<p><strong>php://input</strong> 可以访问请求的原始数据的只读流, 将post请求中的数据作为PHP代码执行。</p>
-<p>PHP.ini：</p>
-<p>allow_url_fopen ：off/on<br>allow_url_include：on</p>
-<p>例：<br><img src="https://img-blog.csdnimg.cn/20191009204108596.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="zip-bzip2-zlib-协议"><a href="#zip-bzip2-zlib-协议" class="headerlink" title="zip://, bzip2://, zlib://协议"></a>zip://, bzip2://, zlib://协议</h2><p>PHP.ini：</p>
-<p>zip://, bzip2://, zlib://协议在双off的情况下也可以正常使用；</p>
-<p>allow_url_fopen ：off/on<br>allow_url_include：off/on</p>
-<p>zip://, bzip2://, zlib:// 均属于压缩流，可以访问压缩文件中的子文件，更重要的是不需要指定后缀名。</p>
-<h3 id="（1）zip-协议"><a href="#（1）zip-协议" class="headerlink" title="（1）zip://协议"></a>（1）zip://协议</h3><p>使用方法：<br>zip://archive.zip#dir/file.txt<br>zip:// [压缩文件绝对路径]#[压缩文件内的子文件名]<br>（注：由于#在get请求中会将后面的参数忽略所以使用get请求时候应进行url编码为%23）<br>例：<code>?file=zip://D:/soft/phpStudy/WWW/file.jpg%23phpcode.txt</code></p>
-<h3 id="（2）bzip2-协议"><a href="#（2）bzip2-协议" class="headerlink" title="（2）bzip2://协议"></a>（2）bzip2://协议</h3><p>使用方法：<br>compress.bzip2://[压缩文件绝对路径或相对路径]<br>例：<code>?file=compress.bzip2://D:/soft/phpStudy/WWW/file.jpg</code><br>或<code>?file=compress.bzip2://./file.jpg</code></p>
-<h3 id="（3）zlib-协议"><a href="#（3）zlib-协议" class="headerlink" title="（3）zlib://协议"></a>（3）zlib://协议</h3><p>使用方法：<br>compress.zlib://file.gz<br>例（同上）：<code>?file=compress.zlib://D:/soft/phpStudy/WWW/file.jpg</code></p>
-<hr>
-<h2 id="data-协议"><a href="#data-协议" class="headerlink" title="data://协议"></a>data://协议</h2><p>PHP.ini：</p>
-<p>data://协议必须双在on才能正常使用；</p>
-<p>allow_url_fopen ：on<br>allow_url_include：on<br>例：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//localhost/test.php?file=data://text/plain,<span class="meta">&lt;?php</span> phpinfo()<span class="meta">?&gt;</span></span></span><br><span class="line">http:<span class="comment">//localhost/test.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpPz4=</span></span><br><span class="line">http:<span class="comment">//localhost/test.php?file=data:text/plain,<span class="meta">&lt;?php</span> phpinfo()<span class="meta">?&gt;</span></span></span><br><span class="line">http:<span class="comment">//localhost/test.php?file=data:text/plain;base64,PD9waHAgcGhwaW5mbygpPz4=</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>借用一下FreeBuf的图最后总结一下<br><img src="https://img-blog.csdnimg.cn/2019100920385028.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>文章转载自FreeBuf一个大佬的文章<a href="https://www.freebuf.com/column/148886.html" target="_blank" rel="noopener">https://www.freebuf.com/column/148886.html</a></p>
+<p>如果没有XFF或者另外一种相似的技术，所有通过代理服务器的连接只会显示代理服务器的IP地址，而非连接发起的原始IP地址，这样的代理服务器实际上充当了匿名服务提供者的角色，<em>如果连接的原始IP地址不可得，恶意访问的检测与预防的难度将大大增加</em>。<br>XFF的有效性依赖于代理服务器提供的连接原始IP地址的真实性，因此，XFF的有效使用应该保证代理服务器是可信的，比如可以通过创建可信服务器白名单的方式。</p>
+<p>部分转载自<a href="https://www.jianshu.com/p/15f3498a7fad" target="_blank" rel="noopener">https://www.jianshu.com/p/15f3498a7fad</a>，（侵权删</p>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/BUU%20misc%EF%BC%88GXYCTF2019%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/BUU%20misc%EF%BC%88GXYCTF2019%EF%BC%89/" class="post-title-link" itemprop="url">BUU misc（GXYCTF2019）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：14:09:44" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF WP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="gakki"><a href="#gakki" class="headerlink" title="gakki"></a>gakki</h1><p>下载压缩包之后是一张gakki的图片，<br><img src="https://img-blog.csdnimg.cn/2020013115185922.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_14,color_FFFFFF,t_70" width="300" height="300" align=center><br>foremost一下，得到一个压缩包，包里有flag.txt，但是需要密码才能打开。尝试数字爆破，得到密码8864，打开之后得到一串奇奇怪怪的字符，<br><img src="https://img-blog.csdnimg.cn/20200131154247216.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_14,color_FFFFFF,t_70" width="500" height="380"><br>看了大佬的wp，对于这种无规律的字符集要尝试字频统计，附上字频统计exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">alphabet = <span class="string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&amp;*()_+- =&#123;&#125;[]"</span></span><br><span class="line">f = open(<span class="string">"flag.txt"</span>, <span class="string">"r"</span>)</span><br><span class="line">data = f.read()</span><br><span class="line">result = &#123;d:<span class="number">0</span> <span class="keyword">for</span> d <span class="keyword">in</span> alphabet&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sort_by_value</span><span class="params">(d)</span>:</span></span><br><span class="line">    items = d.items()</span><br><span class="line">    backitems = [[v[<span class="number">1</span>],v[<span class="number">0</span>]] <span class="keyword">for</span> v <span class="keyword">in</span> items]</span><br><span class="line">    backitems.sort(reverse=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">return</span> [ backitems[i][<span class="number">1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(backitems))]</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> d <span class="keyword">in</span> data:</span><br><span class="line">    <span class="keyword">for</span> alpha <span class="keyword">in</span> alphabet:</span><br><span class="line">        <span class="keyword">if</span> d == alpha:</span><br><span class="line">            result[alpha] = result[alpha] + <span class="number">1</span></span><br><span class="line"> </span><br><span class="line">print(sort_by_value(result))</span><br></pre></td></tr></table></figure>
+<p>跑一遍就能得到flag了。<br><img src="https://img-blog.csdnimg.cn/20200131160731725.png" alt="在这里插入图片描述"></p>
+<h1 id="SXMgdGhpcyBiYXNlPw"><a href="#SXMgdGhpcyBiYXNlPw" class="headerlink" title="SXMgdGhpcyBiYXNlPw=="></a>SXMgdGhpcyBiYXNlPw==</h1><p>题目base64解密一下，得到<code>Is this base?</code><br>下载文件得到一个压缩包，里面是flag.txt，打开一看是base64字符，写脚本跑一下，得到<code>b&#39;Cette nuit,\nIntenable insomnie,\n&#39;</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">file=open(<span class="string">'D:/flag.txt'</span>,<span class="string">'rb'</span>)</span><br><span class="line">result=base64.b64decode(file.read())</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+<p>或者直接ctrl +C到解码网站，得到的基本一样：<br><img src="https://img-blog.csdnimg.cn/20200131174737172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>把那串字符百度一下，是杀人狂想曲的歌词<br><img src="https://img-blog.csdnimg.cn/20200131174823784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_10,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>多行解密一下，得到果然是歌词，不过有些地方因为编码不同乱码了，</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Cette</span> <span class="string">nuit,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Intenable</span> <span class="string">insomnie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">La</span> <span class="string">folie me guette,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">suis ce que je fuis</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">subis,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Cette</span> <span class="string">cacophonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Qui</span> <span class="string">me scie la t锚te,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Assommante</span> <span class="string">harmonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Elle</span> <span class="string">me dit,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tu</span> <span class="string">paieras tes delits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Quoi</span> <span class="string">qu'il advienne,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">On</span> <span class="string">tra卯ne ses cha卯nes,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Ses</span> <span class="string">peines,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Aux</span> <span class="string">requiems,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tuant</span> <span class="string">par depit,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Ce</span> <span class="string">que je seme,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Et</span> <span class="string">aux blasphemes,</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">J'avoue</span> <span class="string">je maudis,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tous</span> <span class="string">ceux qui s'aiment,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">L'ennemi,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tapi</span> <span class="string">dans mon esprit,</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">F锚te</span> <span class="string">mes defaites,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Sans</span> <span class="string">repit me defie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">renie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">La</span> <span class="string">fatale heresie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Qui</span> <span class="string">ronge mon 锚tre,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">veux rena卯tre,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Rena卯tre,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Aux</span> <span class="string">requiems,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tuant</span> <span class="string">par depit,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Ce</span> <span class="string">que je seme,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Et</span> <span class="string">aux blasphemes,</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">J'avoue</span> <span class="string">je maudis,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tous</span> <span class="string">ceux qui s'aiment,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Pleurent</span> <span class="string">les violons de ma vie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">La</span> <span class="string">violence de mes envies,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Siphonnee</span> <span class="string">symphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Deconcertant</span> <span class="string">concerto,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">joue sans toucher le Do,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Mon</span> <span class="string">talent sonne faux,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">noie mon ennui,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Dans</span> <span class="string">la melomanie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">tue mes phobies,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Dans</span> <span class="string">la desharmonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Aux</span> <span class="string">requiems,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tuant</span> <span class="string">par depit,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Ce</span> <span class="string">que je seme,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Et</span> <span class="string">aux blasphemes,</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">J'avoue</span> <span class="string">je maudis,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tous</span> <span class="string">ceux qui s'aiment,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Je</span> <span class="string">voue mes nuits,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">A</span> <span class="string">l'assasymphonie (l'assasymphonie),</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">J'avoue</span> <span class="string">je maudis,</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">Tous</span> <span class="string">ceux qui s'aiment</span></span><br></pre></td></tr></table></figure>
+<p>考虑到是base64隐写，<br><img src="https://img-blog.csdnimg.cn/20200131180418882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_14,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>base64隐写：<br>base64是将3个8比特转换成4个6比特，最小的转换单位是24比特（6和8最小公倍数）</p>
+<p>因此如果原文内容不足三字节，有一部分比特解码时候不需要，但会组成编码后的某个字符。</p>
+<p>比如上图A的 0100 0001 被 base64 识别为 0100 0001 0000 然而最后四个比特解密时无<br>用。换句话说 0100 0001 0000 和0100 0001 1111 对应的原文都是 A ，因此可以使用这四个比特进行隐写。</p>
+<p>简单来说，就是base64编码时不是正好占到3字节，当没有占到3字节的时候，我们就可以利用最后的几个bit来隐藏信息，同时也不影响原本的编码。</p>
+<p>附上一篇关于base64隐写的文章：<a href="https://www.tr0y.wang/2017/06/14/Base64steg/index.html" target="_blank" rel="noopener">https://www.tr0y.wang/2017/06/14/Base64steg/index.html</a></p>
+<p>脚本跑一下得到flag。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">b64chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'flag.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    bin_str = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        stegb64 = <span class="string">''</span>.join(line.split())</span><br><span class="line">        rowb64 =  <span class="string">''</span>.join(stegb64.decode(<span class="string">'base64'</span>).encode(<span class="string">'base64'</span>).split())</span><br><span class="line">        offset = abs(b64chars.index(stegb64.replace(<span class="string">'='</span>,<span class="string">''</span>)[<span class="number">-1</span>])-b64chars.index(rowb64.replace(<span class="string">'='</span>,<span class="string">''</span>)[<span class="number">-1</span>]))</span><br><span class="line">        equalnum = stegb64.count(<span class="string">'='</span>) <span class="comment">#no equalnum no offset</span></span><br><span class="line">        <span class="keyword">if</span> equalnum:</span><br><span class="line">            bin_str += bin(offset)[<span class="number">2</span>:].zfill(equalnum * <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">''</span>.join([chr(int(bin_str[i:i + <span class="number">8</span>], <span class="number">2</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">0</span>, len(bin_str), <span class="number">8</span>)]) <span class="comment">#8 位一组</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -707,88 +840,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/BUUCTF%20MISC%20Wp2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/BUUCTF%20MISC%20Wp2/" class="post-title-link" itemprop="url">BUUCTF misc wp2</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:01:04" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF WP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="0x09-rar"><a href="#0x09-rar" class="headerlink" title="0x09 rar"></a>0x09 rar</h1><p>套路和基础破解那道题一模一样，(ˉ▽ˉ；)…具体见<a href="https://blog.csdn.net/ITmincherry/article/details/99047250" target="_blank" rel="noopener">上一篇博客</a></p>
-<h1 id="0x0A-qr"><a href="#0x0A-qr" class="headerlink" title="0x0A qr"></a>0x0A qr</h1><p>看到题目，顾名思义，使用在线二维码解码网站，(<a href="http://tool.oschina.net/qr?type=2)轻松得到flag。" target="_blank" rel="noopener">http://tool.oschina.net/qr?type=2)轻松得到flag。</a></p>
-<h1 id="0x0B-文件中的秘密"><a href="#0x0B-文件中的秘密" class="headerlink" title="0x0B 文件中的秘密"></a>0x0B 文件中的秘密</h1><p>打开文件属性，在备注里面发现了flag。</p>
-<h1 id="0x0C-Wireshark"><a href="#0x0C-Wireshark" class="headerlink" title="0x0C Wireshark"></a>0x0C Wireshark</h1><p>根据题目提示，用wireshark打开题目给的pcap文件，查看http的包，可以看到有一个login的包，<br><img src="https://img-blog.csdnimg.cn/20190813162639525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>双击这个包，就可以看到管理员的密码了，密码就是flag。<br><img src="https://img-blog.csdnimg.cn/20190813162835865.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="0x0D-假如给我三天光明"><a href="#0x0D-假如给我三天光明" class="headerlink" title="0x0D 假如给我三天光明"></a>0x0D 假如给我三天光明</h1><p>题目给了一个jpg和一个压缩包，估计压缩包的密码就是从jpg中获取。打开jpg，感觉图片下面有点奇怪，又因为题目是假如给我三天光明，联想到盲文，<br><img src="https://img-blog.csdnimg.cn/2019081316365863.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>百度盲文，对照一下，结果是kmdonowg，打开music压缩包，得到一段wav音频，可以听到一段电报的声音，用audacity打开wav文件，<br><img src="https://img-blog.csdnimg.cn/20190813165811545.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>看波的宽度分辨长短音，比较细的就是短音，代表”.”，读“滴”；比较粗的就是长音，代表”-“，读“嗒”；中间的间隔就是“ ”，分析波长得到摩斯电码如下：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-<span class="string">.-.</span>  -  <span class="string">..-.</span>  <span class="string">.--</span>  <span class="string">.--.</span>  .  <span class="string">..</span>  <span class="params">-----</span>  <span class="params">---</span><span class="string">..</span>  --<span class="string">...</span>  <span class="string">...--</span>  <span class="string">..---</span>  <span class="string">..--..</span>  <span class="string">..---</span>  <span class="string">...--</span>  -<span class="string">..</span>  --<span class="string">..</span></span><br></pre></td></tr></table></figure>
-<p>通过<a href="http://www.zhongguosou.com/zonghe/moErSiCodeConverter.aspx" target="_blank" rel="noopener">摩斯电码解码网站</a>，即可得到</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CTFWPEI08732?<span class="number">23</span>DZ</span><br></pre></td></tr></table></figure>
-<p>提交之后，发现incorrect，后来才知道摩斯密码英文没有大小写，修改之后，提交flag{wpei08732?23dz}。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/XSS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -840,97 +891,6 @@
 
       
           <h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><p>跨站脚本攻击（Cross Cite Scripting），它是通过<strong>对网页注入可执行代码（通常是JavaScript代码）且成功地被浏览器执行</strong>，达到攻击的目的，形成了一次有效XSS攻击。一旦攻击成功，它可以获取用户的联系人列表，然后向联系人发送虚假诈骗信息，可以删除用户的日志等等，黑客可以利用xss盗取用户的cookie，有了用户的cookie，可以以用户的身份来正常访问站点。有时候还和其他攻击方式同时实施，比如SQL注入攻击服务器和数据库、Click劫持、相对链接劫持等实施钓鱼，它带来的危害是巨大的。为了不和层叠样式表（Cascading Style Sheets，CSS）混淆，就把跨站脚本攻击缩写为XSS。<br>XSS分为反射型、存储型、DOM型。反射型一般出现在url中，提交给服务器，然后服务器返回，会在页面渲染过程中引发XSS。存储型，提交的数据存储在服务器端，下次访问页面时还会触发XSS，因此相对于另外两个，危害性大一些。DOM型不会经过服务器端，只是放在客户端。也有人将其分为持久型和非持久型，持久型就是存储型，非持久型就是反射型。<br>具体详细内容看大佬博客吧(<a href="https://blog.csdn.net/extremebingo/article/details/81176394" target="_blank" rel="noopener">https://blog.csdn.net/extremebingo/article/details/81176394</a>)<br>小白学习中~~</p>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Bugku%E6%9D%82%E9%A1%B9%20wp2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/Bugku%E6%9D%82%E9%A1%B9%20wp2/" class="post-title-link" itemprop="url">Bugku misc wp2</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:00:35" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF WP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="闪的好快"><a href="#闪的好快" class="headerlink" title="闪的好快"></a>闪的好快</h1><p>gif动图，用stegsolve打开，然后Analysis-&gt;Frame Browser。<br><img src="https://img-blog.csdnimg.cn/2019100319032775.png" alt="在这里插入图片描述"><br>共有18帧，拿着手机一张一张扫，扫出来的结果是<code>SYC{F1aSh-so-f4sT}</code><br>但是提交不正确。最后更改为<code>SYC{F1aSh_so_f4sT}</code></p>
-<h1 id="come-game"><a href="#come-game" class="headerlink" title="come_game"></a>come_game</h1><p>下载下来，发现是一个游戏<br><img src="https://img-blog.csdnimg.cn/20191003195332323.png" alt="在这里插入图片描述"><br>运行.exe文件，进入游戏界面，按照界面提示，shift键和上下左右键控制游戏<br><img src="https://img-blog.csdnimg.cn/20191003200045880.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>随便玩一下，ESC键退出游戏。发现文件夹中多出了两个文件， 死亡就是deathtime  其中save1中的后缀1表示存储第一个游戏关卡的进度。<br><img src="https://img-blog.csdnimg.cn/20191003202101236.png" alt="在这里插入图片描述"><br>用FlexHex打开save1看看，然后发现这里2就是代表关卡的意思。我们这里修改成5也就是对应的35。而且后面的数字都要改为0，不然就会在重新进入的时候，既出现flag又出现gameover的图片。<br><img src="https://img-blog.csdnimg.cn/20191003202559435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>修改之后重新进入游戏，此时因为游戏进度被我们人为更改，所以要加载游戏才能直接通关。得到flag:<code>FLAG{6E23F259D98DF153}</code>，<br><img src="https://img-blog.csdnimg.cn/20191003205820174.png" alt="在这里插入图片描述"><br>但是提交不正确，主要的原因是本题来自于极客大挑战，其flag格式为SYC{}，要改为<code>SYC{6E23F259D98DF153}</code></p>
-<h1 id="白哥的鸽子"><a href="#白哥的鸽子" class="headerlink" title="白哥的鸽子"></a>白哥的鸽子</h1><p>放到winHex里面看看，感觉结尾有点奇怪<br><img src="https://img-blog.csdnimg.cn/20191004002655800.png" alt="在这里插入图片描述"><br>看了wp之后，知道是栅栏密码，上脚本，</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3个字符一组，一共24个字符，总共8组</span></span><br><span class="line">str = <span class="string">"fg2ivyo&#125;l&#123;2s3_o@aw__rcl@"</span></span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, int(len(str)/<span class="number">3</span>), <span class="number">1</span>):</span><br><span class="line">    flag += str[i]</span><br><span class="line">    flag += str[i + <span class="number">8</span>]</span><br><span class="line">    flag += str[i + <span class="number">16</span>]</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
-<p>运行脚本即可得到flag。</p>
-<h1 id="隐写3"><a href="#隐写3" class="headerlink" title="隐写3"></a>隐写3</h1><p>给的是大白的图，但是下面被截断了，IHDR后面8个字节是宽和高，把高改为宽的值。<br><img src="https://img-blog.csdnimg.cn/20191004084137294.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><p>题目给的是1.tar.gz，在Linux里面解压，</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf <span class="number">1.</span>tar.gz</span><br><span class="line">test/</span><br><span class="line">test/flag</span><br></pre></td></tr></table></figure>
-<p>看来flag在flag文件里面，进入目录，用strings命令查看，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~&#x2F;文档# cd test</span><br><span class="line">root@kali:~&#x2F;文档&#x2F;test# strings flag</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-LSCRJY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">info</span><br><span class="line">files</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">game.trashinfo</span><br><span class="line">game.trashinfo.OL1PJY</span><br><span class="line">game</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-3ICRJY</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-PS93JY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-PS93JY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-LSCRJY</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-LSCRJY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">info</span><br><span class="line">files</span><br><span class="line">[Trash Info]</span><br><span class="line">Path&#x3D;game</span><br><span class="line">DeletionDate&#x3D;2016-06-27T12:27:37</span><br><span class="line">key&#123;&#125;</span><br><span class="line">key&#123;&#125;</span><br><span class="line">key&#123;feb81d3834e2423c9903f4755464060b&#125;</span><br><span class="line">game.trashinfo</span><br><span class="line">game.trashinfo.OL1PJY</span><br><span class="line">game</span><br></pre></td></tr></table></figure>
-<p>或者<code>grep &#39;key&#39; -a flag</code>也可以</p>
-<h1 id="做个游戏-08067CTF"><a href="#做个游戏-08067CTF" class="headerlink" title="做个游戏(08067CTF)"></a>做个游戏(08067CTF)</h1><p>下载文件下来，是一个jar，用反编译工具jd-gui查看一下源代码，<br><img src="https://img-blog.csdnimg.cn/20191005191818125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>找到flag，不过经过了base64加密，解密一下即可。</p>
-<h1 id="想蹭网先解开密码"><a href="#想蹭网先解开密码" class="headerlink" title="想蹭网先解开密码"></a>想蹭网先解开密码</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flag格式：flag&#123;你破解的WiFi密码&#125;</span><br><span class="line"></span><br><span class="line">tips：密码为手机号，为了不为难你，大佬特地让我悄悄地把前七位告诉你</span><br><span class="line"><span class="number">1391040</span>**</span><br><span class="line">Goodluck!!</span><br></pre></td></tr></table></figure>
-<p>下载cap包，用wireshark打开，WIFI连接认证的重点在WPA的四次握手包，也就是eapol协议的包，过滤一下<br><img src="https://img-blog.csdnimg.cn/20191007091732404.png" alt="在这里插入图片描述"><br>使用<a href="https://blog.csdn.net/qq_42025840/article/details/81125584" target="_blank" rel="noopener">crunch命令</a>生成密码字典，<br><img src="https://img-blog.csdnimg.cn/20191007092010317.png" alt="在这里插入图片描述"><br>利用aircrack爆破一下，<br><img src="https://img-blog.csdnimg.cn/20191007092303280.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="Linux2"><a href="#Linux2" class="headerlink" title="Linux2"></a>Linux2</h1><p>解压后的文件拿到kali里面binwalk一下，再foremost得到一张flag图片，<br><img src="https://img-blog.csdnimg.cn/20191007082946497.png" alt="在这里插入图片描述"><br>flag{f0rens!cs!C00L!}提交，错误？？？<br>题目提示的是：</p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给你点提示吧：<span class="built_in">key</span>的格式是<span class="built_in">KEY</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>尝试直接搜索brave文件，提交正确！<br><img src="https://img-blog.csdnimg.cn/20191007083304194.png" alt="在这里插入图片描述"><br>也可以直接用strings命令查看一下brave文件。</p>
-<p>还在做题中，后续还会更新的~~</p>
 
       
     </div>
