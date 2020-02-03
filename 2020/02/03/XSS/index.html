@@ -46,15 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="title: XSScategories: Web安全 XSS跨站脚本攻击（Cross Cite Scripting），它是通过对网页注入可执行代码（通常是JavaScript代码）且成功地被浏览器执行，达到攻击的目的，形成了一次有效XSS攻击。一旦攻击成功，它可以获取用户的联系人列表，然后向联系人发送虚假诈骗信息，可以删除用户的日志等等，黑客可以利用xss盗取用户的cookie，有了用户的coo">
+  <meta name="description" content="XSS跨站脚本攻击（Cross Cite Scripting），它是通过对网页注入可执行代码（通常是JavaScript代码）且成功地被浏览器执行，达到攻击的目的，形成了一次有效XSS攻击。一旦攻击成功，它可以获取用户的联系人列表，然后向联系人发送虚假诈骗信息，可以删除用户的日志等等，黑客可以利用xss盗取用户的cookie，有了用户的cookie，可以以用户的身份来正常访问站点。有时候还和其他攻">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XSS">
 <meta property="og:url" content="http://yoursite.com/2020/02/03/XSS/index.html">
 <meta property="og:site_name" content="ChanCherry&#39;s Blog">
-<meta property="og:description" content="title: XSScategories: Web安全 XSS跨站脚本攻击（Cross Cite Scripting），它是通过对网页注入可执行代码（通常是JavaScript代码）且成功地被浏览器执行，达到攻击的目的，形成了一次有效XSS攻击。一旦攻击成功，它可以获取用户的联系人列表，然后向联系人发送虚假诈骗信息，可以删除用户的日志等等，黑客可以利用xss盗取用户的cookie，有了用户的coo">
+<meta property="og:description" content="XSS跨站脚本攻击（Cross Cite Scripting），它是通过对网页注入可执行代码（通常是JavaScript代码）且成功地被浏览器执行，达到攻击的目的，形成了一次有效XSS攻击。一旦攻击成功，它可以获取用户的联系人列表，然后向联系人发送虚假诈骗信息，可以删除用户的日志等等，黑客可以利用xss盗取用户的cookie，有了用户的cookie，可以以用户的身份来正常访问站点。有时候还和其他攻">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-03T04:08:32.348Z">
-<meta property="article:modified_time" content="2020-02-03T04:29:39.981Z">
+<meta property="article:published_time" content="2020-02-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-03T04:59:23.215Z">
 <meta property="article:author" content="ChanCherry">
 <meta property="article:tag" content="�Ű����£�CTFer">
 <meta name="twitter:card" content="summary">
@@ -196,7 +196,18 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 12:08:32 / 修改时间：12:29:39" itemprop="dateCreated datePublished" datetime="2020-02-03T12:08:32+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:59:23" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -210,14 +221,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>title: XSS<br>categories: Web安全</p>
-<h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><p>跨站脚本攻击（Cross Cite Scripting），它是通过<strong>对网页注入可执行代码（通常是JavaScript代码）且成功地被浏览器执行</strong>，达到攻击的目的，形成了一次有效XSS攻击。一旦攻击成功，它可以获取用户的联系人列表，然后向联系人发送虚假诈骗信息，可以删除用户的日志等等，黑客可以利用xss盗取用户的cookie，有了用户的cookie，可以以用户的身份来正常访问站点。有时候还和其他攻击方式同时实施，比如SQL注入攻击服务器和数据库、Click劫持、相对链接劫持等实施钓鱼，它带来的危害是巨大的。为了不和层叠样式表（Cascading Style Sheets，CSS）混淆，就把跨站脚本攻击缩写为XSS。<br>XSS分为反射型、存储型、DOM型。反射型一般出现在url中，提交给服务器，然后服务器返回，会在页面渲染过程中引发XSS。存储型，提交的数据存储在服务器端，下次访问页面时还会触发XSS，因此相对于另外两个，危害性大一些。DOM型不会经过服务器端，只是放在客户端。也有人将其分为持久型和非持久型，持久型就是存储型，非持久型就是反射型。<br>具体详细内容看大佬博客吧(<a href="https://blog.csdn.net/extremebingo/article/details/81176394" target="_blank" rel="noopener">https://blog.csdn.net/extremebingo/article/details/81176394</a>)<br>小白学习中~~</p>
+        <h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><p>跨站脚本攻击（Cross Cite Scripting），它是通过<strong>对网页注入可执行代码（通常是JavaScript代码）且成功地被浏览器执行</strong>，达到攻击的目的，形成了一次有效XSS攻击。一旦攻击成功，它可以获取用户的联系人列表，然后向联系人发送虚假诈骗信息，可以删除用户的日志等等，黑客可以利用xss盗取用户的cookie，有了用户的cookie，可以以用户的身份来正常访问站点。有时候还和其他攻击方式同时实施，比如SQL注入攻击服务器和数据库、Click劫持、相对链接劫持等实施钓鱼，它带来的危害是巨大的。为了不和层叠样式表（Cascading Style Sheets，CSS）混淆，就把跨站脚本攻击缩写为XSS。<br>XSS分为反射型、存储型、DOM型。反射型一般出现在url中，提交给服务器，然后服务器返回，会在页面渲染过程中引发XSS。存储型，提交的数据存储在服务器端，下次访问页面时还会触发XSS，因此相对于另外两个，危害性大一些。DOM型不会经过服务器端，只是放在客户端。也有人将其分为持久型和非持久型，持久型就是存储型，非持久型就是反射型。<br>具体详细内容看大佬博客吧(<a href="https://blog.csdn.net/extremebingo/article/details/81176394" target="_blank" rel="noopener">https://blog.csdn.net/extremebingo/article/details/81176394</a>)<br>小白学习中~~</p>
 
     </div>
 
     
     
     
+
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
         
 
   <div class="followme">
@@ -246,12 +267,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/03/HTTP%E5%8D%8F%E8%AE%AE/" rel="prev" title="HTTP协议">
-      <i class="fa fa-chevron-left"></i> HTTP协议
+    <a href="/2020/02/03/robots%E5%8D%8F%E8%AE%AE/" rel="prev" title="robots协议">
+      <i class="fa fa-chevron-left"></i> robots协议
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/X-Forwarded-For/" rel="next" title="X-Forwarded-For">
-      X-Forwarded-For <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/Cookie/" rel="next" title="Cookie">
+      Cookie <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -331,6 +352,11 @@
           <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
 </div>

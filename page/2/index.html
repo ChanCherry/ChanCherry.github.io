@@ -168,7 +168,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/XSS/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/SQL%E6%B3%A8%E5%85%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -182,7 +182,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/03/XSS/" class="post-title-link" itemprop="url">XSS</a>
+            <a href="/2020/02/03/SQL%E6%B3%A8%E5%85%A5/" class="post-title-link" itemprop="url">SQL注入</a>
         </h1>
 
         <div class="post-meta">
@@ -193,7 +193,18 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 12:08:32 / 修改时间：12:29:39" itemprop="dateCreated datePublished" datetime="2020-02-03T12:08:32+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:58:50" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -207,8 +218,281 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>title: XSS<br>categories: Web安全</p>
-<h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><p>跨站脚本攻击（Cross Cite Scripting），它是通过<strong>对网页注入可执行代码（通常是JavaScript代码）且成功地被浏览器执行</strong>，达到攻击的目的，形成了一次有效XSS攻击。一旦攻击成功，它可以获取用户的联系人列表，然后向联系人发送虚假诈骗信息，可以删除用户的日志等等，黑客可以利用xss盗取用户的cookie，有了用户的cookie，可以以用户的身份来正常访问站点。有时候还和其他攻击方式同时实施，比如SQL注入攻击服务器和数据库、Click劫持、相对链接劫持等实施钓鱼，它带来的危害是巨大的。为了不和层叠样式表（Cascading Style Sheets，CSS）混淆，就把跨站脚本攻击缩写为XSS。<br>XSS分为反射型、存储型、DOM型。反射型一般出现在url中，提交给服务器，然后服务器返回，会在页面渲染过程中引发XSS。存储型，提交的数据存储在服务器端，下次访问页面时还会触发XSS，因此相对于另外两个，危害性大一些。DOM型不会经过服务器端，只是放在客户端。也有人将其分为持久型和非持久型，持久型就是存储型，非持久型就是反射型。<br>具体详细内容看大佬博客吧(<a href="https://blog.csdn.net/extremebingo/article/details/81176394" target="_blank" rel="noopener">https://blog.csdn.net/extremebingo/article/details/81176394</a>)<br>小白学习中~~</p>
+          <h1 id="0x00-SQL注入概述"><a href="#0x00-SQL注入概述" class="headerlink" title="0x00 SQL注入概述"></a>0x00 SQL注入概述</h1><h2 id="什么是SQL注入漏洞"><a href="#什么是SQL注入漏洞" class="headerlink" title="什么是SQL注入漏洞"></a>什么是SQL注入漏洞</h2><p>攻击者利用Web应用程序对用户输入验证上的疏忽，在输入的数据包中包含对某些数据库具有特殊意义的符号和命令，让攻击者有机会直接对后台数据库下达命令，进而入侵后台数据库乃至整个应用系统。</p>
+<h2 id="主流的数据库"><a href="#主流的数据库" class="headerlink" title="主流的数据库"></a>主流的数据库</h2><p><img src="https://img-blog.csdnimg.cn/20191012091108121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="SQL注入原理"><a href="#SQL注入原理" class="headerlink" title="SQL注入原理"></a>SQL注入原理</h2><p>SQL注入攻击的本质，服务端没有过滤用户输入的恶意数据，直接把它当成SQL命令来执行了，从而影响数据库安全和平台安全。</p>
+<h2 id="两个条件"><a href="#两个条件" class="headerlink" title="两个条件"></a>两个条件</h2><ul>
+<li>用户能够控制输入；</li>
+<li>原本程序要执行的SQL语句，拼接了用户输入的恶意数据。<h2 id="导致的危害"><a href="#导致的危害" class="headerlink" title="导致的危害"></a>导致的危害</h2></li>
+<li>绕过登录验证：使用万能密码登录网站后台等</li>
+<li>获取敏感数据：获取网站管理员账号、密码等</li>
+<li>文件系统操作：列目录，读取、写入文件等</li>
+<li>注册表操作：读取、写入、删除注册表等</li>
+<li>执行系统命令：远程执行命令<h2 id="造成的原因"><a href="#造成的原因" class="headerlink" title="造成的原因"></a>造成的原因</h2><h4 id="（1）动态字符串构建引起"><a href="#（1）动态字符串构建引起" class="headerlink" title="（1）动态字符串构建引起"></a>（1）动态字符串构建引起</h4></li>
+<li>不正确的处理转义字符（宽字节注入）</li>
+<li>不正确的处理类型（报错泄露信息）  </li>
+<li>不正确的处理联合查询 </li>
+<li>不正确的处理错误（报错信息泄露） </li>
+<li>不正确的处理多次提交（二次注入）</li>
+</ul>
+<h4 id="（2）后台存在的问题"><a href="#（2）后台存在的问题" class="headerlink" title="（2）后台存在的问题"></a>（2）后台存在的问题</h4><ul>
+<li><p>后台无过滤或者编码用户数据</p>
+</li>
+<li><p>数据库可以拼接用户传递的恶意代码</p>
+<h4 id="（3）错误处理不当"><a href="#（3）错误处理不当" class="headerlink" title="（3）错误处理不当"></a>（3）错误处理不当</h4></li>
+<li><p>详细的内部错误消息显示给用户或攻击者</p>
+</li>
+<li><p>错误信息可以直接给攻击者提供下一步攻击帮助</p>
+<h4 id="（4）不安全的数据库配置"><a href="#（4）不安全的数据库配置" class="headerlink" title="（4）不安全的数据库配置"></a>（4）不安全的数据库配置</h4></li>
+<li><input disabled="" type="checkbox"> <p>默认账户<br>SQL Server “sa”作为数据库系统管理员账户<br>MySQL使用”root”和”anonymous”用户账户<br>Oracle在创建数据库时通常默认会创建SYS、SYSTEMS DBSNMP和OUTLN账户</p>
+</li>
+<li><input disabled="" type="checkbox"> <p>权限<br>问题：系统和数据库管理员在安装数据库服务器时允许以roots SYSTEM或Administrator特权系统用户账户身份执行操作。<br>正确方法：应该始终以普通用户身份运行服务器上的服务，降低用户权限，将用户权限仅限于本服务</p>
+<h2 id="SQL注入方法"><a href="#SQL注入方法" class="headerlink" title="SQL注入方法"></a>SQL注入方法</h2></li>
+<li><input disabled="" type="checkbox"> <p>自动化注入工具</p>
+<ol>
+<li>SQL注入工具<br>Sqlmap   Havij   Sqlid</li>
+<li>ASP/JSP注入工具<br>NBSI   阿D注入软件   明小子注入软件</li>
+<li>PHP注入工具<br>穿山甲注入软件    海阳顶端注入软件</li>
+</ol>
+</li>
+<li><input disabled="" type="checkbox"> <p>手工注入过程</p>
+<ol>
+<li>判断是否存在注入点</li>
+<li>判断字段长度</li>
+<li>判断字段回显位置</li>
+<li>判断数据库信息</li>
+<li>查找数据库名</li>
+<li>查找数据库表</li>
+<li>查找数据库表中所有字段以及字段值</li>
+<li>猜解账号密码</li>
+<li>登录管理员后台</li>
+</ol>
+</li>
+</ul>
+<p>—————————————————————————————————</p>
+<h1 id="0x01-SQL注入技术"><a href="#0x01-SQL注入技术" class="headerlink" title="0x01 SQL注入技术"></a>0x01 SQL注入技术</h1><p>（1）常见SQL语法</p>
+<ul>
+<li><input disabled="" type="checkbox"> 用于与关系型数据库交互的标准SQL命令有：<br>Create、Select、Insert、Update、Delete 和 Drop</li>
+<li><input disabled="" type="checkbox"> 分为三组：<ol>
+<li>数据定义（Create、Drop）</li>
+<li>数据操纵（Select、Insert、Update、Delete）</li>
+<li>数据控制（Grant、Revoke）</li>
+</ol>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CREATE</td>
+<td>创建新的表、视图或其他数据库中的对象</td>
+</tr>
+<tr>
+<td>ALTER</td>
+<td>修改现存数据库对象，比如一张表</td>
+</tr>
+<tr>
+<td>DROP</td>
+<td>删除表、视图或数据库中的其他对象</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SELECT</td>
+<td>从一张或多张表中检索特定的数据</td>
+</tr>
+<tr>
+<td>INSERT</td>
+<td>创建一条新纪录</td>
+</tr>
+<tr>
+<td>UPDATE</td>
+<td>修改记录</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>删除记录</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GRANT</td>
+<td>赋予用户特权</td>
+</tr>
+<tr>
+<td>REVOKE</td>
+<td>收回赋予用户的特权</td>
+</tr>
+</tbody></table>
+<ul>
+<li><input disabled="" type="checkbox"> SQL高级操作：排序、分组、限定条数</li>
+</ul>
+<p>排序Order by</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM test_table ORDER BY userid;</span><br></pre></td></tr></table></figure>
+
+<p>分组Group by</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,count(*) FROM test_table GROUP BY name;</span><br></pre></td></tr></table></figure>
+
+<p>限定条数limit</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM test_table limit <span class="number">0</span>,<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">SELECT * FROM test_table limit <span class="number">1</span>,<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>组合使用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM test_table LIMIT <span class="number">0</span>,<span class="number">5</span> ORDER BY userid;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><input disabled="" type="checkbox"> <p>SQL高级操作：联合查询union：<br><img src="https://img-blog.csdnimg.cn/20191015085021731.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>因为查询语句构造问题，可直接否认掉之前的查询，执行一个全新的查询语句，查询的列应当与之前的列对应。</p>
+</li>
+<li><input disabled="" type="checkbox"> <p>SQL高级操作：结合其他函数操作：<br>在MySQL中，把information_schema（MySQL自带的）看作是一个信息数据库，其中保存着关于MySQL服务器所维护的所有其他数据库的信息。如数据库名，数据库的表，表栏的数据类型与访问权限等。<br>information_schema.SCHEMATA表中的SCHEMA_NAME查看所有的数据库：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span> hehe where id=<span class="number">3</span> <span class="keyword">and</span> <span class="number">1</span>=<span class="number">2</span> union select <span class="number">0</span>,<span class="number">0</span> SCHEMA_NAME <span class="keyword">from</span> information_schema.SCHEMATA limit <span class="number">1</span>,<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>（2）万能密码绕过登录</p>
+<p>通过在用户名处传入参数 ‘ or 1=1 # 进行万能密码登录。<br>SELECT username, password FROM users WHERE username=’textvalue’ or 1=1 # ‘ AND password=’textvalue2’</p>
+<ul>
+<li><input disabled="" type="checkbox"> 输入字符<br>formusr = ‘ or 1=1 - -<br>formpwd = anything</li>
+<li><input disabled="" type="checkbox"> 实际的查询代码<br>SELECT * FROM users WHERE username=’ ‘ or 1=1 - - AND password= ‘anything’</li>
+</ul>
+<p>（3）数字型注入</p>
+<ul>
+<li><input disabled="" type="checkbox"> 输入的参数为<strong>整数</strong>，如ID、年龄、页码等，如果存在注入型漏洞，则为数字型注入。<br><a href="http://www.testweb.com/user.php?id=8" target="_blank" rel="noopener">http://www.testweb.com/user.php?id=8</a></li>
+<li><input disabled="" type="checkbox"> 存在数字型注入测试方法</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><a href="http://www.testweb.com/user.php?id=8‘" target="_blank" rel="noopener">http://www.testweb.com/user.php?id=8‘</a></th>
+<th>返回错误，未对单引号做处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="http://www.testweb.com/user.php?id=8" target="_blank" rel="noopener">http://www.testweb.com/user.php?id=8</a> and 1=1</td>
+<td>运行正常</td>
+</tr>
+<tr>
+<td><a href="http://www.testweb.com/user.php?id=8" target="_blank" rel="noopener">http://www.testweb.com/user.php?id=8</a> and 1=2</td>
+<td>运行异常</td>
+</tr>
+</tbody></table>
+<p>（4）字符型注入</p>
+<ul>
+<li><input disabled="" type="checkbox"> <p>输入的参数为字符串<br>与数组型注入的区别在于：字符型注入一般要用单引号或双引号等来闭合<br><a href="http://www.testweb.com/user.php?user=admin&#39;" target="_blank" rel="noopener">http://www.testweb.com/user.php?user=admin&#39;</a></p>
+</li>
+<li><input disabled="" type="checkbox"> <p>存在字符型注入测试方法</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><a href="http://www.testweb.com/user.php?id=8‘" target="_blank" rel="noopener">http://www.testweb.com/user.php?id=8‘</a></th>
+<th>返回错误</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="http://www.testweb.com/user.php?user=admin&#39;" target="_blank" rel="noopener">http://www.testweb.com/user.php?user=admin&#39;</a> and ‘1’=’1</td>
+<td>运行正常</td>
+</tr>
+<tr>
+<td><a href="http://www.testweb.com/user.php?user=admin&#39;" target="_blank" rel="noopener">http://www.testweb.com/user.php?user=admin&#39;</a> and ‘1’=’2</td>
+<td>运行异常</td>
+</tr>
+</tbody></table>
+<p>（5）SQL盲注<br>SQL盲注是不能通过直接显示的途径来获取数据库数据的方法。</p>
+<p>在盲注中，攻击者根据返回页面的不同来判断信息（可能是页面内容不同，也可以是响应时间不同）。一般情况下，盲注分为三种：</p>
+<ul>
+<li>布尔盲注<br>某些查询语句是不需要返回结果的，仅判断查询语句是否正确执行即可，所以其返回值可以看作一个布尔值，正常时显示true，报错或不正常显示false。<br>查询语句：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT userid FROM member WHERE u_name=$name AND u_pass= $<span class="keyword">pass</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>注入语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name=-1' and (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'a'</span></span><br><span class="line"><span class="keyword">name</span>=<span class="number">-1</span><span class="string">' and (select mid(u_name,2,1) from member where userid=1)='</span>d<span class="string">'</span></span><br><span class="line"><span class="string">name=-1'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">3</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'m'</span></span><br><span class="line"><span class="keyword">name</span>=<span class="number">-1</span><span class="string">' and (select mid(u_name,4,1) from member where userid=1)='</span>i<span class="string">'</span></span><br><span class="line"><span class="string">name=-1'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">5</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'n'</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间盲注<br>某些查询语句是不需要返回结果的，仅判断查询语句是否正确执行即可，但是由于某些限制，布尔盲注的关键字符代入不进去，这时候就可以利用sleep()函数来进行时间盲注，取页面执行时间（结束时间-开始时间）来判断sleep()函数是否正常执行，所以其是否正常执行可以看作一个布尔值，正常时显示true，报错或不正常显示false。</li>
+</ul>
+<p>查询语句：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT userid FROM member WHERE u_name=$name AND u_pass= $<span class="keyword">pass</span>;</span><br></pre></td></tr></table></figure>
+
+<p>注入语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name=-1' and (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'a'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">sleep</span>(<span class="number">3</span>))</span><br><span class="line"><span class="keyword">name</span>=<span class="number">-1</span><span class="string">' and (select mid(u_name,2,1) from member where userid=1)='</span>d<span class="string">' and (select sleep(3))</span></span><br><span class="line"><span class="string">name=-1'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">3</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'m'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">sleep</span>(<span class="number">3</span>))</span><br><span class="line"><span class="keyword">name</span>=<span class="number">-1</span><span class="string">' and (select mid(u_name,4,1) from member where userid=1)='</span>i<span class="string">' and (select sleep(3))</span></span><br><span class="line"><span class="string">name=-1'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">5</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'n'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">sleep</span>(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<p>基于时间的盲注在使用延迟函数上可以有两个选择：<br>（1）BENCHMARK(count,expr)函数        //将expr语句执行count次来延迟时间<br>（2）sleep(time)函数        //直接延迟time时间</p>
+<ul>
+<li>报错型盲注<br>正确时浏览器返回”You are in ……..”，错误会有报错语句。</li>
+</ul>
+<p>（6）SQL文件头注入<br>HTTP Header内容：</p>
+<ul>
+<li>User-Agent：使得服务器可以识别客户使用的操作系统，浏览器版本等（很多客户量大的网站会记录客户使用的操作系统或浏览器版本等存入数据库中）</li>
+<li>Cookie：网站为了辨别用户身份、进行session追踪而储存在用户本地终端上的数据（通常经过加密）</li>
+<li>X-Forwarded-For：简称XFF头，它代表客户端，也就是HTTP的请求端真实的IP（通常一些网站的防注入功能可能会记录请求端真实IP并写入数据库 or 某文件中【通过修改XFF头可以实现伪造IP】</li>
+<li>Clien-IP：同上</li>
+<li>Referer：浏览器告诉WEB服务器我是从哪个页面链接过来的</li>
+<li>Host：客户端指定自己想访问的WEB服务器的域名/IP地址和端口号</li>
+</ul>
+<p>常见的HTTP Header注入类型：</p>
+<ul>
+<li>Cookie注入</li>
+<li>Referer注入</li>
+<li>UA注入</li>
+<li>XFF注入</li>
+</ul>
+<p>（7）宽字节注入<br>统一国际规范的理想：程序都使用unicode编码，所有的网站都使用utf-8编码。</p>
+<p>国内及国外（特别是非英语国家）的一些cms，仍然使用自己国家的一套编码方式，比如gbk，作为自己的默认编码类型。也有一些cms为了照顾老用户，出了gbk和utf-8两个版本。</p>
+<p>一个gbk编码汉字，占2个字节，一个utf-8编码汉字，占3个字节。简体中文系统中ANSI就代表是GBK。</p>
+<p>我们通常使用单引号来探测是否有SQL注入，但我们有可能在前面使用了转义函数，导致输入id=1’ 变成了 id=1\‘ ，探测失效了。<br>于是，输入id=1%df’ ，会变成 id=1%df\‘ ，url编码就是id=1%df%5c%27，gbk是多字节编码，任务两个字节代表一个汉字，所以%df和后面的\也就是%5c变成了一个汉字，而 ‘ 逃逸出来，可以进行SQL注入探测。<br><img src="https://img-blog.csdnimg.cn/2019101507260121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>———————————————————————————————————</p>
+<h1 id="0x02-SQL注入检测绕过"><a href="#0x02-SQL注入检测绕过" class="headerlink" title="0x02 SQL注入检测绕过"></a>0x02 SQL注入检测绕过</h1><ol>
+<li>大小写绕过<br>比如拦截了union，那就使用Union UnloN等等。</li>
+<li>编码绕过<br>WAF检测关键字，比如检测union，用%55也就是U的16进制编码来代替U，union写成%55nloN，结合大小写也可以绕过一些WAF。</li>
+<li>注释绕过<br>适用于WAF只是过滤了一次危险的语句，而没有阻断我们整个的查询</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;?id&#x3D;1+union+select+1,2,3&#x2F;*</span><br></pre></td></tr></table></figure>
+
+<p>对于上面这条语句，WAF过滤了一次union和select，在之前再写一个注释语句，让他把注释里面的过滤掉，并不影响我们的查询。</p>
+<p>绕过语句就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;?id&#x3D;1&#x2F;*union*&#x2F;union&#x2F;*select*&#x2F;select+1,2,3&#x2F;*</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>分隔重写绕过<br>适用于那种WAF使用了正则表达式的情况，会检测所有的敏感字<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;?id&#x3D;1+un&#x2F;**&#x2F;ion+sel&#x2F;**&#x2F;elct+1,2,3-</span><br></pre></td></tr></table></figure>
+至于重写绕过，适用于WAF过滤了一次的情况，和我们上传aaspsp马的原理一样，我们可以写出类似Ununionion这样的，过滤了一次union就会执行我们的查询了。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;?id&#x3D;1 Ununionion select 1,2,3-</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>同功能函数转换<br>Substring()函数可以用mid()和substr()这些函数来替换，都是用来取字符串的某一位字符的。<br>Ascii()编码可以用hex()，bin()也就是16进制，二进制编码转换。<br>时间盲注Benchmark()也可以用sleep()来替换。</li>
+</ol>
+<p>sqlmap中有一个tamper目录，主要存放的是waf绕过脚本，比如：base64encode.py，between.py，greatest.py等。<br><img src="https://img-blog.csdnimg.cn/2019101508105169.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li><input disabled="" type="checkbox"> <p>等号被过滤了—-&gt;<a href="">[equaltolike.py]</a>—-&gt;like代替等号</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Example:</span><br><span class="line">Input: SELECT * FROM users WHERE **id=<span class="number">1</span>**</span><br><span class="line">Output: SELECT * FROM users WHERE **id LIKE <span class="number">1</span>**</span><br></pre></td></tr></table></figure>
+</li>
+<li><input disabled="" type="checkbox"> <p>替换字符和单引号被过滤—-&gt;<a href="">[apostrophenullencode.py]</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Example:</span><br><span class="line">(<span class="string">"1 AND '1'='1"</span>)</span><br><span class="line"><span class="string">"1 AND %00%271%00%27=%00%271"</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>———————————————————————————————————</p>
+<h1 id="0x03-SQL注入的防护策略"><a href="#0x03-SQL注入的防护策略" class="headerlink" title="0x03 SQL注入的防护策略"></a>0x03 SQL注入的防护策略</h1><ul>
+<li><input disabled="" type="checkbox"> 使用参数化查询，检查变量数据类型和格式</li>
+</ul>
+<p>SQL注入因为要操作数据库，所以一般会查找SQL语句关键字：insert,delete,update,select，查看传递的变量参数是否为用户可控，有无做过安全处理</p>
+<ul>
+<li><input disabled="" type="checkbox"> 采用sql语句预编译和绑定变量</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String sql=<span class="string">"select id,no from user where id=?"</span>;</span><br><span class="line">PreparedStatement ps =conn.prepareStatement(sql);</span><br><span class="line">ps.setInt(<span class="number">1</span>,id);</span><br><span class="line">ps.executeQuery();</span><br></pre></td></tr></table></figure>
+<p>采用了PreparedStatement，将sql语句<code>&quot;select id,no from user where id=?&quot;</code>预先编译好，即SQL引擎会先进行语法分析，产生语法树，生成执行计划，这样后面无论你输入什么参数，都不会影响该sql语句的语法结构了。</p>
+<ul>
+<li><input disabled="" type="checkbox"> 不要随意开启生产环境中Webserver的错误显示</li>
+<li><input disabled="" type="checkbox"> 做好数据库账号权限管理</li>
+<li><input disabled="" type="checkbox"> 严格加密处理用户的机密信息</li>
+<li><input disabled="" type="checkbox"> 使用WAF等专业的防护软件系统</li>
+</ul>
+<p>————————————————————<br>以上来自360网络安全学院课程，侵权删~~</p>
 
       
     </div>
@@ -216,6 +500,10 @@
     
     
     
+
+	<div>
+		
+	</div>
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -253,7 +541,18 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 12:08:12 / 修改时间：12:28:49" itemprop="dateCreated datePublished" datetime="2020-02-03T12:08:12+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:57:02" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -267,8 +566,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>title: HTTP协议<br>categories: Web安全</p>
-<p>即超文本传输协议，是Web通信时使用的协议，所有WWW文件都必须遵守这个标准。HTTP基于TCP/IP通信协议来传输数据（HTML文件、图片文件、查询结果等）。</p>
+          <p>即超文本传输协议，是Web通信时使用的协议，所有WWW文件都必须遵守这个标准。HTTP基于TCP/IP通信协议来传输数据（HTML文件、图片文件、查询结果等）。</p>
 <h1 id="HTTP工作原理"><a href="#HTTP工作原理" class="headerlink" title="HTTP工作原理"></a>HTTP工作原理</h1><p>HTTP协议工作于客户端/服务端（C/S）架构上，浏览器作为HTTP客户端通过URL（统一资源定位符）向HTTP服务端发送所有请求。HTTP使用URL来传输数据和建立连接。<br>Web服务器有：Apache服务器，IIS服务器等。<br>Web服务器根据收到的请求后，向客户端发送响应信息。<br>HTTP默认端口是80，但是也可以改为8080或其他。<br>三点注意事项：</p>
 <ol>
 <li>无连接：无连接的含义是限制每次连接只处理一个请求，服务器处理完客户的请求，并收到客户的应答后，即断开连接，采用这种方式可以节省传输时间。</li>
@@ -299,6 +597,10 @@
     
     
     
+
+	<div>
+		
+	</div>
       <footer class="post-footer">
         <div class="post-eof"></div>
       </footer>
@@ -382,6 +684,11 @@
           <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
 </div>
