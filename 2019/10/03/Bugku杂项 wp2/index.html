@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="闪的好快gif动图，用stegsolve打开，然后Analysis-&gt;Frame Browser。共有18帧，拿着手机一张一张扫，扫出来的结果是SYC{F1aSh-so-f4sT}但是提交不正确。最后更改为SYC{F1aSh_so_f4sT} come_game下载下来，发现是一个游戏运行.exe文件，进入游戏界面，按照界面提示，shift键和上下左右键控制游戏随便玩一下，ESC键退出游戏。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bugku misc wp2">
+<meta property="og:url" content="http://yoursite.com/2019/10/03/Bugku%E6%9D%82%E9%A1%B9%20wp2/index.html">
+<meta property="og:site_name" content="ChanCherry&#39;s Blog">
+<meta property="og:description" content="闪的好快gif动图，用stegsolve打开，然后Analysis-&gt;Frame Browser。共有18帧，拿着手机一张一张扫，扫出来的结果是SYC{F1aSh-so-f4sT}但是提交不正确。最后更改为SYC{F1aSh_so_f4sT} come_game下载下来，发现是一个游戏运行.exe文件，进入游戏界面，按照界面提示，shift键和上下左右键控制游戏随便玩一下，ESC键退出游戏。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019100319032775.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191003195332323.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191003200045880.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191003202101236.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191003202559435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191003205820174.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191004002655800.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191004084137294.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191005191818125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007091732404.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007092010317.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007092303280.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007082946497.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007083304194.png">
+<meta property="article:published_time" content="2019-10-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-03T06:21:24.204Z">
+<meta property="article:author" content="ChanCherry">
+<meta property="article:tag" content="�Ű����£�CTFer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2019100319032775.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/10/03/Bugku%E6%9D%82%E9%A1%B9%20wp2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Bugku misc wp2 | ChanCherry's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChanCherry's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/03/Bugku%E6%9D%82%E9%A1%B9%20wp2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Bugku misc wp2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-03 00:00:00" itemprop="dateCreated datePublished" datetime="2019-10-03T00:00:00+08:00">2019-10-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-03 14:21:24" itemprop="dateModified" datetime="2020-02-03T14:21:24+08:00">2020-02-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF WP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="闪的好快"><a href="#闪的好快" class="headerlink" title="闪的好快"></a>闪的好快</h1><p>gif动图，用stegsolve打开，然后Analysis-&gt;Frame Browser。<br><img src="https://img-blog.csdnimg.cn/2019100319032775.png" alt="在这里插入图片描述"><br>共有18帧，拿着手机一张一张扫，扫出来的结果是<code>SYC{F1aSh-so-f4sT}</code><br>但是提交不正确。最后更改为<code>SYC{F1aSh_so_f4sT}</code></p>
+<h1 id="come-game"><a href="#come-game" class="headerlink" title="come_game"></a>come_game</h1><p>下载下来，发现是一个游戏<br><img src="https://img-blog.csdnimg.cn/20191003195332323.png" alt="在这里插入图片描述"><br>运行.exe文件，进入游戏界面，按照界面提示，shift键和上下左右键控制游戏<br><img src="https://img-blog.csdnimg.cn/20191003200045880.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>随便玩一下，ESC键退出游戏。发现文件夹中多出了两个文件， 死亡就是deathtime  其中save1中的后缀1表示存储第一个游戏关卡的进度。<br><img src="https://img-blog.csdnimg.cn/20191003202101236.png" alt="在这里插入图片描述"><br>用FlexHex打开save1看看，然后发现这里2就是代表关卡的意思。我们这里修改成5也就是对应的35。而且后面的数字都要改为0，不然就会在重新进入的时候，既出现flag又出现gameover的图片。<br><img src="https://img-blog.csdnimg.cn/20191003202559435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>修改之后重新进入游戏，此时因为游戏进度被我们人为更改，所以要加载游戏才能直接通关。得到flag:<code>FLAG{6E23F259D98DF153}</code>，<br><img src="https://img-blog.csdnimg.cn/20191003205820174.png" alt="在这里插入图片描述"><br>但是提交不正确，主要的原因是本题来自于极客大挑战，其flag格式为SYC{}，要改为<code>SYC{6E23F259D98DF153}</code></p>
+<h1 id="白哥的鸽子"><a href="#白哥的鸽子" class="headerlink" title="白哥的鸽子"></a>白哥的鸽子</h1><p>放到winHex里面看看，感觉结尾有点奇怪<br><img src="https://img-blog.csdnimg.cn/20191004002655800.png" alt="在这里插入图片描述"><br>看了wp之后，知道是栅栏密码，上脚本，</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3个字符一组，一共24个字符，总共8组</span></span><br><span class="line">str = <span class="string">"fg2ivyo&#125;l&#123;2s3_o@aw__rcl@"</span></span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, int(len(str)/<span class="number">3</span>), <span class="number">1</span>):</span><br><span class="line">    flag += str[i]</span><br><span class="line">    flag += str[i + <span class="number">8</span>]</span><br><span class="line">    flag += str[i + <span class="number">16</span>]</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+<p>运行脚本即可得到flag。</p>
+<h1 id="隐写3"><a href="#隐写3" class="headerlink" title="隐写3"></a>隐写3</h1><p>给的是大白的图，但是下面被截断了，IHDR后面8个字节是宽和高，把高改为宽的值。<br><img src="https://img-blog.csdnimg.cn/20191004084137294.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><p>题目给的是1.tar.gz，在Linux里面解压，</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf <span class="number">1.</span>tar.gz</span><br><span class="line">test/</span><br><span class="line">test/flag</span><br></pre></td></tr></table></figure>
+<p>看来flag在flag文件里面，进入目录，用strings命令查看，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~&#x2F;文档# cd test</span><br><span class="line">root@kali:~&#x2F;文档&#x2F;test# strings flag</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-LSCRJY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">info</span><br><span class="line">files</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">game.trashinfo</span><br><span class="line">game.trashinfo.OL1PJY</span><br><span class="line">game</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-3ICRJY</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-PS93JY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-PS93JY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-LSCRJY</span><br><span class="line">lost+found</span><br><span class="line">game</span><br><span class="line">.Trash-0</span><br><span class="line">flag.txt</span><br><span class="line">.goutputstream-LSCRJY</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">&#x2F;media&#x2F;test</span><br><span class="line">[WI&#x2F;</span><br><span class="line">xy#^</span><br><span class="line">info</span><br><span class="line">files</span><br><span class="line">[Trash Info]</span><br><span class="line">Path&#x3D;game</span><br><span class="line">DeletionDate&#x3D;2016-06-27T12:27:37</span><br><span class="line">key&#123;&#125;</span><br><span class="line">key&#123;&#125;</span><br><span class="line">key&#123;feb81d3834e2423c9903f4755464060b&#125;</span><br><span class="line">game.trashinfo</span><br><span class="line">game.trashinfo.OL1PJY</span><br><span class="line">game</span><br></pre></td></tr></table></figure>
+<p>或者<code>grep &#39;key&#39; -a flag</code>也可以</p>
+<h1 id="做个游戏-08067CTF"><a href="#做个游戏-08067CTF" class="headerlink" title="做个游戏(08067CTF)"></a>做个游戏(08067CTF)</h1><p>下载文件下来，是一个jar，用反编译工具jd-gui查看一下源代码，<br><img src="https://img-blog.csdnimg.cn/20191005191818125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>找到flag，不过经过了base64加密，解密一下即可。</p>
+<h1 id="想蹭网先解开密码"><a href="#想蹭网先解开密码" class="headerlink" title="想蹭网先解开密码"></a>想蹭网先解开密码</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flag格式：flag&#123;你破解的WiFi密码&#125;</span><br><span class="line"></span><br><span class="line">tips：密码为手机号，为了不为难你，大佬特地让我悄悄地把前七位告诉你</span><br><span class="line"><span class="number">1391040</span>**</span><br><span class="line">Goodluck!!</span><br></pre></td></tr></table></figure>
+<p>下载cap包，用wireshark打开，WIFI连接认证的重点在WPA的四次握手包，也就是eapol协议的包，过滤一下<br><img src="https://img-blog.csdnimg.cn/20191007091732404.png" alt="在这里插入图片描述"><br>使用<a href="https://blog.csdn.net/qq_42025840/article/details/81125584" target="_blank" rel="noopener">crunch命令</a>生成密码字典，<br><img src="https://img-blog.csdnimg.cn/20191007092010317.png" alt="在这里插入图片描述"><br>利用aircrack爆破一下，<br><img src="https://img-blog.csdnimg.cn/20191007092303280.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="Linux2"><a href="#Linux2" class="headerlink" title="Linux2"></a>Linux2</h1><p>解压后的文件拿到kali里面binwalk一下，再foremost得到一张flag图片，<br><img src="https://img-blog.csdnimg.cn/20191007082946497.png" alt="在这里插入图片描述"><br>flag{f0rens!cs!C00L!}提交，错误？？？<br>题目提示的是：</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给你点提示吧：<span class="built_in">key</span>的格式是<span class="built_in">KEY</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>尝试直接搜索brave文件，提交正确！<br><img src="https://img-blog.csdnimg.cn/20191007083304194.png" alt="在这里插入图片描述"><br>也可以直接用strings命令查看一下brave文件。</p>
+<p>还在做题中，后续还会更新的~~</p>
+
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/03/BUUCTF%20MISC%20Wp2/" rel="prev" title="BUUCTF misc wp2">
+      <i class="fa fa-chevron-left"></i> BUUCTF misc wp2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/03/NWU-CTF%20web/" rel="next" title="NWUCTF web">
+      NWUCTF web <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#闪的好快"><span class="nav-number">1.</span> <span class="nav-text">闪的好快</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#come-game"><span class="nav-number">2.</span> <span class="nav-text">come_game</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#白哥的鸽子"><span class="nav-number">3.</span> <span class="nav-text">白哥的鸽子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隐写3"><span class="nav-number">4.</span> <span class="nav-text">隐写3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux"><span class="nav-number">5.</span> <span class="nav-text">linux</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#做个游戏-08067CTF"><span class="nav-number">6.</span> <span class="nav-text">做个游戏(08067CTF)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#想蹭网先解开密码"><span class="nav-number">7.</span> <span class="nav-text">想蹭网先解开密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux2"><span class="nav-number">8.</span> <span class="nav-text">Linux2</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanCherry"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">ChanCherry</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ChanCherry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChanCherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://me.csdn.net/ITmincherry" title="CSDN → https:&#x2F;&#x2F;me.csdn.net&#x2F;ITmincherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-csdn"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/chancherry" title="֪�� → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;chancherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-ioxhost"></i>֪��</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/ChanCherry" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;ChanCherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://120.79.189.7/" title="http:&#x2F;&#x2F;120.79.189.7&#x2F;" rel="noopener" target="_blank">yulige</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.leavesongs.com/" title="https:&#x2F;&#x2F;www.leavesongs.com&#x2F;" rel="noopener" target="_blank">����</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChanCherry</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共35.5k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
