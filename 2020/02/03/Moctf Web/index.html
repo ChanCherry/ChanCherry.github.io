@@ -46,12 +46,12 @@
   };
 </script>
 
-  <meta name="description" content="php黑魔法emmm传送门只有下图，查看源代码，也没有发现什么，于是，查看一下http:&#x2F;&#x2F;119.23.73.3:5001&#x2F;web5&#x2F;index.php，还是什么都没有，大佬提示访问http:&#x2F;&#x2F;119.23.73.3:5001&#x2F;web5&#x2F;index.php~，然后查看源代码，大致意思是参数a,b的md5值相等，但a不等于b，就可以输出flag。两种方法：1.构造数组，md5加密遇到数组时都返回">
+  <meta name="description" content="刷题ing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MOCTF web">
 <meta property="og:url" content="http://yoursite.com/2020/02/03/Moctf%20Web/index.html">
 <meta property="og:site_name" content="ChanCherry&#39;s Blog">
-<meta property="og:description" content="php黑魔法emmm传送门只有下图，查看源代码，也没有发现什么，于是，查看一下http:&#x2F;&#x2F;119.23.73.3:5001&#x2F;web5&#x2F;index.php，还是什么都没有，大佬提示访问http:&#x2F;&#x2F;119.23.73.3:5001&#x2F;web5&#x2F;index.php~，然后查看源代码，大致意思是参数a,b的md5值相等，但a不等于b，就可以输出flag。两种方法：1.构造数组，md5加密遇到数组时都返回">
+<meta property="og:description" content="刷题ing">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190925170324387.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190925170819861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
@@ -60,7 +60,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190925175132111.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190925175523344.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2020-02-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-02-03T07:02:00.532Z">
+<meta property="article:modified_time" content="2020-02-03T08:05:02.720Z">
 <meta property="article:author" content="ChanCherry">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190925170324387.png">
@@ -212,7 +212,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:02:00" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:05:02" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,7 +237,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="php黑魔法"><a href="#php黑魔法" class="headerlink" title="php黑魔法"></a>php黑魔法</h1><p>emmm传送门只有下图，<br><img src="https://img-blog.csdnimg.cn/20190925170324387.png" alt="在这里插入图片描述"><br>查看源代码，也没有发现什么，于是，查看一下<a href="http://119.23.73.3:5001/web5/index.php" target="_blank" rel="noopener">http://119.23.73.3:5001/web5/index.php</a>，还是什么都没有，大佬提示访问<a href="http://119.23.73.3:5001/web5/index.php~" target="_blank" rel="noopener">http://119.23.73.3:5001/web5/index.php~</a>，然后查看源代码，<br><img src="https://img-blog.csdnimg.cn/20190925170819861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">大致意思是参数a,b的md5值相等，但a不等于b，就可以输出flag。<br>两种方法：<br>1.构造数组，md5加密遇到数组时都返回false，于是相等，但值并不相等。<code>?a[]=1&amp;b[]=2</code><br>2.md5加密后0e开头的都相等，例如：240610708 和 QNKCDZO。   <code>?a=240610708&amp;b=QNKCDZO</code></p>
+        <p>刷题ing</p>
+<a id="more"></a>
+<h1 id="php黑魔法"><a href="#php黑魔法" class="headerlink" title="php黑魔法"></a>php黑魔法</h1><p>emmm传送门只有下图，<br><img src="https://img-blog.csdnimg.cn/20190925170324387.png" alt="在这里插入图片描述"><br>查看源代码，也没有发现什么，于是，查看一下<a href="http://119.23.73.3:5001/web5/index.php" target="_blank" rel="noopener">http://119.23.73.3:5001/web5/index.php</a>，还是什么都没有，大佬提示访问<a href="http://119.23.73.3:5001/web5/index.php~" target="_blank" rel="noopener">http://119.23.73.3:5001/web5/index.php~</a>，然后查看源代码，<br><img src="https://img-blog.csdnimg.cn/20190925170819861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">大致意思是参数a,b的md5值相等，但a不等于b，就可以输出flag。<br>两种方法：<br>1.构造数组，md5加密遇到数组时都返回false，于是相等，但值并不相等。<code>?a[]=1&amp;b[]=2</code><br>2.md5加密后0e开头的都相等，例如：240610708 和 QNKCDZO。   <code>?a=240610708&amp;b=QNKCDZO</code></p>
 <h1 id="unset"><a href="#unset" class="headerlink" title="unset"></a>unset</h1><p>题目一开始就放了源码，<br><img src="https://img-blog.csdnimg.cn/20190925173549623.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>仔细审计一下，首先，waf函数是要求传入的键名中不能有flag字符。之后，就是一个不容易看懂的循环了，<br><img src="https://img-blog.csdnimg.cn/20190925174051605.png" alt="在这里插入图片描述"><br>大致意思是，把_POST,_GET,_COOKIE依次传给$ _R，如果$ $ _R有数据（_POST,_GET）传数据过来了，就执行下一步循环。可是， $ _R怎么变成了$ $_R了呢？<br>$ $ _R实际上是 $ _R值的值，打个比方，有a=&gt;b;    b=&gt;c;那么我 $ $a 就是是取出a的值的值,也就是说取出c。<br>之后我们进入下一个foreach， $<strong>K为键名， $</strong>V为值。如果键名作为变量所对应的值与 $ $<strong>R的值相等，则unset掉 $ $</strong>K。这里unset经过我查资料理解为就是把这个值在程序中所对应的内存清除掉。简单来说就是销毁了他，他就不存在了。<br>接着往下，这一段的意思是如果对应的值存在，那么满足if进入waf函数。<br><img src="https://img-blog.csdnimg.cn/20190925175132111.png" alt="在这里插入图片描述"><br>extract函数的功能是从数组中将变量导入到当前的符号表，举个例子：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/* 假定 $var_array 是 wddx_deserialize 返回的数组*/</span></span><br><span class="line">$size = <span class="string">"large"</span>;</span><br><span class="line">$var_array = <span class="keyword">array</span>(<span class="string">"color"</span> =&gt; <span class="string">"blue"</span>,</span><br><span class="line">                   <span class="string">"size"</span>  =&gt; <span class="string">"medium"</span>,</span><br><span class="line">                   <span class="string">"shape"</span> =&gt; <span class="string">"sphere"</span>);</span><br><span class="line">extract($var_array, EXTR_PREFIX_SAME, <span class="string">"wddx"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"$color, $size, $shape, $wddx_size\n"</span>;</span><br><span class="line"><span class="comment">//输出blue, large, sphere, medium</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>而EXTR_SKIP意思是如果前面存在了此键名，那么我不会覆盖掉前面的。<br><img src="https://img-blog.csdnimg.cn/20190925175523344.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>wtcl不得不看大佬的wp了，这道题我们的目的是要读取flag.php这个页面的内容，而如果我们不绕过waf，那么我们是不能读取的。<br>所以我们要通过POST一个特殊的内容来达到绕过的目的。根据代码的逻辑，我们发现如果我们提前把_GET的内容给unset掉，之后顺便的通过waf，然后再通过extract函数给还原回来是不是就达到我们的目的了？？？<br><strong>实现</strong>：<br>题目需要我们传入三个值，分别为flag,daiker和file,其中file是需要对waf进行绕过的，这里到了解决问题的关键，我们传入<code>http://119.23.73.3:5101/?flag=s878926199a&amp;daiker=s155964671a&amp;file=php://filter/read=convert.base64-encode/resource=flag.php</code><br>其中flag和daiker不能相同，但flag和daiker的md5值需要相等，注意到判断md5值时使用了==的方式，可以利用php的弱类型判断。file利用php://filter伪协议进行读取。<br>然后，我们还需要post一系列数据，payload:_GET[flag]=s878926199a&amp;_GET[daiker]=s155964671a&amp;_GET[file]=php://filter/read=convert.base64-encode/resource=flag.php。此时我们对情况进行分析在进行_POST的foreach时，_k的值为_GET[flag],其值的值为我们在url中get进去的flag的值，这与我们post进去的值相同。unset()起作用，_GET[flag]的值消失，waf失效。<br>页面最底下出现一串base64编码<code>PD9waHAKJGZsYWcgPSAnbW9jdGZ7ZTIxODFiNW8xNGE2NzE1OWNjMjNvYzhmZW9kNmM1YjZ9JzsKCgo=</code>，解码一下，得到moctf{e2181b5o14a67159cc23oc8feod6c5b6}</p>
@@ -290,8 +292,8 @@
       <i class="fa fa-chevron-left"></i> NWUCTF web
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/Moctf%E6%AD%BB%E4%BA%A1%E9%80%80%E5%87%BAWrite%20up/" rel="next" title="MOCTF 死亡退出">
-      MOCTF 死亡退出 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="next" title="Java中的序列化和反序列化">
+      Java中的序列化和反序列化 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -385,10 +387,10 @@
         <a href="https://github.com/ChanCherry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChanCherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://me.csdn.net/ITmincherry" title="CSDN → https:&#x2F;&#x2F;me.csdn.net&#x2F;ITmincherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-csdn"></i>CSDN</a>
+        <a href="https://me.csdn.net/ITmincherry" title="CSDN → https:&#x2F;&#x2F;me.csdn.net&#x2F;ITmincherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-adjust"></i>CSDN</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/people/chancherry" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;chancherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-ioxhost"></i>知乎</a>
+        <a href="https://www.zhihu.com/people/chancherry" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;chancherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-bell"></i>知乎</a>
       </span>
       <span class="links-of-author-item">
         <a href="https://twitter.com/ChanCherry" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;ChanCherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
@@ -412,6 +414,11 @@
   </div>
 
       </div>
+	  
+	  <div id="music163player">
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="https://music.163.com/#/song?id=1349292048">
+		</iframe>
+	  </div>
 
     </div>
   </aside>
@@ -445,7 +452,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共35.6k字</span>
+  <span class="post-count">博客全站共35.5k字</span>
 </div>
 
         
@@ -496,6 +503,8 @@
 
 
 
+
+  
 
   
 
