@@ -137,6 +137,21 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
@@ -387,171 +402,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/MOCTF%20misc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/MOCTF%20misc/" class="post-title-link" itemprop="url">MOCTF misc</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:57:52" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF WP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="0x00-假装安全"><a href="#0x00-假装安全" class="headerlink" title="0x00 假装安全"></a>0x00 假装安全</h1><p>题目给了一个carefully.jpg，用记事本打开发现有flag.txt，于是binwalk一下，<br><img src="https://img-blog.csdnimg.cn/20190816164148407.png" alt="在这里插入图片描述"><br>果然，里面有个zip，其中有个flag.txt，binwalk -e carefully.jpg解压一下，得到一个压缩包和flag.txt，打开flag.txt就可以看到一串像是flag的东西：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mcfCrflyS1eot</span>&#123;<span class="variable">@eul_ld</span>&#125;</span><br></pre></td></tr></table></figure>
-<p>栅栏密码解密，即可得到moctf{C@refully_Sl1de}</p>
-<h1 id="0x01-扫扫出奇迹"><a href="#0x01-扫扫出奇迹" class="headerlink" title="0x01 扫扫出奇迹"></a>0x01 扫扫出奇迹</h1><p>拿到二维码，试着扫一扫，扫不出来，发现是一个取反色的二维码，<br><img src="https://img-blog.csdnimg.cn/20190816165240568.png" alt="在这里插入图片描述"><br>用stegsolve的Xor可以取反色，得到二维码，<br><img src="https://img-blog.csdnimg.cn/20190816165306213.png" alt="在这里插入图片描述"><br>扫一扫得到flag：moctf{qr_code_1s_1n_1t}</p>
-<h1 id="0x02-光阴似箭"><a href="#0x02-光阴似箭" class="headerlink" title="0x02 光阴似箭"></a>0x02 光阴似箭</h1><p>是一个gif动图，用stegsolve的Frame Browser查看，<br><img src="https://img-blog.csdnimg.cn/20190816165531562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>反过来就是moctf{Flash_Movie}</p>
-<h1 id="0x03-杰斯的魔法"><a href="#0x03-杰斯的魔法" class="headerlink" title="0x03 杰斯的魔法"></a>0x03 杰斯的魔法</h1><p>查看源代码，感觉有点像包含flag，试一试，moctf{scr1pt_1s_magical}真的是！</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.write(unescape('%3Cscript%20language%20%3D%20%22javascript%22%3Ealert%28%22moctf%7Bscr1pt_1s_magical%7D%22%29%3B%3C/script%3E'));</span><br></pre></td></tr></table></figure>
-<p>当然在线url解码也可以！<br><img src="https://img-blog.csdnimg.cn/20190816170203192.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="0x04-流量分析"><a href="#0x04-流量分析" class="headerlink" title="0x04 流量分析"></a>0x04 流量分析</h1><p>是一个pcapng文件，用wireshark打开，利用分析中的追踪流量进行分析发现flag<br><img src="https://img-blog.csdnimg.cn/20190816173300375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">即可得到moctf{c@N_y0U_4lnd_m8}。</p>
-<h1 id="0x05-女神的告白"><a href="#0x05-女神的告白" class="headerlink" title="0x05 女神的告白"></a>0x05 女神的告白</h1><p>解压需要密码，提示说压缩包密码是以meimei开头，利用ARCHPR直接掩码攻击，设置好掩码，后面的位数可以一位一位的试，试到第四位时得到密码。将得到的密码解压文件，获取flag：moctf{Y0u_@re_A_g00d_man}<br>（ARCHPR 4.54破解版可以帮助你破解密码，它可以恢复保护口令或将用所有流行的档案版本创建的加密 ZIP 和 RAR 档案解除锁定。）<br><img src="https://img-blog.csdnimg.cn/20190816182614968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">Java中的序列化和反序列化</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:57:28" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">Web安全</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>众所周知，类的对象会随着程序的终止而被垃圾收集器销毁。如果要在不重新创建对象的情况下调用该类，该怎么做？这就可以通过序列化将数据转换为字节流。<br><strong>对象序列化</strong>是一个用于将对象状态转换为字节流的过程，可以将其保存到磁盘文件中或通过网络发送到任何其他程序；从字节流创建对象的相反的过程称为<strong>反序列化</strong>。而创建的字节流是与平台无关的，在一个平台上序列化的对象可以在不同的平台上反序列化。<br>简言之，序列化就是在运行代码的时候，我们想保存多个对象的数据，就把内存里面的这些对象给变成一连串的字节。常见的就是变成文件，其实不序列化也可以保存文件，emmm</p>
-<h2 id="什么时候需要序列化？"><a href="#什么时候需要序列化？" class="headerlink" title="什么时候需要序列化？"></a>什么时候需要序列化？</h2><p>当你想把的内存中的对象状态保存到一个文件中或者数据库中时候；<br>当你想用套接字在网络上传送对象的时候；<br>当你想通过RMI传输对象的时候；</p>
-<h2 id="如何使Java类可序列化？"><a href="#如何使Java类可序列化？" class="headerlink" title="如何使Java类可序列化？"></a>如何使Java类可序列化？</h2><p>通过实现java.io.Serializable接口，可以在Java类中启用可序列化。它是一个标记接口，意味着它不包含任何方法或字段，仅用于标识可序列化的语义。</p>
-<h2 id="试图序列化不可序列化的对象怎么办？"><a href="#试图序列化不可序列化的对象怎么办？" class="headerlink" title="试图序列化不可序列化的对象怎么办？"></a>试图序列化不可序列化的对象怎么办？</h2><p>将得到一个 RuntimeException 异常：主线程中出现异常 java.io.NotSerializableException。</p>
-<h2 id="什么是serialVersionUID？"><a href="#什么是serialVersionUID？" class="headerlink" title="什么是serialVersionUID？"></a>什么是serialVersionUID？</h2><p>SerialVersionUID是一个标识符，当它通常使用对象的哈希码序列化时会标记在对象上。我们可以通过Java中serialver工具找到该对象的serialVersionUID。<br>语法：<strong>serialver classname</strong>，SerialVersionUID用于对象的版本控制。当您添加或修改类中的任何字段时，已经序列化的类将无法恢复，因为serialVersionUID已为新类生成与旧的序列化对象将不同。Java序列化过程依赖于正确的serialVersionUID恢复序列化对象的状态，并在serialVersionUID不匹配时抛出java.io.InvalidClassException 异常。</p>
-<h2 id="Transient-关键字"><a href="#Transient-关键字" class="headerlink" title="Transient 关键字"></a>Transient 关键字</h2><p>transient修饰符仅适用于变量，不适用于方法和类。在序列化时，如果我们不想序列化特定变量以满足安全约束，那么我们应该将该变量声明为transient。执行序列化时，JVM会忽略transient变量的原始值并将默认值保存到文件中。因此，transient意味着不要序列化。</p>
-<h2 id="Transient-与-Static"><a href="#Transient-与-Static" class="headerlink" title="Transient 与 Static"></a>Transient 与 Static</h2><p>静态变量不是对象状态的一部分，因此它不参与序列化。所以将静态变量声明为transient变量是没有用处的。</p>
-<h2 id="Final-与-Transient"><a href="#Final-与-Transient" class="headerlink" title="Final 与 Transient"></a>Final 与 Transient</h2><p>final变量将直接通过值参与序列化，所以将final变量声明为transient变量不会产生任何影响。现在，让我们考虑一个显示Java中的序列化和反序列化的程序。<br><img src="https://img-blog.csdnimg.cn/20190927150923104.png" alt="在这里插入图片描述"><br>实现 Serializable 接口的 Employee 类：<br><img src="https://img-blog.csdnimg.cn/2019092715100119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190927151014405.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下面的 SerializingObject 程序实例化一个 Employee 的对象，并将它序列化到文件中。<br><img src="https://img-blog.csdnimg.cn/20190927151041821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下面的 DeSerializingObject 程序反序列化 Employee 对象。<br><img src="https://img-blog.csdnimg.cn/20190927151117717.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>文章借鉴了好几个大佬的，下面附上原链接：<br><a href="https://baijiahao.baidu.com/s?id=1622011683975285944&wfr=spider&for=pc" target="_blank" rel="noopener">Java程序员：Java中的序列化和反序列化</a><br><a href="https://blog.csdn.net/u013870094/article/details/82765907" target="_blank" rel="noopener">Java 之 Serializable 序列化和反序列化的概念,作用的通俗易懂的解释</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/PHP%E4%BC%AA%E5%8D%8F%E8%AE%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -751,6 +601,171 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">Java中的序列化和反序列化</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:57:28" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>众所周知，类的对象会随着程序的终止而被垃圾收集器销毁。如果要在不重新创建对象的情况下调用该类，该怎么做？这就可以通过序列化将数据转换为字节流。<br><strong>对象序列化</strong>是一个用于将对象状态转换为字节流的过程，可以将其保存到磁盘文件中或通过网络发送到任何其他程序；从字节流创建对象的相反的过程称为<strong>反序列化</strong>。而创建的字节流是与平台无关的，在一个平台上序列化的对象可以在不同的平台上反序列化。<br>简言之，序列化就是在运行代码的时候，我们想保存多个对象的数据，就把内存里面的这些对象给变成一连串的字节。常见的就是变成文件，其实不序列化也可以保存文件，emmm</p>
+<h2 id="什么时候需要序列化？"><a href="#什么时候需要序列化？" class="headerlink" title="什么时候需要序列化？"></a>什么时候需要序列化？</h2><p>当你想把的内存中的对象状态保存到一个文件中或者数据库中时候；<br>当你想用套接字在网络上传送对象的时候；<br>当你想通过RMI传输对象的时候；</p>
+<h2 id="如何使Java类可序列化？"><a href="#如何使Java类可序列化？" class="headerlink" title="如何使Java类可序列化？"></a>如何使Java类可序列化？</h2><p>通过实现java.io.Serializable接口，可以在Java类中启用可序列化。它是一个标记接口，意味着它不包含任何方法或字段，仅用于标识可序列化的语义。</p>
+<h2 id="试图序列化不可序列化的对象怎么办？"><a href="#试图序列化不可序列化的对象怎么办？" class="headerlink" title="试图序列化不可序列化的对象怎么办？"></a>试图序列化不可序列化的对象怎么办？</h2><p>将得到一个 RuntimeException 异常：主线程中出现异常 java.io.NotSerializableException。</p>
+<h2 id="什么是serialVersionUID？"><a href="#什么是serialVersionUID？" class="headerlink" title="什么是serialVersionUID？"></a>什么是serialVersionUID？</h2><p>SerialVersionUID是一个标识符，当它通常使用对象的哈希码序列化时会标记在对象上。我们可以通过Java中serialver工具找到该对象的serialVersionUID。<br>语法：<strong>serialver classname</strong>，SerialVersionUID用于对象的版本控制。当您添加或修改类中的任何字段时，已经序列化的类将无法恢复，因为serialVersionUID已为新类生成与旧的序列化对象将不同。Java序列化过程依赖于正确的serialVersionUID恢复序列化对象的状态，并在serialVersionUID不匹配时抛出java.io.InvalidClassException 异常。</p>
+<h2 id="Transient-关键字"><a href="#Transient-关键字" class="headerlink" title="Transient 关键字"></a>Transient 关键字</h2><p>transient修饰符仅适用于变量，不适用于方法和类。在序列化时，如果我们不想序列化特定变量以满足安全约束，那么我们应该将该变量声明为transient。执行序列化时，JVM会忽略transient变量的原始值并将默认值保存到文件中。因此，transient意味着不要序列化。</p>
+<h2 id="Transient-与-Static"><a href="#Transient-与-Static" class="headerlink" title="Transient 与 Static"></a>Transient 与 Static</h2><p>静态变量不是对象状态的一部分，因此它不参与序列化。所以将静态变量声明为transient变量是没有用处的。</p>
+<h2 id="Final-与-Transient"><a href="#Final-与-Transient" class="headerlink" title="Final 与 Transient"></a>Final 与 Transient</h2><p>final变量将直接通过值参与序列化，所以将final变量声明为transient变量不会产生任何影响。现在，让我们考虑一个显示Java中的序列化和反序列化的程序。<br><img src="https://img-blog.csdnimg.cn/20190927150923104.png" alt="在这里插入图片描述"><br>实现 Serializable 接口的 Employee 类：<br><img src="https://img-blog.csdnimg.cn/2019092715100119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190927151014405.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下面的 SerializingObject 程序实例化一个 Employee 的对象，并将它序列化到文件中。<br><img src="https://img-blog.csdnimg.cn/20190927151041821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下面的 DeSerializingObject 程序反序列化 Employee 对象。<br><img src="https://img-blog.csdnimg.cn/20190927151117717.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>文章借鉴了好几个大佬的，下面附上原链接：<br><a href="https://baijiahao.baidu.com/s?id=1622011683975285944&wfr=spider&for=pc" target="_blank" rel="noopener">Java程序员：Java中的序列化和反序列化</a><br><a href="https://blog.csdn.net/u013870094/article/details/82765907" target="_blank" rel="noopener">Java 之 Serializable 序列化和反序列化的概念,作用的通俗易懂的解释</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/MOCTF%20misc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/MOCTF%20misc/" class="post-title-link" itemprop="url">MOCTF misc</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:57:52" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF WP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="0x00-假装安全"><a href="#0x00-假装安全" class="headerlink" title="0x00 假装安全"></a>0x00 假装安全</h1><p>题目给了一个carefully.jpg，用记事本打开发现有flag.txt，于是binwalk一下，<br><img src="https://img-blog.csdnimg.cn/20190816164148407.png" alt="在这里插入图片描述"><br>果然，里面有个zip，其中有个flag.txt，binwalk -e carefully.jpg解压一下，得到一个压缩包和flag.txt，打开flag.txt就可以看到一串像是flag的东西：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mcfCrflyS1eot</span>&#123;<span class="variable">@eul_ld</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>栅栏密码解密，即可得到moctf{C@refully_Sl1de}</p>
+<h1 id="0x01-扫扫出奇迹"><a href="#0x01-扫扫出奇迹" class="headerlink" title="0x01 扫扫出奇迹"></a>0x01 扫扫出奇迹</h1><p>拿到二维码，试着扫一扫，扫不出来，发现是一个取反色的二维码，<br><img src="https://img-blog.csdnimg.cn/20190816165240568.png" alt="在这里插入图片描述"><br>用stegsolve的Xor可以取反色，得到二维码，<br><img src="https://img-blog.csdnimg.cn/20190816165306213.png" alt="在这里插入图片描述"><br>扫一扫得到flag：moctf{qr_code_1s_1n_1t}</p>
+<h1 id="0x02-光阴似箭"><a href="#0x02-光阴似箭" class="headerlink" title="0x02 光阴似箭"></a>0x02 光阴似箭</h1><p>是一个gif动图，用stegsolve的Frame Browser查看，<br><img src="https://img-blog.csdnimg.cn/20190816165531562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>反过来就是moctf{Flash_Movie}</p>
+<h1 id="0x03-杰斯的魔法"><a href="#0x03-杰斯的魔法" class="headerlink" title="0x03 杰斯的魔法"></a>0x03 杰斯的魔法</h1><p>查看源代码，感觉有点像包含flag，试一试，moctf{scr1pt_1s_magical}真的是！</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.write(unescape('%3Cscript%20language%20%3D%20%22javascript%22%3Ealert%28%22moctf%7Bscr1pt_1s_magical%7D%22%29%3B%3C/script%3E'));</span><br></pre></td></tr></table></figure>
+<p>当然在线url解码也可以！<br><img src="https://img-blog.csdnimg.cn/20190816170203192.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="0x04-流量分析"><a href="#0x04-流量分析" class="headerlink" title="0x04 流量分析"></a>0x04 流量分析</h1><p>是一个pcapng文件，用wireshark打开，利用分析中的追踪流量进行分析发现flag<br><img src="https://img-blog.csdnimg.cn/20190816173300375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">即可得到moctf{c@N_y0U_4lnd_m8}。</p>
+<h1 id="0x05-女神的告白"><a href="#0x05-女神的告白" class="headerlink" title="0x05 女神的告白"></a>0x05 女神的告白</h1><p>解压需要密码，提示说压缩包密码是以meimei开头，利用ARCHPR直接掩码攻击，设置好掩码，后面的位数可以一位一位的试，试到第四位时得到密码。将得到的密码解压文件，获取flag：moctf{Y0u_@re_A_g00d_man}<br>（ARCHPR 4.54破解版可以帮助你破解密码，它可以恢复保护口令或将用所有流行的档案版本创建的加密 ZIP 和 RAR 档案解除锁定。）<br><img src="https://img-blog.csdnimg.cn/20190816182614968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Cookie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -913,84 +928,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/robots%E5%8D%8F%E8%AE%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/robots%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">robots协议</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:58:36" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">Web安全</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>晚上刷ctf时，做到一题，关于robots的，作为小白的我，丝毫不会，就查了一下。</p>
-<p>robots.txt文件是一个文本文件，使用任何一个常见的文本编辑器，比如Windows系统自带的Notepad，就可以创建和编辑它 。robots.txt是一个协议，而不是一个命令。robots.txt是搜索引擎中访问网站的时候要查看的第一个文件。robots.txt文件告诉蜘蛛程序在服务器上什么文件是可以被查看的。当 一个搜索蜘蛛访问一个站点时，它会首先检查该站点根目录下是否存在robots.txt，如果存在，搜索机器人就会按照该文件中的内容来确定访问的范围；如果该文件不存在，所有的搜索蜘蛛将能够访问网站上所有没有被口令保护的页面。</p>
-<p>点开网址什么都没有，看教程说要用dirsearch扫目录脚本，又百度了一下。。。</p>
-<p>dirsearch是一个基于python的命令行工具，旨在暴力扫描页面结构，包括网页中的目录和文件。</p>
-<p>在kali中用以下命令即可使用：(kali中自带python环境）<br>git clone <a href="https://github.com/maurosoria/dirsearch.git" target="_blank" rel="noopener">https://github.com/maurosoria/dirsearch.git</a><br>cd dirsearch/<br>./dirsearch.py -u 目标网址 -e *<br>果然扫到了robots.txt，emmm，尴尬的是，不会访问该文件，后来大神指点，在网址链接后面加上robots.txt即可访问，表示学到了，?终于得到了flag.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/%E4%BD%A0%E7%9F%A5%E9%81%93http%E8%AF%B7%E6%B1%82%E5%A4%B4%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B9%88%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1054,6 +991,84 @@
 <h2 id="HTTP-Request-Header-请求头"><a href="#HTTP-Request-Header-请求头" class="headerlink" title="HTTP Request Header 请求头"></a>HTTP Request Header 请求头</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">Accept：指定客户端能够接收的内容类型。</span><br><span class="line"></span><br><span class="line">Accept-Charset：浏览器可以接受的字符编码集。</span><br><span class="line"></span><br><span class="line">Accept-Encoding：指定浏览器可以支持的web服务器返回内容压缩编码类型。</span><br><span class="line"></span><br><span class="line">Accept-Language：浏览器可接受的语言。</span><br><span class="line"></span><br><span class="line">Accept-Ranges：可以请求网页实体的一个或者多个子范围字段。</span><br><span class="line"></span><br><span class="line">AuthorizationHTTP：授权的授权证书。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Cache</span>-Control：指定请求和响应遵循的缓存机制。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Connection</span>：表示是否需要持久连接。（<span class="keyword">HTTP</span> <span class="number">1.1</span>默认进行持久连接）</span><br><span class="line"></span><br><span class="line">CookieHTTP：请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Length</span>：请求的内容长度。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Type</span>：请求的与实体对应的MIME信息。</span><br><span class="line"></span><br><span class="line"><span class="built_in">Date</span>：请求发送的日期和时间。</span><br><span class="line"></span><br><span class="line">Expect：请求的特定的服务器行为。</span><br><span class="line"></span><br><span class="line"><span class="keyword">From</span>：发出请求的用户的Email。</span><br><span class="line"></span><br><span class="line">Host：指定请求的服务器的域名和端口号。</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span>-<span class="keyword">Match</span>：只有请求内容与实体相匹配才有效。</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span>-Modified-Since：如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回<span class="number">304</span>代码。</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span>-<span class="keyword">None</span>-<span class="keyword">Match</span>：如果内容未改变返回<span class="number">304</span>代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变。</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span>-<span class="keyword">Range</span>：如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span>-Unmodified-Since：只在实体在指定时间之后未被修改才请求成功。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Max</span>-Forwards：限制信息通过代理和网关传送的时间。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Pragma</span>：用来包含实现特定的指令。</span><br><span class="line"></span><br><span class="line">Proxy-Authorization：连接到代理的授权证书。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Range</span>：只请求实体的一部分，指定范围。</span><br><span class="line"></span><br><span class="line">Referer：先前网页的地址，当前请求网页紧随其后,即来路。</span><br><span class="line"></span><br><span class="line">TE：客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Upgrade</span>：向服务器指定某种传输协议以便服务器进行转换（如果支持。</span><br><span class="line"></span><br><span class="line"><span class="keyword">User</span>-AgentUser-<span class="keyword">Agent</span>：的内容包含发出请求的用户信息。</span><br><span class="line"></span><br><span class="line">Via：通知中间网关或代理服务器地址，通信协议。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Warning</span>：关于消息实体的警告信息</span><br></pre></td></tr></table></figure>
 <h2 id="HTTP-Responses-Header-响应头"><a href="#HTTP-Responses-Header-响应头" class="headerlink" title="HTTP Responses Header 响应头"></a>HTTP Responses Header 响应头</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">Accept-Ranges：表明服务器是否支持指定范围请求及哪种类型的分段请求。</span><br><span class="line"></span><br><span class="line">Age：从原始服务器到代理缓存形成的估算时间（以秒计，非负）。</span><br><span class="line"></span><br><span class="line">Allow：对某网络资源的有效的请求行为，不允许则返回405。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Cache</span>-Control：告诉所有的缓存机制是否可以缓存及哪种类型。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-Encodingweb：服务器支持的返回内容压缩编码类型。。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Language</span>：响应体的语言。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Length</span>：响应体的长度。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-Location：请求资源可替代的备用的另一地址。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">MD5</span>：返回资源的<span class="keyword">MD5</span>校验值。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Range</span>：在整个返回体中本部分的字节位置。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Type</span>：返回内容的MIME类型。</span><br><span class="line"></span><br><span class="line"><span class="built_in">Date</span>：原始服务器消息发出的时间。</span><br><span class="line"></span><br><span class="line">ETag：请求变量的实体标签的当前值。</span><br><span class="line"></span><br><span class="line">Expires：响应过期的日期和时间。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Last</span>-Modified：请求资源的最后修改时间。</span><br><span class="line"></span><br><span class="line">Location：用来重定向接收方到非请求<span class="keyword">URL</span>的位置来完成请求或标识新的资源。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Pragma</span>：包括实现特定的指令，它可应用到响应链上的任何接收方。</span><br><span class="line"></span><br><span class="line">Proxy-Authenticate：它指出认证方案和可应用到代理的该<span class="keyword">URL</span>上的参数。</span><br><span class="line"></span><br><span class="line"><span class="keyword">refresh</span>：应用于重定向或一个新的资源被创造，在<span class="number">5</span>秒之后重定向（由网景提出，被大部分浏览器支持）</span><br><span class="line"></span><br><span class="line">Retry-<span class="keyword">After</span>：如果实体暂时不可取，通知客户端在指定时间之后再次尝试。</span><br><span class="line"></span><br><span class="line">Serverweb：服务器软件名称。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Set</span>-Cookie：设置<span class="keyword">Http</span> Cookie。</span><br><span class="line"></span><br><span class="line">Trailer：指出头域在分块传输编码的尾部存在。</span><br><span class="line"></span><br><span class="line">Transfer-<span class="keyword">Encoding</span>：文件传输编码。</span><br><span class="line"></span><br><span class="line">Vary：告诉下游代理是使用缓存响应还是从原始服务器请求。</span><br><span class="line"></span><br><span class="line">Via：告知代理客户端响应是通过哪里发送的。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Warning</span>：警告实体可能存在的问题。</span><br><span class="line"></span><br><span class="line">WWW-Authenticate：表明客户端请求实体应该使用的授权方案。</span><br></pre></td></tr></table></figure>
 <p>附上原文链接：<br><a href="https://www.jianshu.com/p/60063b692a3f" target="_blank" rel="noopener">https://www.jianshu.com/p/60063b692a3f</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/robots%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/robots%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">robots协议</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：12:58:36" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>晚上刷ctf时，做到一题，关于robots的，作为小白的我，丝毫不会，就查了一下。</p>
+<p>robots.txt文件是一个文本文件，使用任何一个常见的文本编辑器，比如Windows系统自带的Notepad，就可以创建和编辑它 。robots.txt是一个协议，而不是一个命令。robots.txt是搜索引擎中访问网站的时候要查看的第一个文件。robots.txt文件告诉蜘蛛程序在服务器上什么文件是可以被查看的。当 一个搜索蜘蛛访问一个站点时，它会首先检查该站点根目录下是否存在robots.txt，如果存在，搜索机器人就会按照该文件中的内容来确定访问的范围；如果该文件不存在，所有的搜索蜘蛛将能够访问网站上所有没有被口令保护的页面。</p>
+<p>点开网址什么都没有，看教程说要用dirsearch扫目录脚本，又百度了一下。。。</p>
+<p>dirsearch是一个基于python的命令行工具，旨在暴力扫描页面结构，包括网页中的目录和文件。</p>
+<p>在kali中用以下命令即可使用：(kali中自带python环境）<br>git clone <a href="https://github.com/maurosoria/dirsearch.git" target="_blank" rel="noopener">https://github.com/maurosoria/dirsearch.git</a><br>cd dirsearch/<br>./dirsearch.py -u 目标网址 -e *<br>果然扫到了robots.txt，emmm，尴尬的是，不会访问该文件，后来大神指点，在网址链接后面加上robots.txt即可访问，表示学到了，?终于得到了flag.</p>
 
       
     </div>
@@ -1151,6 +1166,7 @@
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
+          
         <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
@@ -1279,5 +1295,5 @@
    <script type="text/javascript" src="/js/src/fireworks.js"></script>
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
