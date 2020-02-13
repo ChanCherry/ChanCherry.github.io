@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-03T08:06:31.045Z</updated>
+  <updated>2020-02-13T09:44:32.694Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,22 +17,22 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Referer</title>
-    <link href="http://yoursite.com/2020/02/03/Referer/"/>
-    <id>http://yoursite.com/2020/02/03/Referer/</id>
-    <published>2020-02-02T16:00:00.000Z</published>
-    <updated>2020-02-03T08:06:31.045Z</updated>
+    <title>高考志愿填报の思考</title>
+    <link href="http://yoursite.com/2020/02/13/%E9%AB%98%E8%80%83%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5%E3%81%AE%E6%80%9D%E8%80%83/"/>
+    <id>http://yoursite.com/2020/02/13/%E9%AB%98%E8%80%83%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5%E3%81%AE%E6%80%9D%E8%80%83/</id>
+    <published>2020-02-12T16:00:00.000Z</published>
+    <updated>2020-02-13T09:44:32.694Z</updated>
     
-    <content type="html"><![CDATA[<p><strong>HTTP Referer</strong>是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p><a id="more"></a><h2 id="Referer的作用"><a href="#Referer的作用" class="headerlink" title="Referer的作用"></a>Referer的作用</h2><p>1.防盗链<br>我在<code>www.google.com</code>里有一个<code>www.baidu.com</code>链接，那么点击这个   <code>www.baidu.com</code>，它的header信息里就有：</p><pre><code>Referer=http://www.google.com</code></pre><p>那么可以利用这个来防止盗链了，比如我只允许我自己的网站访问我自己的图片服务器，那我的域名是<strong><strong>，那么图片服务器每次取到Referer来判断一下是不是我自己的域名</strong></strong>，如果是就继续访问，不是就拦截。<br>还有将这个http请求发给服务器后，如果服务器要求必须是某个地址或者某几个地址才能访问，而你发送的referer不符合他的要求，就会拦截或者跳转到他要求的地址，然后再通过这个地址进行访问。</p><p>2.防止恶意请求。<br>比如静态请求是<em>.html结尾的，动态请求是</em>.shtml，那么由此可以这么用，所有的*.shtml请求，必须 Referer  为我自己的网站。</p><pre><code>Referer=http://www.google.com</code></pre><h2 id="空Referer"><a href="#空Referer" class="headerlink" title="空Referer"></a>空Referer</h2><p> 空Referer即，Referer  头部的内容为空，或者，一个 HTTP  请求中根本不包含 Referer 头部。根据Referer的定义，它的作用是指示一个请求是从哪里链接过来，那么当一个<em>请求并不是由链接触发产生的</em>，那么自然也就不需要指定这个请求的链接来源。<br>比如，直接在浏览器的地址栏中输入一个资源的URL地址，那么这种请求是不会包含 Referer  字段的，因为这是一个“凭空产生”的 HTTP  请求，并不是从一个地方链接过去的。<br>允许 Referer  为空，意味着你允许比如浏览器直接访问，就是空。</p>]]></content>
+    <content type="html"><![CDATA[<p>这几天，总感觉心里毛毛躁躁，不太想学习，什么也不想干了（颓废状态orz）<br><img src="https://img-blog.csdnimg.cn/20200213163056860.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" width="250" height="250"></p><a id="more"></a><p>作为一名“好学生”，怎么能放任自己这样下去呢！然后就想办法激励自己去学习，不经意就神游天外了。。。<br>不知怎么就想起了自己高考志愿填报的事。安徽省18届考生，依稀记得省排名14000+（貌似是14469，记不清了，记性不好QAQ）志愿填报的图找不到了，就不po出来了。但是志愿还依稀记得，第一，合工大，第二，西南大学，第三，南昌大学，第四，郑州大学，第五，安徽大学。基本上报的都是电子或计算机相关专业，因为当时高中总听数学老师说，学计算机的有多nb什么的，自己也有点偏向这个方向，就报了（家里人部分想让我学医，然鹅我不想，有点倔强(●’◡’●)）第一志愿，当时是抱着可以冲一冲的心态报的，毕竟是安徽省第二的高校（第一没得希望），当时家人劝我上安大，但我个人比较偏执，对安大不知怎么就是不太愿意上（我知道我的分数肯定绰绰有余，想上个更好的211）最后被南大信安专业录取了。通知书刚下来，不算满意，毕竟没被合工大录取，不过想想合工大王牌专业是车辆工程，我还是算了吧（不算了又能怎样呢），自我安慰。。。<br>进入学校之后，感觉还可以，同学比较友好，老师也还好（没怎么研究过师资力量，保研方面的，只感觉应该还不错吧），只是我们学院是老校区，比较破旧，还是和附中在一起的，每天还要和“小学生”抢饭吃，难受.jpg。不过还好是在南昌市中心，交通便利，出校门就有超市等，比较方便，而且学院小，上课不用走太多路hhh<br>大一进了学院的技协ctf部门，认识了许多大佬，而且非常感谢肖师傅对我的引导和帮助，我也渐渐对安全产生了兴趣，并决定要好好学。奈何自己比较懒，浅尝辄止，参加了几次ctf比赛，几乎没有什么成绩，现在大二了还没学到什么东西tcl  慢慢地我发现我们学校的信安专业并不是很好，网上看到竟然还不如安大的信安专业，有点后悔当初的选择了555，（更后悔高三整天想睡觉，不好好学习）不过近两年排名有所上升，毕竟国家重视嘛！<br>不过想一想，还是自己的锅，只能怪自己大学前没有想好自己以后要做什么，（之前和学姐聊天的时候，学姐就看破了我的经历），从小到大，一直都是大人眼中的乖乖女，老师眼中的好学生，就一直学习书本知识，好像没有明确过自己以后要做的事，浑浑噩噩过了十几年。。。走到今天这一步，都是自己做出的选择，也怪不得谁。时光不能倒流，高考已成往事，再后悔已经无用了，还是好好考虑一下当下和以后的路吧！既然本科没考好，不如研究生努力考好一点，一不做二不休就考中科大吧，我们省第一大高校(ง •_•)ง（PS：说不定以后会变，先写着吧，学姐跨专业考研清华网络空间安全，想向她学习，而且北京机会多，emm又怕自己太菜了QAQ）从现在开始，好好学安全技术，还记得有大佬和我说过，学校不出名，那就让自己出名，现在想想这句话很有道理。<br>再回到志愿填报上。无聊查了一下当年高考投档线，如下图，<br><img src="https://img-blog.csdnimg.cn/20200213171604653.jpeg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200213171629476.jpeg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>看投档最低分排名，很明显，合工大12687，西南13177，上不了，南大14744，录取了。当年的志愿没有请教过老师，觉得考差了，不好意思，都是我自己决定填报的。这么看来，志愿填的还行吧，不算太烂，继续求心理安慰。。。<br>总结一下，高中真的要好好学习，高考很重要，是人生中一大转折点，你18年的努力有没有白费就体现在你的高考成绩上了，以前的成绩再光辉都没用。今年表妹就要高考了，希望她能不负众望，考上理想的985大学，一定要考得比我好！wtcl 而且我觉得志愿填报首先要看自己的意愿，想报什么专业，其次就是考虑省排名，对应可以报考的高校，再最后结合城市，学校条件进行选择（城市蛮重要的orz毕竟大城市机会多）<br>最后，人间值得，未来可期！(ง •_•)ง</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;strong&gt;HTTP Referer&lt;/strong&gt;是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。&lt;/p&gt;
+      &lt;p&gt;这几天，总感觉心里毛毛躁躁，不太想学习，什么也不想干了（颓废状态orz）&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20200213163056860.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70&quot; width=&quot;250&quot; height=&quot;250&quot;&gt;&lt;/p&gt;
     
     </summary>
     
     
-      <category term="Web安全" scheme="http://yoursite.com/categories/Web%E5%AE%89%E5%85%A8/"/>
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
   </entry>
