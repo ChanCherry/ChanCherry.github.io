@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="记一下CSRF和SSRF的笔记~~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP伪协议">
+<meta property="og:url" content="http://yoursite.com/2020/02/03/Web%E5%AE%89%E5%85%A8/CSRF&SSRF%E7%AE%80%E6%9E%90/index.html">
+<meta property="og:site_name" content="ChanCherry&#39;s Blog">
+<meta property="og:description" content="记一下CSRF和SSRF的笔记~~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019072818034721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-02-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-03T08:02:36.303Z">
+<meta property="article:author" content="ChanCherry">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2019072818034721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/03/Web%E5%AE%89%E5%85%A8/CSRF&SSRF%E7%AE%80%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>PHP伪协议 | ChanCherry's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChanCherry's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">信安萌新，CTFer</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Web%E5%AE%89%E5%85%A8/CSRF&SSRF%E7%AE%80%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP伪协议
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:02:36" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>记一下CSRF和SSRF的笔记~~</p>
+<a id="more"></a>
+
+<h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h1><h2 id="什么是CSRF"><a href="#什么是CSRF" class="headerlink" title="什么是CSRF"></a>什么是CSRF</h2><p>跨站请求伪造，是一种对网站的恶意利用。XSS利用站点内地信任用户，而CSRF通过伪装来自信任用户的请求来利用受信任的网站。与XSS相比，CSRF攻击往往不大流行（因此对其防范的资源也相对较少）和难以防范，所以被认为比XSS更具危险性。一个场景，跨域发出了一个请求，可以无JavaScript参加，请求是身份认证后的。一般分为HTML CSRF,JOSN HiJacking攻击和Flash CSRF。<br><img src="https://img-blog.csdnimg.cn/2019072818034721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="原理总结"><a href="#原理总结" class="headerlink" title="原理总结"></a>原理总结</h2><p>一个CSRF漏洞攻击的实现，需要由“三个部分”构成：</p>
+<ol>
+<li>有一个漏洞存在（无需验证，任意修改后台数据，新增请求）；</li>
+<li>伪装数据操纵请求的恶意链接或页面；</li>
+<li>诱使用户主动访问或登录恶意链接，触发非法操作。</li>
+</ol>
+<ul>
+<li><input disabled="" type="checkbox"> 第一部分    漏洞的存在</li>
+</ul>
+<p>关键字：跨站请求漏洞（CSR:Cross Site Request）<br>如果需要CSRF攻击能够成功，首先就需要目标站点或系统存在一个可以进行数据修改或新增操作，且此操作被提交后台之后的过程中，其未提供任何身份识别和校验的参数。后台只要收到请求，就立即下发数据修改或新增的操作。<br>以上漏洞情况的存在，出现场景比较多的用户密码的修改、购物地址的修改或后台管理账户的新增等操作过程中。</p>
+<ul>
+<li><input disabled="" type="checkbox"> 第二部分    漏洞利用的伪装</li>
+</ul>
+<p>关键字：伪装请求（F:Forgery）<br>CSRF漏洞存在了，如果需要真正的被利用，还需要对“修改或新增”数据操作请求的伪装，此时恶意攻击者只要将伪装好的“数据修改或新增”的请求发送给被攻击者，或者通过社工的方式诱使被攻击者在其cookie还生效的情况下点击该请求链接，即可触发CSRF漏洞，成功修改或新增当前用户的数据信息，如修改当前用户的密码，又或者是当前用户为后台管理员，触发漏洞后又新增了一个后台管理员。</p>
+<ul>
+<li><input disabled="" type="checkbox"> 第三部分    用户非本意的操作</li>
+</ul>
+<p>关键字：非本意的操作<br>当前用户在不知情的情况下，访问了黑客恶意构造的页面或链接，即在非本意的情况下完成黑客想完成的非法操作，实现了对当前用户个人信息的恶意操作。后台审计只能审计到用户的信息，并不能审计到黑客的信息。</p>
+<h2 id="简单实验"><a href="#简单实验" class="headerlink" title="简单实验"></a>简单实验</h2><p>首先需要一个简单的登录来实现基于session的会话访问控制<br>登录页面：没有用到数据库，账号密码固定<br>登出界面：logout.php，session_destroy()</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">session_start[<span class="string">'username'</span>];</span><br><span class="line">$usr=$_POST[<span class="string">'usrname'</span>];</span><br><span class="line">$pwd=$_POST[<span class="string">'password'</span>];</span><br><span class="line"><span class="keyword">if</span>($usr==<span class="string">'admin'</span> &amp;&amp; $pwd===<span class="string">'admin'</span>)&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'登录成功'</span>;</span><br><span class="line">	$_SEESION[<span class="string">'admin'</span>]=<span class="number">1</span>;</span><br><span class="line">	var_dump($_SESSION);</span><br><span class="line">	<span class="keyword">echo</span> <span class="number">111</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'登录失败'</span>；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>管理员的界面：模拟一个添加管理员的功能，通过if判断和echo实现</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">session_start();</span><br><span class="line"><span class="keyword">if</span>($_SESSION[<span class="string">'admin'</span>]!=<span class="number">1</span>)&#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">'你不是管理员'</span>);</span><br><span class="line">&#125;</span><br><span class="line">$usr=$_GET[<span class="string">'user'</span>];</span><br><span class="line"><span class="comment">//这里模拟一个添加管理员的功能，可以将get传参的内容添加成管理员</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($usr))&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'管理员'</span>.usr.<span class="string">'添加成功'</span>;</span><br><span class="line">	$log=fopen(<span class="string">"admin.txt"</span>,<span class="string">"a"</span>);</span><br><span class="line">	fwrite($log,$usr.<span class="string">"\n"</span>);</span><br><span class="line">	fclose($log);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'请输入想要添加的管理员用户名'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>实验开始：</p>
+<p>首先将login.php，manage.php，logout.php放入本机的php环境，假设本机是管理员使用的机器。本机的ip 127.0.0.1就当作是我们要攻击的服务器的ip，虚拟机的192.168.123.211当作一个管理员和攻击者都可以访问的外网服务器地址。</p>
+<p>现在本机登录管理员界面manage.php，尝试添加管理员，使用的url如下：<br><code>http://127.0.0.1/test/session/csrf/manage.php?user=123</code>（这里url需要和自己搭建的路径一致）此时去读admin.txt，会发现里面成功增加了123。</p>
+<p>现在攻击者在虚拟机中写一个html页面，这个页面的url是：<code>http://192.168.123.211/123/1.html</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>csrf test<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://127.0.0.1/test/session/csrf/manage.php?user=123"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>你看到这个页面并不知道里面是什么内容，如果攻击者给它加上伪装，例如点击链接可以获得优惠券或红包，可能有些用户就会上当了。这时实际上，就会在用户的admin.txt里面添加一个新管理员，于是，用户就受到了csrf攻击。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>构造一个恶意链接或者html页面<br>CSRF漏洞的目的：利用一个已存在的漏洞，构造一个“恶意链接”或者“html页面”，然后诱使用户点击触发此漏洞。<br>目标站点存在一个漏洞（CSRF），攻击者利用此类漏洞伪装了一个“恶意链接”或者“html页面”，诱使被攻击者在登录的情况下（即当前cookie有用的情况下）点击了此伪装请求，随后在用户不知情的情况下完成了对当前用户数据的修改或新增操作，而被修改的信息可能是用户的密码、关键信息又或者是新增后台管理员等。</p>
+<ul>
+<li>如何防范？<br>二次验证（验证cookie）。还有不仅验证cookie，还有验证referer字段、增加token机制等。<br>进行修改或新增操作时，会有相应的信息提示。</li>
+</ul>
+<hr>
+<h1 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h1><h2 id="SSRF简介"><a href="#SSRF简介" class="headerlink" title="SSRF简介"></a>SSRF简介</h2><p>SSRF（Server-Side Request Forgery：服务器端请求伪造）是一种以攻击者构造形成，由服务器端发起请求的一个安全漏洞。一般情况下，SSRF漏洞攻击的对象是从外网无法访问的内部系统，正因为它是由服务器端发起的，所以它能够请求到与它相连而与外网隔离的内部系统。</p>
+<p>SSRF形成的原因大都是由于服务端提供了从其他服务器获取数据的功能，且没有对目标地址做过滤和限制，比如从指定url地址获取网页文本内容，加载指定地址的图片，下载等。我们外网通过web服务器去访问内网的数据库，web服务器帮我们去获取数据，相当于一个跳板，然后返回数据给我们。<br>比如加载指定地址的图片，web服务器访问内部的图片服务器，有可能会把所有的图片都泄露。</p>
+<h2 id="SSRF常见危害"><a href="#SSRF常见危害" class="headerlink" title="SSRF常见危害"></a>SSRF常见危害</h2><ul>
+<li>可以对外网，服务器所在内网，本地进行端口扫描，获取一些服务的Banner信息等</li>
+<li>攻击运行在内网或本地的应用程序，如内网的OA,ERP系统等外网拿不到的，但是通过SSRF攻击可以攻击到这些系统</li>
+<li>对内网web应用程序进行指纹识别，通过访问默认文件实现（如Readme文件）</li>
+<li>攻击内外网web应用，主要是使用GET就可以实现的攻击（比如Struts2,SQLI等）</li>
+<li>利用File协议读取本地文件等<h2 id="SSRF常见应用场景"><a href="#SSRF常见应用场景" class="headerlink" title="SSRF常见应用场景"></a>SSRF常见应用场景</h2></li>
+<li>分享</li>
+</ul>
+<p>一些分享应用中，web应用在分享功能中，通常会获取目标url地址网页内容中的<code>&lt;title&gt;&lt;/title&gt;</code> 标签的文本内容作为显示来提供更好的体验，如果在此功能中没有对目标地址范围做过滤与限制就存在SSRF漏洞。如360的页面有一些其他网站的超链接。</p>
+<ul>
+<li>在线翻译</li>
+</ul>
+<p>通过url地址翻译对应文本的内容<br>提供此功能的国内公司有百度、有道等</p>
+<ul>
+<li>图片加载与下载</li>
+</ul>
+<p>图片加载远程图片地址此功能用到的地方很多，但大多比较隐秘，比如在有些公司中，加载自家图片服务器上的图片用于展示，开发者通常对图片做些微小调整例如加水印、压缩等，很大可能造成SSRF漏洞。</p>
+<ul>
+<li>图片、文章收藏功能</li>
+<li>未公开的API实现以及其他调用URL的功能</li>
+</ul>
+<h2 id="如何防范？"><a href="#如何防范？" class="headerlink" title="如何防范？"></a>如何防范？</h2><p>对网站的ip地址进行严格的过滤，需要严格限定可以访问的地址，或者过滤掉内网IP地址，或者规定只能请求哪些URL，其他的一律不能请求，白名单。</p>
+<p>以上来自360网络安全学院授课内容，侵权删</p>
+
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/03/CTF%20WP/%E4%BA%8C%E5%88%B7bugku%20web/" rel="prev" title="二刷bugku web">
+      <i class="fa fa-chevron-left"></i> 二刷bugku web
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/Cookie/" rel="next" title="Cookie">
+      Cookie <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSRF"><span class="nav-number">1.</span> <span class="nav-text">CSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是CSRF"><span class="nav-number">1.1.</span> <span class="nav-text">什么是CSRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理总结"><span class="nav-number">1.2.</span> <span class="nav-text">原理总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单实验"><span class="nav-number">1.3.</span> <span class="nav-text">简单实验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSRF"><span class="nav-number">2.</span> <span class="nav-text">SSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSRF简介"><span class="nav-number">2.1.</span> <span class="nav-text">SSRF简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSRF常见危害"><span class="nav-number">2.2.</span> <span class="nav-text">SSRF常见危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSRF常见应用场景"><span class="nav-number">2.3.</span> <span class="nav-text">SSRF常见应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何防范？"><span class="nav-number">2.4.</span> <span class="nav-text">如何防范？</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanCherry"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">ChanCherry</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ChanCherry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChanCherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://me.csdn.net/ITmincherry" title="CSDN → https:&#x2F;&#x2F;me.csdn.net&#x2F;ITmincherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-adjust"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/chancherry" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;chancherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-bell"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/ChanCherry" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;ChanCherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://120.79.189.7/" title="http:&#x2F;&#x2F;120.79.189.7&#x2F;" rel="noopener" target="_blank">郁离歌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.leavesongs.com/" title="https:&#x2F;&#x2F;www.leavesongs.com&#x2F;" rel="noopener" target="_blank">离别歌</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+	  
+	  <div id="music163player">
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28312036&auto=1&height=66">
+			</iframe>
+	  </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChanCherry</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by">
+	<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+	本站访客数:<span id="busuanzi_value_site_uv"></span>
+	</span>
+  </div>
+  <span class="post-count">博客全站共50.9k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

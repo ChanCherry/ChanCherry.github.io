@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Cookie Cookie 可以翻译为“小甜品，小饼干” ，Cookie 在网络系统中几乎无 处不在，当我们浏览以前访问过的网站时，网页中可能会出现：你好 XXX，这会让我们感觉很亲切，就好像吃了一个小甜品一样。这其实是通过访问主机中的一个文件来实现的，这个文件就是 Cookie。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cookie">
+<meta property="og:url" content="http://yoursite.com/2020/02/03/Web%E5%AE%89%E5%85%A8/Cookie/index.html">
+<meta property="og:site_name" content="ChanCherry&#39;s Blog">
+<meta property="og:description" content="Cookie Cookie 可以翻译为“小甜品，小饼干” ，Cookie 在网络系统中几乎无 处不在，当我们浏览以前访问过的网站时，网页中可能会出现：你好 XXX，这会让我们感觉很亲切，就好像吃了一个小甜品一样。这其实是通过访问主机中的一个文件来实现的，这个文件就是 Cookie。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191012084153470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-02-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-03T08:00:20.111Z">
+<meta property="article:author" content="ChanCherry">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191012084153470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/03/Web%E5%AE%89%E5%85%A8/Cookie/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Cookie | ChanCherry's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChanCherry's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">信安萌新，CTFer</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/Web%E5%AE%89%E5%85%A8/Cookie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Cookie
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：16:00:20" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h1><blockquote>
+<p>Cookie 可以翻译为“小甜品，小饼干” ，Cookie 在网络系统中几乎无 处不在，当我们浏览以前访问过的网站时，网页中可能会出现<br>：你好 XXX，这会让我们感觉很亲切，就好像吃了一个小甜品一样。这其实是通过访问主机中的一个文件来实现的，这个文件就是 Cookie。</p>
+</blockquote>
+<a id="more"></a>
+<p>在 Internet 中，Cookie 实际上是指<strong>小量信息，是由 Web 服务器创建的，将信息存储在用户计算机上的文本文件</strong>。Web服务器用HTTP标头将cookie发送到客户端。在客户端终端，浏览器解析cookie并将其保存为本地文件，该文件自动将来自同一服务器的任何请求绑定到这些cookie。一般网络用户习惯用其复数形式 Cookies。</p>
+<blockquote>
+<p>在计算机中，Cookie 是存储在浏览器目录中的文本文件，当浏览器运行时，存储在 RAM<br>（随机存取存储器，也叫主存，是与CPU直接交换数据的内部存储器，可以随时读写（刷新时除外），而且速度很快，通常作为操作系统或其他正在运行中的程序的临时数据存储介质。主存即计算机内部最主要的存储器，用来加载各式各样的程序与数据，以供CPU直接运行与运用。）中发挥作用<br>（此种 Cookies 称作 Session Cookies），一旦用户从该网站或服务器退出，Cookie 可存储在用户本地的硬盘上<br>（此种 Cookies 称作 Persistent Cookies）。 通常情况下，当用户结束浏览器会话时，系统将终止所有的<br>Cookie。当 Web 服务器创建了Cookies 后，只要在其有效期内，当用户访问同一个 Web<br>服务器时，浏览器首先要检查本地的Cookies，并将其原样发送给 Web 服务器。这种状态信息称作“Persistent Client<br>State HTTP Cookie” ，简称为 Cookies。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20191012084153470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>通过扩展HTTP协议来实现正统cookie分发。服务器通过向HTTP响应头添加特殊指示来提示浏览器生成cookie。纯JavaScript等客户端也可以产生cookie。根据某些原则，浏览器在后台自动发送cookie给服务器，浏览器检查所有的cookie，如果cookie声明范围大于或等于要请求的资源的位置，cookie将添加到请求资源的HTTP标头发送到服务器。</p>
+<p>cookie的内容主要包括：名称，值，到期时间，路径和域。路径与域一起构成了cookie的范围。<br>如果未设置到期时间，则表示此cookie的生命周期是在浏览器会话期间，浏览器窗口关闭，并且cookie消失。<br>生命周期为浏览器会话的cookie称为会话cookie。会话cookie通常不存储在硬盘上，而是存储在内存中。当然，这种行为不受监管。如果设置了到期时间，浏览器会将cookie保存到硬盘，关闭它并再次打开浏览器。在超过设定的到期时间之前，这些cookie仍然有效。存储在硬盘上的Cookie可以在不同的浏览器进程之间共享，例如两个IE窗口。<br>不同的浏览器对存储在内存中的cookie有不同的处理方法。<br>对于IE，在一个打开的窗口上按Ctrl-N（或者从文件菜单）打开的窗口可以与原窗口共享，而使用其他方式新开的IE进程则不能共享已经打开的窗口的内存cookie；对于Mozilla Firefox0.8，所有的进程和标签页都可以共享同样的cookie。一般来说是用javascript的window.open打开的窗口会与原窗口共享内存cookie。浏览器对于会话cookie的这种只认cookie不认人的处理方式经常给采用session机制的web应用程序开发者造成很大的困扰。<br>会话机制使用维护服务器端状态的解决方案。同时，我们也看到，由于服务器端状态保存方案还需要在客户端保存标识符，会话机制可能需要使用cookie机制来达到保存标识符的目的。会话提供了一种管理全局变量的便捷方法。</p>
+<p>该会话适用于每个用户。变量的值存储在服务器上。 sessionID用于区分使用哪个用户会话变量。当用户访问浏览器时，该值将返回给服务器。当客户端禁用cookie时，此值也可以设置为通过get返回给服务器。</p>
+<p>下面就是一个goolge设置cookie的响应头的例子 :</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">302</span> Found </span><br><span class="line">   Location: http://www.google.com/intl/zh-CN/ </span><br><span class="line">   Set-Cookie: PREF=ID=<span class="number">0565</span>f77e132de138:NW=<span class="number">1</span>:TM=<span class="number">1098082649</span>:LM=<span class="number">1098082649</span>:S=KaeaCFPo49RiA_d8; </span><br><span class="line">   expires=Sun, <span class="number">17</span>-Jan<span class="number">-2038</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">07</span> GMT; path=/; domain=.google.com </span><br><span class="line">   Content-Type: text/html</span><br></pre></td></tr></table></figure>
+
+<p>在安全性方面：当您访问使用会话并在您自己的计算机上创建cookie的站点时，建议服务器端的会话机制更安全，因为它不会任意读取客户端存储的信息。</p>
+<p>文章参照了下面两篇文章，可以好好学习一下。<br><a href="https://baijiahao.baidu.com/s?id=1612804856429135825&wfr=spider&for=pc" target="_blank" rel="noopener">官方解析cookies和session的区别</a><br><a href="https://www.cnblogs.com/wangpei/p/4884840.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangpei/p/4884840.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/CSRF&SSRF%E7%AE%80%E6%9E%90/" rel="prev" title="PHP伪协议">
+      <i class="fa fa-chevron-left"></i> PHP伪协议
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="next" title="Java中的序列化和反序列化">
+      Java中的序列化和反序列化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cookie"><span class="nav-number">1.</span> <span class="nav-text">Cookie</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanCherry"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">ChanCherry</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ChanCherry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChanCherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://me.csdn.net/ITmincherry" title="CSDN → https:&#x2F;&#x2F;me.csdn.net&#x2F;ITmincherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-adjust"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/chancherry" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;chancherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-bell"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/ChanCherry" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;ChanCherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://120.79.189.7/" title="http:&#x2F;&#x2F;120.79.189.7&#x2F;" rel="noopener" target="_blank">郁离歌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.leavesongs.com/" title="https:&#x2F;&#x2F;www.leavesongs.com&#x2F;" rel="noopener" target="_blank">离别歌</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+	  
+	  <div id="music163player">
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28312036&auto=1&height=66">
+			</iframe>
+	  </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChanCherry</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by">
+	<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+	本站访客数:<span id="busuanzi_value_site_uv"></span>
+	</span>
+  </div>
+  <span class="post-count">博客全站共50.9k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

