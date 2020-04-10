@@ -103,6 +103,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -235,11 +276,11 @@
         <p>JACTF刷题ing</p>
 <a id="more"></a>
 <p>首先查看源代码，发现3719372767312836781.js可能会有点东西。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>签到<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./3719372767312836781.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>The requested URL /eighteen8.php was not found on this server.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Additionally, a 404 Not Found</span><br><span class="line">    error was encountered while trying to use an ErrorDocument to handle the request.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span></span><br><span class="line">呀，小伙子不错啊，还可以找到这里，是个人才。</span><br><span class="line"></span><br><span class="line">but，flag不在这里，不过还是在这个页面内，你自己看一看。</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>签到<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./3719372767312836781.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Not Found<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The requested URL /eighteen8.php was not found on this server.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Additionally, a 404 Not Found<br>    error was encountered while trying to use an ErrorDocument to handle the request.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"display:none"</span>&gt;</span><br>呀，小伙子不错啊，还可以找到这里，是个人才。<br><br>but，flag不在这里，不过还是在这个页面内，你自己看一看。<br><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <p>点开看看，</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.fromCharCode(102,108,97,103,58,102,108,97,103,95,105,115,95,118,101,114,121,95,101,97,115,121)</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html">String.fromCharCode(102,108,97,103,58,102,108,97,103,95,105,115,95,118,101,114,121,95,101,97,115,121)<br></code></pre></td></tr></table></figure>
 <p>很明显102是“f”的ASCII码，于是用python编写一个脚本，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"> </span><br><span class="line">s = [<span class="number">102</span>,<span class="number">108</span>,<span class="number">97</span>,<span class="number">103</span>,<span class="number">58</span>,<span class="number">102</span>,<span class="number">108</span>,<span class="number">97</span>,<span class="number">103</span>,<span class="number">95</span>,<span class="number">105</span>,<span class="number">115</span>,<span class="number">95</span>,<span class="number">118</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">121</span>,<span class="number">95</span>,<span class="number">101</span>,<span class="number">97</span>,<span class="number">115</span>,<span class="number">121</span>]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">    k = chr(i)</span><br><span class="line">    flag += k</span><br><span class="line">print(<span class="string">"web签到的flag是"</span>,flag)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># coding=utf-8</span><br> <br>s = [<span class="hljs-number">102</span>,<span class="hljs-number">108</span>,<span class="hljs-number">97</span>,<span class="hljs-number">103</span>,<span class="hljs-number">58</span>,<span class="hljs-number">102</span>,<span class="hljs-number">108</span>,<span class="hljs-number">97</span>,<span class="hljs-number">103</span>,<span class="hljs-number">95</span>,<span class="hljs-number">105</span>,<span class="hljs-number">115</span>,<span class="hljs-number">95</span>,<span class="hljs-number">118</span>,<span class="hljs-number">101</span>,<span class="hljs-number">114</span>,<span class="hljs-number">121</span>,<span class="hljs-number">95</span>,<span class="hljs-number">101</span>,<span class="hljs-number">97</span>,<span class="hljs-number">115</span>,<span class="hljs-number">121</span>]<br>flag = <span class="hljs-string">''</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> s:<br>    k = chr(i)<br>    flag += k<br>print(<span class="hljs-string">"web签到的flag是"</span>,flag)<br></code></pre></td></tr></table></figure>
 <p>得到flag:flag_is_very_easy</p>
 
     </div>
@@ -286,12 +327,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/03/CTF%20WP/Bugku%20INSERT-INTO%E6%B3%A8%E5%85%A5/" rel="prev" title="Bugku INSERT-INTO注入">
-      <i class="fa fa-chevron-left"></i> Bugku INSERT-INTO注入
+    <a href="/2020/02/03/CTF%20WP/Bugku%20pwn/" rel="prev" title="Bugku pwn">
+      <i class="fa fa-chevron-left"></i> Bugku pwn
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/CTF%20WP/Moctf%20Web/" rel="next" title="MOCTF web">
-      MOCTF web <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/CTF%20WP/MOCTF%20misc/" rel="next" title="MOCTF misc">
+      MOCTF misc <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -372,7 +413,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -452,7 +493,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

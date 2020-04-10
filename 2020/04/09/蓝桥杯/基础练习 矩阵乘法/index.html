@@ -106,6 +106,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -240,7 +281,7 @@
 </blockquote>
 <p>–这个题其实不难，就是一开始我忘了矩阵乘法的相关知识Orz(⊙﹏⊙)</p>
 <p>要注意分类讨论，矩阵的0次幂是单位矩阵，1次幂是矩阵本身，2+次幂就要借用另外两个数组来计算了。<br><img src="https://img-blog.csdnimg.cn/20200403225835598.png" alt="在这里插入图片描述"><br>AC代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">35</span>][<span class="number">35</span>];</span><br><span class="line"><span class="keyword">int</span> b[<span class="number">35</span>][<span class="number">35</span>];</span><br><span class="line"><span class="keyword">int</span> t[<span class="number">35</span>][<span class="number">35</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n,m,i,j,k;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i][j]);</span><br><span class="line">			b[i][j]=a[i][j];</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(m==<span class="number">0</span>)&#123;<span class="comment">//矩阵的0次幂为单位矩阵 </span></span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123; </span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(i==j)</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"1 "</span>);</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"0 "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//要结束程序 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(m==<span class="number">1</span>)&#123;<span class="comment">//矩阵的1次幂为它本身 </span></span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i][j]);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//要结束程序 </span></span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">while</span>(m&gt;=<span class="number">2</span>)&#123;<span class="comment">//矩阵2次幂及以上需要做运算 </span></span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++) </span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">			<span class="keyword">int</span> k=n;</span><br><span class="line">			<span class="keyword">while</span>(k)&#123;</span><br><span class="line">				t[i][j]+=b[i][k<span class="number">-1</span>]*a[k<span class="number">-1</span>][j];<span class="comment">//t[i][j]作为中间数组 </span></span><br><span class="line">				k--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; </span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">			b[i][j]=t[i][j];<span class="comment">//将中间计算得到的数组再赋给b[][]，便于下一次乘法 </span></span><br><span class="line">			t[i][j]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		m--;	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d "</span>,b[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-keyword">int</span> a[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><span class="hljs-keyword">int</span> b[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><span class="hljs-keyword">int</span> t[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n,m,i,j,k;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m);<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i][j]);<br>			b[i][j]=a[i][j];<br>		&#125;	<br>	&#125;<br>	<span class="hljs-keyword">if</span>(m==<span class="hljs-number">0</span>)&#123;<span class="hljs-comment">//矩阵的0次幂为单位矩阵 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123; <br>			<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>				<span class="hljs-keyword">if</span>(i==j)<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"1 "</span>);<br>				<span class="hljs-keyword">else</span><br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"0 "</span>);<br>			&#125;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//要结束程序 </span><br>	&#125;<br>	<span class="hljs-keyword">if</span>(m==<span class="hljs-number">1</span>)&#123;<span class="hljs-comment">//矩阵的1次幂为它本身 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>			<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,a[i][j]);<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//要结束程序 </span><br>	&#125;<br>		<br>	<span class="hljs-keyword">while</span>(m&gt;=<span class="hljs-number">2</span>)&#123;<span class="hljs-comment">//矩阵2次幂及以上需要做运算 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++) <br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-keyword">int</span> k=n;<br>			<span class="hljs-keyword">while</span>(k)&#123;<br>				t[i][j]+=b[i][k<span class="hljs-number">-1</span>]*a[k<span class="hljs-number">-1</span>][j];<span class="hljs-comment">//t[i][j]作为中间数组 </span><br>				k--;<br>			&#125;<br>		&#125; <br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			b[i][j]=t[i][j];<span class="hljs-comment">//将中间计算得到的数组再赋给b[][]，便于下一次乘法 </span><br>			t[i][j]=<span class="hljs-number">0</span>;<br>		&#125;<br>		m--;	<br>	&#125;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,b[i][j]);<br>		&#125;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>	&#125; <br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>一定要注意当m=0和m=1时，要注意结束程序，不然会出错。<br>例如，输入10 0：<br><img src="https://img-blog.csdnimg.cn/20200403230131278.png" alt="在这里插入图片描述"></p>
 
     </div>
@@ -287,12 +328,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E6%95%B0%E7%9A%84%E8%AF%BB%E6%B3%95/" rel="prev" title="基础练习 数的读法">
-      <i class="fa fa-chevron-left"></i> 基础练习 数的读法
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF%E4%BA%A4/" rel="prev" title="基础练习 矩形面积交">
+      <i class="fa fa-chevron-left"></i> 基础练习 矩形面积交
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%A2%A0%E5%80%92%E7%9A%84%E4%BB%B7%E7%89%8C/" rel="next" title="颠倒的价牌">
-      颠倒的价牌 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E9%BE%9F%E5%85%94%E8%B5%9B%E8%B7%91%E9%A2%84%E6%B5%8B/" rel="next" title="基础练习 龟兔赛跑预测">
+      基础练习 龟兔赛跑预测 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -373,7 +414,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -453,7 +494,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

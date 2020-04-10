@@ -103,6 +103,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -246,7 +287,7 @@
 <p>Input<br>None</p>
 <p>Output<br>提交答案的格式是：yyyy-mm-dd, 例如：1980-03-21（这个不是答案！！！！）</p>
 <p>原本一着急就纯手算了，还好数学计算能力还行，算起来不费劲，后来改代码运算：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> year=<span class="number">1777</span>,mon=<span class="number">4</span>,day=<span class="number">30</span>;<span class="comment">//起始日期</span></span><br><span class="line">	<span class="keyword">int</span> d;</span><br><span class="line">	<span class="keyword">bool</span> <span class="built_in">run</span>=<span class="number">0</span>;<span class="comment">//定义闰年</span></span><br><span class="line">	<span class="keyword">for</span>(d=<span class="number">1</span>;d&lt;<span class="number">8113</span>;d++)&#123;</span><br><span class="line">		<span class="comment">//判断闰年 </span></span><br><span class="line">		<span class="keyword">if</span>(year%<span class="number">4</span>==<span class="number">0</span> &amp;&amp; year%<span class="number">100</span>!=<span class="number">0</span> || year%<span class="number">400</span>==<span class="number">0</span>)</span><br><span class="line">			<span class="built_in">run</span>=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">run</span>=<span class="number">0</span>;</span><br><span class="line">		<span class="comment">//在每月月底，将day置1；年底将mon，day都置1</span></span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">run</span>==<span class="number">1</span> &amp;&amp; mon==<span class="number">2</span> &amp;&amp;day==<span class="number">29</span>)&#123;</span><br><span class="line">			mon++;</span><br><span class="line">			day=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">run</span>==<span class="number">0</span> &amp;&amp; mon==<span class="number">2</span> &amp;&amp; day==<span class="number">28</span>)&#123;</span><br><span class="line">			mon++;</span><br><span class="line">			day=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>((mon==<span class="number">1</span> || mon==<span class="number">3</span> || mon==<span class="number">5</span> || mon==<span class="number">7</span> || mon==<span class="number">8</span> || mon==<span class="number">10</span>) &amp;&amp; day==<span class="number">31</span>)&#123;</span><br><span class="line">			mon++;</span><br><span class="line">			day=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>((mon==<span class="number">4</span> || mon==<span class="number">6</span> ||mon==<span class="number">9</span> || mon==<span class="number">11</span>) &amp;&amp; day==<span class="number">30</span>)&#123;</span><br><span class="line">			mon++;</span><br><span class="line">			day=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(mon==<span class="number">12</span> &amp;&amp;day==<span class="number">31</span>)&#123;</span><br><span class="line">			year++;</span><br><span class="line">			mon=<span class="number">1</span>;day=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			day++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d-%d-%d\n"</span>,year,mon,day);</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> year=<span class="hljs-number">1777</span>,mon=<span class="hljs-number">4</span>,day=<span class="hljs-number">30</span>;<span class="hljs-comment">//起始日期</span><br>	<span class="hljs-keyword">int</span> d;<br>	<span class="hljs-keyword">bool</span> <span class="hljs-built_in">run</span>=<span class="hljs-number">0</span>;<span class="hljs-comment">//定义闰年</span><br>	<span class="hljs-keyword">for</span>(d=<span class="hljs-number">1</span>;d&lt;<span class="hljs-number">8113</span>;d++)&#123;<br>		<span class="hljs-comment">//判断闰年 </span><br>		<span class="hljs-keyword">if</span>(year%<span class="hljs-number">4</span>==<span class="hljs-number">0</span> &amp;&amp; year%<span class="hljs-number">100</span>!=<span class="hljs-number">0</span> || year%<span class="hljs-number">400</span>==<span class="hljs-number">0</span>)<br>			<span class="hljs-built_in">run</span>=<span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">else</span><br>			<span class="hljs-built_in">run</span>=<span class="hljs-number">0</span>;<br>		<span class="hljs-comment">//在每月月底，将day置1；年底将mon，day都置1</span><br>		<span class="hljs-keyword">if</span>(<span class="hljs-built_in">run</span>==<span class="hljs-number">1</span> &amp;&amp; mon==<span class="hljs-number">2</span> &amp;&amp;day==<span class="hljs-number">29</span>)&#123;<br>			mon++;<br>			day=<span class="hljs-number">1</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-built_in">run</span>==<span class="hljs-number">0</span> &amp;&amp; mon==<span class="hljs-number">2</span> &amp;&amp; day==<span class="hljs-number">28</span>)&#123;<br>			mon++;<br>			day=<span class="hljs-number">1</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>((mon==<span class="hljs-number">1</span> || mon==<span class="hljs-number">3</span> || mon==<span class="hljs-number">5</span> || mon==<span class="hljs-number">7</span> || mon==<span class="hljs-number">8</span> || mon==<span class="hljs-number">10</span>) &amp;&amp; day==<span class="hljs-number">31</span>)&#123;<br>			mon++;<br>			day=<span class="hljs-number">1</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>((mon==<span class="hljs-number">4</span> || mon==<span class="hljs-number">6</span> ||mon==<span class="hljs-number">9</span> || mon==<span class="hljs-number">11</span>) &amp;&amp; day==<span class="hljs-number">30</span>)&#123;<br>			mon++;<br>			day=<span class="hljs-number">1</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(mon==<span class="hljs-number">12</span> &amp;&amp;day==<span class="hljs-number">31</span>)&#123;<br>			year++;<br>			mon=<span class="hljs-number">1</span>;day=<span class="hljs-number">1</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span>&#123;<br>			day++;<br>		&#125;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d-%d-%d\n"</span>,year,mon,day);<br>	&#125; <br>	<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>答案：1799-07-16（一定要注意07！！！）</p>
 
     </div>
@@ -293,12 +334,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%9D%AD%E7%94%B5OJ2015%E5%81%B6%E6%95%B0%E6%B1%82%E5%92%8C/" rel="prev" title="杭电OJ2015偶数求和">
-      <i class="fa fa-chevron-left"></i> 杭电OJ2015偶数求和
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%A2%A0%E5%80%92%E7%9A%84%E4%BB%B7%E7%89%8C/" rel="prev" title="颠倒的价牌">
+      <i class="fa fa-chevron-left"></i> 颠倒的价牌
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%20%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F/" rel="next" title="算法训练 数字游戏">
-      算法训练 数字游戏 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%8A%A5%E6%95%B0%E6%B8%B8%E6%88%8F%EF%BC%88%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF%E9%97%AE%E9%A2%98%EF%BC%89/" rel="next" title="报数游戏（约瑟夫环问题）">
+      报数游戏（约瑟夫环问题） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -379,7 +420,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -459,7 +500,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

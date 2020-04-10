@@ -103,6 +103,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -239,7 +280,7 @@
 </blockquote>
 <p><strong>思路</strong>：<br>用两个数组分别存放兔子和乌龟跑的路程，数组下标正好对应跑的时间，再用一个flag标记变量判断兔子是否休息（下标对应时间），用一个数组判断兔子休息的时间段。当兔子或乌龟的路程达到比赛路程l时，就表示比赛结束，相同时间下，谁的路程远就谁胜利。大致就是这样，需要注意兔子休息之后，如果不加判断变量flag，可能会再次判断兔子是否超过乌龟t米，在这上面纠结了好一会，后来终于AC了。╮(─▽─)╭</p>
 <p>AC代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> v1,v2,t,s,l,j,i=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> sr[<span class="number">10000</span>],st[<span class="number">10000</span>];<span class="comment">//分别表示兔子走的路程和乌龟的路程 </span></span><br><span class="line">	<span class="built_in">memset</span>(sr,<span class="number">0</span>,<span class="keyword">sizeof</span>(sr));</span><br><span class="line">	<span class="built_in">memset</span>(st,<span class="number">0</span>,<span class="keyword">sizeof</span>(st));</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d%d"</span>,&amp;v1,&amp;v2,&amp;t,&amp;s,&amp;l);</span><br><span class="line">	<span class="keyword">int</span> tot[<span class="number">10000</span>];</span><br><span class="line">	<span class="built_in">memset</span>(tot,<span class="number">0</span>,<span class="keyword">sizeof</span>(tot));</span><br><span class="line"></span><br><span class="line">	i=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> flag=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(sr[i]!=l &amp;&amp; st[i]!=l)&#123;<span class="comment">//两者都没有到达终点 </span></span><br><span class="line">		<span class="keyword">if</span>(tot[i]==<span class="number">0</span>)&#123;</span><br><span class="line">			sr[i]=sr[i<span class="number">-1</span>]+v1;</span><br><span class="line">			flag=<span class="number">0</span>;</span><br><span class="line">		&#125; 	</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			sr[i]=sr[i<span class="number">-1</span>];</span><br><span class="line">		</span><br><span class="line">		st[i]=st[i<span class="number">-1</span>]+v2;</span><br><span class="line">		<span class="keyword">if</span>(!flag &amp;&amp; tot[i]!=<span class="number">1</span>)&#123;<span class="comment">//用flag变量防止兔子休息过程中再次判断是否休息 </span></span><br><span class="line">			<span class="keyword">if</span>(sr[i]-st[i]&gt;=t)&#123;</span><br><span class="line">				flag=<span class="number">1</span>; </span><br><span class="line">				<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;=i+s;j++)&#123;</span><br><span class="line">					tot[j]=<span class="number">1</span>;<span class="comment">//标志兔子休息 </span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(sr[i]&gt;=l || st[i]&gt;=l)</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(sr[i]&gt;st[i])&#123;<span class="comment">//相同的时间内，看谁的路程远，谁先到 </span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"R\n%d\n"</span>,i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(sr[i]&lt;st[i])</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"T\n%d\n"</span>,i);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"D\n%d\n"</span>,i);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> v1,v2,t,s,l,j,i=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">int</span> sr[<span class="hljs-number">10000</span>],st[<span class="hljs-number">10000</span>];<span class="hljs-comment">//分别表示兔子走的路程和乌龟的路程 </span><br>	<span class="hljs-built_in">memset</span>(sr,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(sr));<br>	<span class="hljs-built_in">memset</span>(st,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(st));<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d%d%d"</span>,&amp;v1,&amp;v2,&amp;t,&amp;s,&amp;l);<br>	<span class="hljs-keyword">int</span> tot[<span class="hljs-number">10000</span>];<br>	<span class="hljs-built_in">memset</span>(tot,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(tot));<br><br>	i=<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">int</span> flag=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span>(sr[i]!=l &amp;&amp; st[i]!=l)&#123;<span class="hljs-comment">//两者都没有到达终点 </span><br>		<span class="hljs-keyword">if</span>(tot[i]==<span class="hljs-number">0</span>)&#123;<br>			sr[i]=sr[i<span class="hljs-number">-1</span>]+v1;<br>			flag=<span class="hljs-number">0</span>;<br>		&#125; 	<br>		<span class="hljs-keyword">else</span><br>			sr[i]=sr[i<span class="hljs-number">-1</span>];<br>		<br>		st[i]=st[i<span class="hljs-number">-1</span>]+v2;<br>		<span class="hljs-keyword">if</span>(!flag &amp;&amp; tot[i]!=<span class="hljs-number">1</span>)&#123;<span class="hljs-comment">//用flag变量防止兔子休息过程中再次判断是否休息 </span><br>			<span class="hljs-keyword">if</span>(sr[i]-st[i]&gt;=t)&#123;<br>				flag=<span class="hljs-number">1</span>; <br>				<span class="hljs-keyword">for</span>(j=i+<span class="hljs-number">1</span>;j&lt;=i+s;j++)&#123;<br>					tot[j]=<span class="hljs-number">1</span>;<span class="hljs-comment">//标志兔子休息 </span><br>				&#125;<br>			&#125;<br>		&#125;<br><br>		<span class="hljs-keyword">if</span>(sr[i]&gt;=l || st[i]&gt;=l)<br>		<span class="hljs-keyword">break</span>;<br>		i++;<br>	&#125;<br><br>	<span class="hljs-keyword">if</span>(sr[i]&gt;st[i])&#123;<span class="hljs-comment">//相同的时间内，看谁的路程远，谁先到 </span><br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"R\n%d\n"</span>,i);<br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(sr[i]&lt;st[i])<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"T\n%d\n"</span>,i);<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"D\n%d\n"</span>,i);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>可能方法相较于其他的大佬比较繁琐，不过做出来就好了，菜鸡继续学习ing(#^.^#)</p>
 
     </div>
@@ -286,12 +327,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%A2%A0%E5%80%92%E7%9A%84%E4%BB%B7%E7%89%8C/" rel="prev" title="颠倒的价牌">
-      <i class="fa fa-chevron-left"></i> 颠倒的价牌
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" rel="prev" title="基础练习 矩阵乘法">
+      <i class="fa fa-chevron-left"></i> 基础练习 矩阵乘法
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%8A%A5%E6%95%B0%E6%B8%B8%E6%88%8F%EF%BC%88%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF%E9%97%AE%E9%A2%98%EF%BC%89/" rel="next" title="报数游戏（约瑟夫环问题）">
-      报数游戏（约瑟夫环问题） <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E8%8A%AF%E7%89%87%E6%B5%8B%E8%AF%95/" rel="next" title="基础练习 芯片测试">
+      基础练习 芯片测试 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -372,7 +413,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -452,7 +493,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

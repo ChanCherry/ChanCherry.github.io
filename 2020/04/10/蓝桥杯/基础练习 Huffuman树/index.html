@@ -48,17 +48,19 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="博文分类">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="问题描述　　Huffman树在编码中有着广泛的应用。在这里，我们只关心Huffman树的构造过程。　　给出一列数{pi}&#x3D;{p0, p1, …, pn-1}，用这列数构造Huffman树的过程如下：　　1. 找到{pi}中最小的两个数，设为pa和pb，将pa和pb从{pi}中删除掉，然后将它们的和加入到{pi}中。这个过程的费用记为pa + pb。　　2. 重复步骤1，直到{pi}中只剩下一个数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础练习 Huffuman树">
+<meta property="og:url" content="http://yoursite.com/2020/04/10/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20Huffuman%E6%A0%91/index.html">
 <meta property="og:site_name" content="ChanCherry&#39;s Blog">
+<meta property="og:description" content="问题描述　　Huffman树在编码中有着广泛的应用。在这里，我们只关心Huffman树的构造过程。　　给出一列数{pi}&#x3D;{p0, p1, …, pn-1}，用这列数构造Huffman树的过程如下：　　1. 找到{pi}中最小的两个数，设为pa和pb，将pa和pb从{pi}中删除掉，然后将它们的和加入到{pi}中。这个过程的费用记为pa + pb。　　2. 重复步骤1，直到{pi}中只剩下一个数">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-03T03:47:37.000Z">
-<meta property="article:modified_time" content="2020-04-09T11:41:44.510Z">
+<meta property="article:published_time" content="2020-04-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-10T03:03:32.649Z">
 <meta property="article:author" content="ChanCherry">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/categories/">
+<link rel="canonical" href="http://yoursite.com/2020/04/10/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20Huffuman%E6%A0%91/">
 
 
 <script id="page-configurations">
@@ -66,12 +68,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>博文分类 | ChanCherry's Blog
-  </title>
+  <title>基础练习 Huffuman树 | ChanCherry's Blog</title>
   
 
 
@@ -214,57 +215,138 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
           <div class="content">
             
 
   <div class="posts-expand">
-    
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">博文分类
-</h1>
-
-<div class="post-meta">
+      
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/10/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20Huffuman%E6%A0%91/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基础练习 Huffuman树
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-10 00:00:00 / 修改时间：11:03:32" itemprop="dateCreated datePublished" datetime="2020-04-10T00:00:00+08:00">2020-04-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">蓝桥杯</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>问题描述<br>　　Huffman树在编码中有着广泛的应用。在这里，我们只关心Huffman树的构造过程。<br>　　给出一列数{pi}={p0, p1, …, pn-1}，用这列数构造Huffman树的过程如下：<br>　　1. 找到{pi}中最小的两个数，设为pa和pb，将pa和pb从{pi}中删除掉，然后将它们的和加入到{pi}中。这个过程的费用记为pa + pb。<br>　　2. 重复步骤1，直到{pi}中只剩下一个数。<br>　　在上面的操作过程中，把所有的费用相加，就得到了构造Huffman树的总费用。<br>　　本题任务：对于给定的一个数列，现在请你求出用该数列构造Huffman树的总费用。</p>
+<p>例如，对于数列{pi}={5, 3, 8, 2, 9}，Huffman树的构造过程如下：<br>　　1. 找到{5, 3, 8, 2, 9}中最小的两个数，分别是2和3，从{pi}中删除它们并将和5加入，得到{5, 8, 9, 5}，费用为5。<br>　　2. 找到{5, 8, 9, 5}中最小的两个数，分别是5和5，从{pi}中删除它们并将和10加入，得到{8, 9, 10}，费用为10。<br>　　3. 找到{8, 9, 10}中最小的两个数，分别是8和9，从{pi}中删除它们并将和17加入，得到{10, 17}，费用为17。<br>　　4. 找到{10, 17}中最小的两个数，分别是10和17，从{pi}中删除它们并将和27加入，得到{27}，费用为27。<br>　　5. 现在，数列中只剩下一个数27，构造过程结束，总费用为5+10+17+27=59。 输入格式 　　输入的第一行包含一个正整数n（n&lt;=100）。 　　接下来是n个正整数，表示p0, p1, …, pn-1，每个数不超过1000。<br>输出格式 　　输出用这些数构造Huffman树的总费用。 样例输入 5 5 3 8 2 9 样例输出 59</p>
+</blockquote>
+<p>思路：<br>先将数组升序排序，a[0] 和 a[1]就是当前两个最小的数，然后a[0]+a[1]赋值给a[0]，a[1]赋值为-1，总费用sum加上a[0] ，下一次排序后将这个数删除，依次循环，直到集合中元素只剩一个。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>; <br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> maxx 100</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> a[maxx];<br>	<span class="hljs-keyword">int</span> i,n;<br>	<span class="hljs-built_in">cin</span>&gt;&gt;n;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>		<span class="hljs-built_in">cin</span>&gt;&gt;a[i];<br>	sort(a,a+n);<span class="hljs-comment">//从大到小排序 </span><br>	<span class="hljs-keyword">int</span> sum=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span>(n&gt;<span class="hljs-number">1</span>)&#123;<br>		i=<span class="hljs-number">0</span>;<br>		a[i]=a[i]+a[i+<span class="hljs-number">1</span>];<br>		sum+=a[i];<br>		a[i+<span class="hljs-number">1</span>]=<span class="hljs-number">-1</span>;<span class="hljs-comment">//将这个数除去</span><br>		sort(a,a+n);<br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n<span class="hljs-number">-1</span>;i++)<br>			a[i]=a[i+<span class="hljs-number">1</span>];<br>		n--; <br>	&#125;<br>	<span class="hljs-built_in">cout</span>&lt;&lt;sum&lt;&lt;<span class="hljs-built_in">endl</span>;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
 </div>
 
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <div class="category-all-page">
-            <div class="category-all-title">
-              目前共计 5 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-WP/">CTF WP</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/">软件配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
+		
+	</div>
         
-      </div>
-      
-      
-      
-    </div>
-    
 
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%8A%A5%E6%95%B0%E6%B8%B8%E6%88%8F%EF%BC%88%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF%E9%97%AE%E9%A2%98%EF%BC%89/" rel="prev" title="报数游戏（约瑟夫环问题）">
+      <i class="fa fa-chevron-left"></i> 报数游戏（约瑟夫环问题）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
     
-    
-    
+  </article>
+  
+  
+  
+
   </div>
 
 
           </div>
           
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80OTU1OS8yNjA1MA=="></div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -464,6 +546,21 @@
 
   
 
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
 
   
   

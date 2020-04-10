@@ -103,6 +103,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -236,9 +277,9 @@
 <a id="more"></a>
 
 <p>X-Forwarded-For请求头格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For:client,proxy1,proxy2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">X-Forwarded-For:client,proxy1,proxy2<br></code></pre></td></tr></table></figure>
 <p>格式比较简单，首先是离服务端最远的设备IP，然后就是每一级代理设备的IP。如果一个HTTP请求到达服务器之前，经过了三个代理Proxy1、Proxy2、Proxy3，IP分别为IP1、IP2、IP3，用户真实IP是IP0，那么根据XFF标准，服务器最终会收到下面的信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For:IP0,IP1,IP2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">X-Forwarded-For:IP0,IP1,IP2<br></code></pre></td></tr></table></figure>
 <p>Proxy3直连服务器，它会给XFF追加IP2，帮Proxy2转发请求。列表中并没有 IP3，IP3 可以在服务端通过 $ remote_address 字段获得。我们知道 HTTP 连接基于 TCP 连接，HTTP 协议中没有 IP 的概念，$remote_address 来自 TCP 连接，表示与服务端建立 TCP 连接的设备 IP，在这个例子里就是 IP3。<br>详细分析一下，这样的结果是经过这样的流程而形成的：</p>
 <ol>
 <li>用户IP0—&gt; 代理Proxy1（IP1），Proxy1记录用户IP0，并将请求转发给Proxy2时，带上一个Http Header <code>X-Forwarded-For: IP0</code>。</li>
@@ -293,12 +334,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/03/CTF%20WP/BUUCTF%20snake%EF%BC%88%E5%AE%9E%E9%AA%8C%E5%90%A7Snake%EF%BC%89/" rel="prev" title="BUUCTF snake（实验吧Snake）">
-      <i class="fa fa-chevron-left"></i> BUUCTF snake（实验吧Snake）
+    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/Referer/" rel="prev" title="Referer">
+      <i class="fa fa-chevron-left"></i> Referer
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/robots%E5%8D%8F%E8%AE%AE/" rel="next" title="robots协议">
-      robots协议 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/CTF%20WP/NWU-CTF%20web/" rel="next" title="NWUCTF web">
+      NWUCTF web <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -379,7 +420,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -459,7 +500,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

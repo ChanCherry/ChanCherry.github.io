@@ -105,6 +105,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -246,7 +287,7 @@
 <p>cookie的内容主要包括：名称，值，到期时间，路径和域。路径与域一起构成了cookie的范围。<br>如果未设置到期时间，则表示此cookie的生命周期是在浏览器会话期间，浏览器窗口关闭，并且cookie消失。<br>生命周期为浏览器会话的cookie称为会话cookie。会话cookie通常不存储在硬盘上，而是存储在内存中。当然，这种行为不受监管。如果设置了到期时间，浏览器会将cookie保存到硬盘，关闭它并再次打开浏览器。在超过设定的到期时间之前，这些cookie仍然有效。存储在硬盘上的Cookie可以在不同的浏览器进程之间共享，例如两个IE窗口。<br>不同的浏览器对存储在内存中的cookie有不同的处理方法。<br>对于IE，在一个打开的窗口上按Ctrl-N（或者从文件菜单）打开的窗口可以与原窗口共享，而使用其他方式新开的IE进程则不能共享已经打开的窗口的内存cookie；对于Mozilla Firefox0.8，所有的进程和标签页都可以共享同样的cookie。一般来说是用javascript的window.open打开的窗口会与原窗口共享内存cookie。浏览器对于会话cookie的这种只认cookie不认人的处理方式经常给采用session机制的web应用程序开发者造成很大的困扰。<br>会话机制使用维护服务器端状态的解决方案。同时，我们也看到，由于服务器端状态保存方案还需要在客户端保存标识符，会话机制可能需要使用cookie机制来达到保存标识符的目的。会话提供了一种管理全局变量的便捷方法。</p>
 <p>该会话适用于每个用户。变量的值存储在服务器上。 sessionID用于区分使用哪个用户会话变量。当用户访问浏览器时，该值将返回给服务器。当客户端禁用cookie时，此值也可以设置为通过get返回给服务器。</p>
 <p>下面就是一个goolge设置cookie的响应头的例子 :</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">302</span> Found </span><br><span class="line">   Location: http://www.google.com/intl/zh-CN/ </span><br><span class="line">   Set-Cookie: PREF=ID=<span class="number">0565</span>f77e132de138:NW=<span class="number">1</span>:TM=<span class="number">1098082649</span>:LM=<span class="number">1098082649</span>:S=KaeaCFPo49RiA_d8; </span><br><span class="line">   expires=Sun, <span class="number">17</span>-Jan<span class="number">-2038</span> <span class="number">19</span>:<span class="number">14</span>:<span class="number">07</span> GMT; path=/; domain=.google.com </span><br><span class="line">   Content-Type: text/html</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs py">HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">302</span> Found <br>   Location: http://www.google.com/intl/zh-CN/ <br>   Set-Cookie: PREF=ID=<span class="hljs-number">0565</span>f77e132de138:NW=<span class="hljs-number">1</span>:TM=<span class="hljs-number">1098082649</span>:LM=<span class="hljs-number">1098082649</span>:S=KaeaCFPo49RiA_d8; <br>   expires=Sun, <span class="hljs-number">17</span>-Jan<span class="hljs-number">-2038</span> <span class="hljs-number">19</span>:<span class="hljs-number">14</span>:<span class="hljs-number">07</span> GMT; path=/; domain=.google.com <br>   Content-Type: text/html<br></code></pre></td></tr></table></figure>
 
 <p>在安全性方面：当您访问使用会话并在您自己的计算机上创建cookie的站点时，建议服务器端的会话机制更安全，因为它不会任意读取客户端存储的信息。</p>
 <p>文章参照了下面两篇文章，可以好好学习一下。<br><a href="https://baijiahao.baidu.com/s?id=1612804856429135825&wfr=spider&for=pc" target="_blank" rel="noopener">官方解析cookies和session的区别</a><br><a href="https://www.cnblogs.com/wangpei/p/4884840.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangpei/p/4884840.html</a></p>
@@ -295,12 +336,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/CSRF&SSRF%E7%AE%80%E6%9E%90/" rel="prev" title="PHP伪协议">
-      <i class="fa fa-chevron-left"></i> PHP伪协议
+    <a href="/2020/02/03/CTF%20WP/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CMISC%20%E5%8A%9F%E5%A4%AB%E5%86%8D%E9%AB%98%E4%B9%9F%E6%80%95%E8%8F%9C%E5%88%80/" rel="prev" title="攻防世界misc 功夫再高也怕菜刀">
+      <i class="fa fa-chevron-left"></i> 攻防世界misc 功夫再高也怕菜刀
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/%E4%BD%A0%E7%9F%A5%E9%81%93http%E8%AF%B7%E6%B1%82%E5%A4%B4%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B9%88%EF%BC%9F/" rel="next" title="你知道HTTP请求头有哪些吗？">
-      你知道HTTP请求头有哪些吗？ <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/CTF%20WP/%E4%BA%8C%E5%88%B7bugku%20web/" rel="next" title="二刷bugku web">
+      二刷bugku web <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -382,7 +423,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -462,7 +503,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

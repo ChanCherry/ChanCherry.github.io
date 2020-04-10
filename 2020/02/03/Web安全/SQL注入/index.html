@@ -108,6 +108,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -358,22 +399,22 @@
 <li><input disabled="" type="checkbox"> SQL高级操作：排序、分组、限定条数</li>
 </ul>
 <p>排序Order by</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM test_table ORDER BY userid;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">SELECT * FROM test_table ORDER BY userid;<br></code></pre></td></tr></table></figure>
 
 <p>分组Group by</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,count(*) FROM test_table GROUP BY name;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">SELECT name,count(*) FROM test_table GROUP BY name;<br></code></pre></td></tr></table></figure>
 
 <p>限定条数limit</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM test_table limit <span class="number">0</span>,<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">SELECT * FROM test_table limit <span class="number">1</span>,<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">SELECT * FROM test_table limit <span class="hljs-number">0</span>,<span class="hljs-number">10</span>;<br><br>SELECT * FROM test_table limit <span class="hljs-number">1</span>,<span class="hljs-number">5</span>;<br></code></pre></td></tr></table></figure>
 
 <p>组合使用</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM test_table LIMIT <span class="number">0</span>,<span class="number">5</span> ORDER BY userid;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">SELECT * FROM test_table LIMIT <span class="hljs-number">0</span>,<span class="hljs-number">5</span> ORDER BY userid;<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><input disabled="" type="checkbox"> <p>SQL高级操作：联合查询union：<br><img src="https://img-blog.csdnimg.cn/20191015085021731.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>因为查询语句构造问题，可直接否认掉之前的查询，执行一个全新的查询语句，查询的列应当与之前的列对应。</p>
 </li>
 <li><input disabled="" type="checkbox"> <p>SQL高级操作：结合其他函数操作：<br>在MySQL中，把information_schema（MySQL自带的）看作是一个信息数据库，其中保存着关于MySQL服务器所维护的所有其他数据库的信息。如数据库名，数据库的表，表栏的数据类型与访问权限等。<br>information_schema.SCHEMATA表中的SCHEMA_NAME查看所有的数据库：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span> hehe where id=<span class="number">3</span> <span class="keyword">and</span> <span class="number">1</span>=<span class="number">2</span> union select <span class="number">0</span>,<span class="number">0</span> SCHEMA_NAME <span class="keyword">from</span> information_schema.SCHEMATA limit <span class="number">1</span>,<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs py">select * <span class="hljs-keyword">from</span> hehe where id=<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> <span class="hljs-number">1</span>=<span class="hljs-number">2</span> union select <span class="hljs-number">0</span>,<span class="hljs-number">0</span> SCHEMA_NAME <span class="hljs-keyword">from</span> information_schema.SCHEMATA limit <span class="hljs-number">1</span>,<span class="hljs-number">2</span>;<br></code></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -430,21 +471,21 @@
 <p>（5）SQL盲注<br>SQL盲注是不能通过直接显示的途径来获取数据库数据的方法。</p>
 <p>在盲注中，攻击者根据返回页面的不同来判断信息（可能是页面内容不同，也可以是响应时间不同）。一般情况下，盲注分为三种：</p>
 <ul>
-<li>布尔盲注<br>某些查询语句是不需要返回结果的，仅判断查询语句是否正确执行即可，所以其返回值可以看作一个布尔值，正常时显示true，报错或不正常显示false。<br>查询语句：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT userid FROM member WHERE u_name=$name AND u_pass= $<span class="keyword">pass</span>;</span><br></pre></td></tr></table></figure>
+<li>布尔盲注<br>某些查询语句是不需要返回结果的，仅判断查询语句是否正确执行即可，所以其返回值可以看作一个布尔值，正常时显示true，报错或不正常显示false。<br>查询语句：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs py">SELECT userid FROM member WHERE u_name=$name AND u_pass= $<span class="hljs-keyword">pass</span>;<br></code></pre></td></tr></table></figure>
 
 </li>
 </ul>
 <p>注入语句：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name=-1' and (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'a'</span></span><br><span class="line"><span class="keyword">name</span>=<span class="number">-1</span><span class="string">' and (select mid(u_name,2,1) from member where userid=1)='</span>d<span class="string">'</span></span><br><span class="line"><span class="string">name=-1'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">3</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'m'</span></span><br><span class="line"><span class="keyword">name</span>=<span class="number">-1</span><span class="string">' and (select mid(u_name,4,1) from member where userid=1)='</span>i<span class="string">'</span></span><br><span class="line"><span class="string">name=-1'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">5</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'n'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql">name=-1' and (<span class="hljs-keyword">select</span> <span class="hljs-keyword">mid</span>(u_name,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>) <span class="hljs-keyword">from</span> <span class="hljs-keyword">member</span> <span class="hljs-keyword">where</span> userid=<span class="hljs-number">1</span>)=<span class="hljs-string">'a'</span><br><span class="hljs-keyword">name</span>=<span class="hljs-number">-1</span><span class="hljs-string">' and (select mid(u_name,2,1) from member where userid=1)='</span>d<span class="hljs-string">'<br>name=-1'</span> <span class="hljs-keyword">and</span> (<span class="hljs-keyword">select</span> <span class="hljs-keyword">mid</span>(u_name,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>) <span class="hljs-keyword">from</span> <span class="hljs-keyword">member</span> <span class="hljs-keyword">where</span> userid=<span class="hljs-number">1</span>)=<span class="hljs-string">'m'</span><br><span class="hljs-keyword">name</span>=<span class="hljs-number">-1</span><span class="hljs-string">' and (select mid(u_name,4,1) from member where userid=1)='</span>i<span class="hljs-string">'<br>name=-1'</span> <span class="hljs-keyword">and</span> (<span class="hljs-keyword">select</span> <span class="hljs-keyword">mid</span>(u_name,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>) <span class="hljs-keyword">from</span> <span class="hljs-keyword">member</span> <span class="hljs-keyword">where</span> userid=<span class="hljs-number">1</span>)=<span class="hljs-string">'n'</span><br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>时间盲注<br>某些查询语句是不需要返回结果的，仅判断查询语句是否正确执行即可，但是由于某些限制，布尔盲注的关键字符代入不进去，这时候就可以利用sleep()函数来进行时间盲注，取页面执行时间（结束时间-开始时间）来判断sleep()函数是否正常执行，所以其是否正常执行可以看作一个布尔值，正常时显示true，报错或不正常显示false。</li>
 </ul>
 <p>查询语句：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT userid FROM member WHERE u_name=$name AND u_pass= $<span class="keyword">pass</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs py">SELECT userid FROM member WHERE u_name=$name AND u_pass= $<span class="hljs-keyword">pass</span>;<br></code></pre></td></tr></table></figure>
 
 <p>注入语句：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name=-1' and (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'a'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">sleep</span>(<span class="number">3</span>))</span><br><span class="line"><span class="keyword">name</span>=<span class="number">-1</span><span class="string">' and (select mid(u_name,2,1) from member where userid=1)='</span>d<span class="string">' and (select sleep(3))</span></span><br><span class="line"><span class="string">name=-1'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">3</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'m'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">sleep</span>(<span class="number">3</span>))</span><br><span class="line"><span class="keyword">name</span>=<span class="number">-1</span><span class="string">' and (select mid(u_name,4,1) from member where userid=1)='</span>i<span class="string">' and (select sleep(3))</span></span><br><span class="line"><span class="string">name=-1'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">mid</span>(u_name,<span class="number">5</span>,<span class="number">1</span>) <span class="keyword">from</span> <span class="keyword">member</span> <span class="keyword">where</span> userid=<span class="number">1</span>)=<span class="string">'n'</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="keyword">sleep</span>(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql">name=-1' and (<span class="hljs-keyword">select</span> <span class="hljs-keyword">mid</span>(u_name,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>) <span class="hljs-keyword">from</span> <span class="hljs-keyword">member</span> <span class="hljs-keyword">where</span> userid=<span class="hljs-number">1</span>)=<span class="hljs-string">'a'</span> <span class="hljs-keyword">and</span> (<span class="hljs-keyword">select</span> <span class="hljs-keyword">sleep</span>(<span class="hljs-number">3</span>))<br><span class="hljs-keyword">name</span>=<span class="hljs-number">-1</span><span class="hljs-string">' and (select mid(u_name,2,1) from member where userid=1)='</span>d<span class="hljs-string">' and (select sleep(3))<br>name=-1'</span> <span class="hljs-keyword">and</span> (<span class="hljs-keyword">select</span> <span class="hljs-keyword">mid</span>(u_name,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>) <span class="hljs-keyword">from</span> <span class="hljs-keyword">member</span> <span class="hljs-keyword">where</span> userid=<span class="hljs-number">1</span>)=<span class="hljs-string">'m'</span> <span class="hljs-keyword">and</span> (<span class="hljs-keyword">select</span> <span class="hljs-keyword">sleep</span>(<span class="hljs-number">3</span>))<br><span class="hljs-keyword">name</span>=<span class="hljs-number">-1</span><span class="hljs-string">' and (select mid(u_name,4,1) from member where userid=1)='</span>i<span class="hljs-string">' and (select sleep(3))<br>name=-1'</span> <span class="hljs-keyword">and</span> (<span class="hljs-keyword">select</span> <span class="hljs-keyword">mid</span>(u_name,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>) <span class="hljs-keyword">from</span> <span class="hljs-keyword">member</span> <span class="hljs-keyword">where</span> userid=<span class="hljs-number">1</span>)=<span class="hljs-string">'n'</span> <span class="hljs-keyword">and</span> (<span class="hljs-keyword">select</span> <span class="hljs-keyword">sleep</span>(<span class="hljs-number">3</span>))<br></code></pre></td></tr></table></figure>
 <p>基于时间的盲注在使用延迟函数上可以有两个选择：<br>（1）BENCHMARK(count,expr)函数        //将expr语句执行count次来延迟时间<br>（2）sleep(time)函数        //直接延迟time时间</p>
 <ul>
 <li>报错型盲注<br>正确时浏览器返回”You are in ……..”，错误会有报错语句。</li>
@@ -474,16 +515,16 @@
 <li>编码绕过<br>WAF检测关键字，比如检测union，用%55也就是U的16进制编码来代替U，union写成%55nloN，结合大小写也可以绕过一些WAF。</li>
 <li>注释绕过<br>适用于WAF只是过滤了一次危险的语句，而没有阻断我们整个的查询</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;?id&#x3D;1+union+select+1,2,3&#x2F;*</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">&#x2F;?id&#x3D;1+union+select+1,2,3&#x2F;*<br></code></pre></td></tr></table></figure>
 
 <p>对于上面这条语句，WAF过滤了一次union和select，在之前再写一个注释语句，让他把注释里面的过滤掉，并不影响我们的查询。</p>
 <p>绕过语句就是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;?id&#x3D;1&#x2F;*union*&#x2F;union&#x2F;*select*&#x2F;select+1,2,3&#x2F;*</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">&#x2F;?id&#x3D;1&#x2F;*union*&#x2F;union&#x2F;*select*&#x2F;select+1,2,3&#x2F;*<br></code></pre></td></tr></table></figure>
 <ol start="4">
-<li>分隔重写绕过<br>适用于那种WAF使用了正则表达式的情况，会检测所有的敏感字<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;?id&#x3D;1+un&#x2F;**&#x2F;ion+sel&#x2F;**&#x2F;elct+1,2,3-</span><br></pre></td></tr></table></figure>
+<li>分隔重写绕过<br>适用于那种WAF使用了正则表达式的情况，会检测所有的敏感字<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">&#x2F;?id&#x3D;1+un&#x2F;**&#x2F;ion+sel&#x2F;**&#x2F;elct+1,2,3-<br></code></pre></td></tr></table></figure>
 至于重写绕过，适用于WAF过滤了一次的情况，和我们上传aaspsp马的原理一样，我们可以写出类似Ununionion这样的，过滤了一次union就会执行我们的查询了。</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;?id&#x3D;1 Ununionion select 1,2,3-</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">&#x2F;?id&#x3D;1 Ununionion select 1,2,3-<br></code></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>同功能函数转换<br>Substring()函数可以用mid()和substr()这些函数来替换，都是用来取字符串的某一位字符的。<br>Ascii()编码可以用hex()，bin()也就是16进制，二进制编码转换。<br>时间盲注Benchmark()也可以用sleep()来替换。</li>
@@ -491,10 +532,10 @@
 <p>sqlmap中有一个tamper目录，主要存放的是waf绕过脚本，比如：base64encode.py，between.py，greatest.py等。<br><img src="https://img-blog.csdnimg.cn/2019101508105169.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <ul>
 <li><input disabled="" type="checkbox"> <p>等号被过滤了—-&gt;<a href="">[equaltolike.py]</a>—-&gt;like代替等号</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Example:</span><br><span class="line">Input: SELECT * FROM users WHERE **id=<span class="number">1</span>**</span><br><span class="line">Output: SELECT * FROM users WHERE **id LIKE <span class="number">1</span>**</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">Example:<br>Input: SELECT * FROM users WHERE **id=<span class="hljs-number">1</span>**<br>Output: SELECT * FROM users WHERE **id LIKE <span class="hljs-number">1</span>**<br></code></pre></td></tr></table></figure>
 </li>
 <li><input disabled="" type="checkbox"> <p>替换字符和单引号被过滤—-&gt;<a href="">[apostrophenullencode.py]</a></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Example:</span><br><span class="line">(<span class="string">"1 AND '1'='1"</span>)</span><br><span class="line"><span class="string">"1 AND %00%271%00%27=%00%271"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">Example:<br>(<span class="hljs-string">"1 AND '1'='1"</span>)<br><span class="hljs-string">"1 AND %00%271%00%27=%00%271"</span><br></code></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -506,7 +547,7 @@
 <ul>
 <li><input disabled="" type="checkbox"> 采用sql语句预编译和绑定变量</li>
 </ul>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String sql=<span class="string">"select id,no from user where id=?"</span>;</span><br><span class="line">PreparedStatement ps =conn.prepareStatement(sql);</span><br><span class="line">ps.setInt(<span class="number">1</span>,id);</span><br><span class="line">ps.executeQuery();</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs py">String sql=<span class="hljs-string">"select id,no from user where id=?"</span>;<br>PreparedStatement ps =conn.prepareStatement(sql);<br>ps.setInt(<span class="hljs-number">1</span>,id);<br>ps.executeQuery();<br></code></pre></td></tr></table></figure>
 <p>采用了PreparedStatement，将sql语句<code>&quot;select id,no from user where id=?&quot;</code>预先编译好，即SQL引擎会先进行语法分析，产生语法树，生成执行计划，这样后面无论你输入什么参数，都不会影响该sql语句的语法结构了。</p>
 <ul>
 <li><input disabled="" type="checkbox"> 不要随意开启生产环境中Webserver的错误显示</li>
@@ -560,12 +601,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/03/CTF%20WP/Bugku%20web1/" rel="prev" title="Bugku web1">
-      <i class="fa fa-chevron-left"></i> Bugku web1
+    <a href="/2020/02/03/CTF%20WP/JACTF%20misc%20wp/" rel="prev" title="JACTF misc wp">
+      <i class="fa fa-chevron-left"></i> JACTF misc wp
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/CTF%20WP/Bugku%E6%9D%82%E9%A1%B9%20wp/" rel="next" title="Bugku misc wp">
-      Bugku misc wp <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/CTF%20WP/BUUCTF%20MISC%20wp/" rel="next" title="BUUCTF misc wp">
+      BUUCTF misc wp <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -647,7 +688,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -727,7 +768,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

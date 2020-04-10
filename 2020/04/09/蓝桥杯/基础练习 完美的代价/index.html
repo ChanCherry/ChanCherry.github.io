@@ -103,6 +103,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -240,7 +281,7 @@
 <li><strong>impossible的情况：如果有一个字符出现的次数是奇数次数，而且n是偶数，那么不可能构成回文；如果n是奇数，但是已经有一个字符出现的次数是奇数次数了，那么如果又有一个字符是奇数次数，就不可能构成回文。</strong></li>
 <li><strong>如果n是奇数，计算中间那个字符交换的次数的时候，不需要模拟把这个数移动到中间去，先把所有的回文数移动到位，再移动中间的奇数</strong>。因为，假设有一对数都在左边或者都在右边，那么交换成回文的时候就要经过中间，就会每次把cnt多加了1，而这个1是没有必要的，因为可以所有的回文移动完了之后再把这个独立的奇数移动过去，才能保证交换次数最少。</li>
 </ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="built_in">string</span> s;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;s;</span><br><span class="line">	<span class="keyword">int</span> j=n<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> cnt=<span class="number">0</span>;<span class="comment">//cnt用来统计交换的次数</span></span><br><span class="line">	<span class="keyword">int</span> flag=<span class="number">0</span>;<span class="comment">//flag判断是否已经有一个单独的奇个数的字符了</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;j;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k=j;k&gt;=i;k--)&#123;</span><br><span class="line">			<span class="keyword">if</span>(k==i)&#123;</span><br><span class="line">				<span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span> || flag==<span class="number">1</span>)&#123;</span><br><span class="line">					<span class="built_in">cout</span>&lt;&lt;<span class="string">"Impossible"</span>;</span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				flag=<span class="number">1</span>;</span><br><span class="line">				cnt+=n/<span class="number">2</span>-i;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(s[k]==s[i])&#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> l=k;l&lt;j;l++)&#123;</span><br><span class="line">					swap(s[l],s[l+<span class="number">1</span>]);<span class="comment">//把s[k]换到s[j]处</span></span><br><span class="line">					cnt++;<span class="comment">//统计交换次数 </span></span><br><span class="line">				&#125;</span><br><span class="line">				j--;</span><br><span class="line">				<span class="keyword">break</span>; </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;cnt;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n;<br>	<span class="hljs-built_in">cin</span>&gt;&gt;n;<br>	<span class="hljs-built_in">string</span> s;<br>	<span class="hljs-built_in">cin</span>&gt;&gt;s;<br>	<span class="hljs-keyword">int</span> j=n<span class="hljs-number">-1</span>;<br>	<span class="hljs-keyword">int</span> cnt=<span class="hljs-number">0</span>;<span class="hljs-comment">//cnt用来统计交换的次数</span><br>	<span class="hljs-keyword">int</span> flag=<span class="hljs-number">0</span>;<span class="hljs-comment">//flag判断是否已经有一个单独的奇个数的字符了</span><br>	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;j;i++)&#123;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=j;k&gt;=i;k--)&#123;<br>			<span class="hljs-keyword">if</span>(k==i)&#123;<br>				<span class="hljs-keyword">if</span>(n%<span class="hljs-number">2</span>==<span class="hljs-number">0</span> || flag==<span class="hljs-number">1</span>)&#123;<br>					<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Impossible"</span>;<br>					<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>				&#125;<br>				flag=<span class="hljs-number">1</span>;<br>				cnt+=n/<span class="hljs-number">2</span>-i;<br>			&#125;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(s[k]==s[i])&#123;<br>				<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> l=k;l&lt;j;l++)&#123;<br>					swap(s[l],s[l+<span class="hljs-number">1</span>]);<span class="hljs-comment">//把s[k]换到s[j]处</span><br>					cnt++;<span class="hljs-comment">//统计交换次数 </span><br>				&#125;<br>				j--;<br>				<span class="hljs-keyword">break</span>; <br>			&#125;<br>		&#125;<br>	&#125; <br>	<span class="hljs-built_in">cout</span>&lt;&lt;cnt;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
     </div>
@@ -287,12 +328,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E8%8A%AF%E7%89%87%E6%B5%8B%E8%AF%95/" rel="prev" title="基础练习 芯片测试">
-      <i class="fa fa-chevron-left"></i> 基础练习 芯片测试
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E6%95%B0%E7%9A%84%E8%AF%BB%E6%B3%95/" rel="prev" title="基础练习 数的读法">
+      <i class="fa fa-chevron-left"></i> 基础练习 数的读法
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E6%95%B0%E7%9A%84%E8%AF%BB%E6%B3%95/" rel="next" title="基础练习 数的读法">
-      基础练习 数的读法 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20Sine%E4%B9%8B%E8%88%9E/" rel="next" title="基础练习 Sine之舞">
+      基础练习 Sine之舞 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -373,7 +414,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -453,7 +494,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

@@ -103,6 +103,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -240,7 +281,7 @@
 <p>3 2<br>4 2</p>
 <p>Sample Output</p>
 <p>3 6<br>3 7</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n,m,i;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">101</span>],b[<span class="number">101</span>];</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m)!=EOF)&#123;</span><br><span class="line">		<span class="keyword">if</span>(n&gt;<span class="number">0</span> &amp;&amp; n&lt;=<span class="number">100</span>)&#123;</span><br><span class="line">			<span class="keyword">int</span> count=<span class="number">0</span>,sum=<span class="number">0</span>,k=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">			a[i]=(i+<span class="number">1</span>)*<span class="number">2</span>;</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">				count++;</span><br><span class="line">				sum+=a[i];</span><br><span class="line">				<span class="comment">//每隔m个数计算一次</span></span><br><span class="line">				<span class="keyword">if</span>(count==m)&#123;</span><br><span class="line">					b[k++]=sum/m;</span><br><span class="line">					sum=<span class="number">0</span>;</span><br><span class="line">					count=<span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(n%m!=<span class="number">0</span>)&#123;</span><br><span class="line">				b[k]=sum/(n%m);</span><br><span class="line">				k++;<span class="comment">//保证数组b正常输出</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;k<span class="number">-1</span>;i++)&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"%d "</span>,b[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,b[k<span class="number">-1</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n,m,i;<br>	<span class="hljs-keyword">int</span> a[<span class="hljs-number">101</span>],b[<span class="hljs-number">101</span>];<br>	<span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m)!=EOF)&#123;<br>		<span class="hljs-keyword">if</span>(n&gt;<span class="hljs-number">0</span> &amp;&amp; n&lt;=<span class="hljs-number">100</span>)&#123;<br>			<span class="hljs-keyword">int</span> count=<span class="hljs-number">0</span>,sum=<span class="hljs-number">0</span>,k=<span class="hljs-number">0</span>;<br>			<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>			a[i]=(i+<span class="hljs-number">1</span>)*<span class="hljs-number">2</span>;<br>			<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>				count++;<br>				sum+=a[i];<br>				<span class="hljs-comment">//每隔m个数计算一次</span><br>				<span class="hljs-keyword">if</span>(count==m)&#123;<br>					b[k++]=sum/m;<br>					sum=<span class="hljs-number">0</span>;<br>					count=<span class="hljs-number">0</span>;<br>				&#125;<br>			&#125;<br>			<span class="hljs-keyword">if</span>(n%m!=<span class="hljs-number">0</span>)&#123;<br>				b[k]=sum/(n%m);<br>				k++;<span class="hljs-comment">//保证数组b正常输出</span><br>			&#125;<br>			<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;k<span class="hljs-number">-1</span>;i++)&#123;<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,b[i]);<br>			&#125;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,b[k<span class="hljs-number">-1</span>]);<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
     </div>
@@ -287,12 +328,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%9D%AD%E7%94%B52044%E2%80%94%E2%80%94%E4%B8%80%E5%8F%AA%E5%B0%8F%E8%9C%9C%E8%9C%82.../" rel="prev" title="杭电2044——一只小蜜蜂">
-      <i class="fa fa-chevron-left"></i> 杭电2044——一只小蜜蜂
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%20%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F/" rel="prev" title="算法训练 数字游戏">
+      <i class="fa fa-chevron-left"></i> 算法训练 数字游戏
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%AB%98%E6%96%AF%E6%97%A5%E8%AE%B0/" rel="next" title="高斯日记">
-      高斯日记 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%A2%A0%E5%80%92%E7%9A%84%E4%BB%B7%E7%89%8C/" rel="next" title="颠倒的价牌">
+      颠倒的价牌 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -373,7 +414,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -453,7 +494,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

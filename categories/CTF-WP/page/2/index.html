@@ -99,6 +99,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -202,28 +243,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/02/03/CTF%20WP/BUUCTF%20snake%EF%BC%88%E5%AE%9E%E9%AA%8C%E5%90%A7Snake%EF%BC%89/" itemprop="url">
-            <span itemprop="name">BUUCTF snake（实验吧Snake）</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-03T00:00:00+08:00"
-              content="2020-02-03">
-          02-03
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/02/03/CTF%20WP/%E4%BA%8C%E5%88%B7bugku%20web/" itemprop="url">
-            <span itemprop="name">二刷bugku web</span>
+          <a class="post-title-link" href="/2020/02/03/CTF%20WP/BUU%20misc%EF%BC%88GXYCTF2019%EF%BC%89/" itemprop="url">
+            <span itemprop="name">BUU misc（GXYCTF2019）</span>
           </a>
       </h2>
 
@@ -302,8 +323,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/02/03/CTF%20WP/BUUCTF%20MISC%20wp/" itemprop="url">
-            <span itemprop="name">BUUCTF misc wp</span>
+          <a class="post-title-link" href="/2020/02/03/CTF%20WP/%E4%BA%8C%E5%88%B7bugku%20web/" itemprop="url">
+            <span itemprop="name">二刷bugku web</span>
           </a>
       </h2>
 
@@ -342,8 +363,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/02/03/CTF%20WP/Bugku%20web1/" itemprop="url">
-            <span itemprop="name">Bugku web1</span>
+          <a class="post-title-link" href="/2020/02/03/CTF%20WP/BUUCTF%20MISC%20wp/" itemprop="url">
+            <span itemprop="name">BUUCTF misc wp</span>
           </a>
       </h2>
 
@@ -364,6 +385,26 @@
       <h2 class="post-title">
           <a class="post-title-link" href="/2020/02/03/CTF%20WP/JACTF%20misc%20wp/" itemprop="url">
             <span itemprop="name">JACTF misc wp</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-02-03T00:00:00+08:00"
+              content="2020-02-03">
+          02-03
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/02/03/CTF%20WP/Bugku%20web1/" itemprop="url">
+            <span itemprop="name">Bugku web1</span>
           </a>
       </h2>
 
@@ -466,7 +507,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -546,7 +587,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

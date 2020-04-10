@@ -106,6 +106,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -239,7 +280,7 @@
 <p>问题描述<br>　　平面上有两个矩形，它们的边平行于直角坐标系的X轴或Y轴。对于每个矩形，我们给出它的一对相对顶点的坐标，请你编程算出两个矩形的交的面积。<br>输入格式<br>　　输入仅包含两行，每行描述一个矩形。<br>　　在每行中，给出矩形的一对相对顶点的坐标，每个点的坐标都用两个绝对值不超过10^7的实数表示。<br>输出格式<br>　　输出仅包含一个实数，为交的面积，保留到小数后两位。<br>样例输入<br>1 1 3 3<br>2 2 4 4<br>样例输出<br>1.00</p>
 </blockquote>
 <p>思路：<br>（1）如果两个矩形相交，<br><img src="https://img-blog.csdnimg.cn/20200404164531312.png" alt="在这里插入图片描述"><br>如图，可以发现，我们只要求出两个矩形相交的主对角线的交点坐标，然后计算面积即可。观察图可以发现，A点横坐标是两个矩形两个小的横坐标的最大值，而B点横坐标是两个矩形两个大的横坐标的最小值，纵坐标类似，就可以求出矩形的长和宽了。<br>（2）若两个矩形不相交，上面的方法就不行了，通过计算得到的交点坐标如下图，很明显是不对滴，所以需要另行判断<br><img src="https://img-blog.csdnimg.cn/20200404170518309.png" alt="在这里插入图片描述"><br>AC代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">max</span><span class="params">(<span class="keyword">double</span> a,<span class="keyword">double</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a&gt;b)</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">min</span><span class="params">(<span class="keyword">double</span> a,<span class="keyword">double</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a&lt;b)</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> x1,x2,x3,x4,y1,y2,y3,y4,s;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lf%lf%lf%lf"</span>,&amp;x1,&amp;y1,&amp;x2,&amp;y2);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lf%lf%lf%lf"</span>,&amp;x3,&amp;y3,&amp;x4,&amp;y4);</span><br><span class="line">	<span class="keyword">double</span> m1,n1,m2,n2;<span class="comment">//两个交点的坐标 </span></span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">max</span>(x1,x2)&lt;=<span class="built_in">min</span>(x3,x4) || <span class="built_in">max</span>(x3,x4)&lt;=<span class="built_in">min</span>(x1,x2))</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"0.00\n"</span>);</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		m1=<span class="built_in">max</span>(<span class="built_in">min</span>(x1,x2),<span class="built_in">min</span>(x3,x4));</span><br><span class="line">		m2=<span class="built_in">min</span>(<span class="built_in">max</span>(x1,x2),<span class="built_in">max</span>(x3,x4));</span><br><span class="line">		n1=<span class="built_in">min</span>(<span class="built_in">max</span>(y1,y2),<span class="built_in">max</span>(y3,y4));</span><br><span class="line">		n2=<span class="built_in">max</span>(<span class="built_in">min</span>(y1,y2),<span class="built_in">min</span>(y3,y4));</span><br><span class="line">		s=(m2-m1)*(n1-n2);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,s);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">double</span> a,<span class="hljs-keyword">double</span> b)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(a&gt;b)<br>		<span class="hljs-keyword">return</span> a;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> b;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">min</span><span class="hljs-params">(<span class="hljs-keyword">double</span> a,<span class="hljs-keyword">double</span> b)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(a&lt;b)<br>		<span class="hljs-keyword">return</span> a;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> b;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">double</span> x1,x2,x3,x4,y1,y2,y3,y4,s;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lf%lf%lf%lf"</span>,&amp;x1,&amp;y1,&amp;x2,&amp;y2);<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lf%lf%lf%lf"</span>,&amp;x3,&amp;y3,&amp;x4,&amp;y4);<br>	<span class="hljs-keyword">double</span> m1,n1,m2,n2;<span class="hljs-comment">//两个交点的坐标 </span><br>	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">max</span>(x1,x2)&lt;=<span class="hljs-built_in">min</span>(x3,x4) || <span class="hljs-built_in">max</span>(x3,x4)&lt;=<span class="hljs-built_in">min</span>(x1,x2))<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"0.00\n"</span>);<br>	<span class="hljs-keyword">else</span>&#123;<br>		m1=<span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(x1,x2),<span class="hljs-built_in">min</span>(x3,x4));<br>		m2=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">max</span>(x1,x2),<span class="hljs-built_in">max</span>(x3,x4));<br>		n1=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">max</span>(y1,y2),<span class="hljs-built_in">max</span>(y3,y4));<br>		n2=<span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(y1,y2),<span class="hljs-built_in">min</span>(y3,y4));<br>		s=(m2-m1)*(n1-n2);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%.2lf\n"</span>,s);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
     </div>
@@ -286,12 +327,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/%E5%8D%8E%E4%B8%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88linux%E7%B3%BB%E7%BB%9F%EF%BC%89%E5%AE%8C%E6%95%B4%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E5%8C%85%E5%90%ABjdk%E3%80%81Tomcat%E9%85%8D%E7%BD%AE%E3%80%81%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE%E7%AD%89%EF%BC%89/" rel="prev" title="华为云服务器（linux系统）完整配置流程（包含jdk,Tomcat,网页配置等）">
-      <i class="fa fa-chevron-left"></i> 华为云服务器（linux系统）完整配置流程（包含jdk,Tomcat,网页配置等）
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20Sine%E4%B9%8B%E8%88%9E/" rel="prev" title="基础练习 Sine之舞">
+      <i class="fa fa-chevron-left"></i> 基础练习 Sine之舞
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20Sine%E4%B9%8B%E8%88%9E/" rel="next" title="基础练习 Sine之舞">
-      基础练习 Sine之舞 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" rel="next" title="基础练习 矩阵乘法">
+      基础练习 矩阵乘法 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -372,7 +413,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -452,7 +493,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

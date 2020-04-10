@@ -107,6 +107,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -256,8 +297,8 @@
 </ol>
 <p>allow_url_fopen：默认为on  ，该选项为on便是激活了url 形式的 fopen封装协议，使得可以访问 url 对象文件等。</p>
 <p>allow_url_include：  默认为off，不允许url里的封装协议访问对象文件。</p>
-<h1 id="0x00-是否截断问题"><a href="#0x00-是否截断问题" class="headerlink" title="0x00 是否截断问题:"></a>0x00 是否截断问题:</h1><h2 id="不需要截断"><a href="#不需要截断" class="headerlink" title="不需要截断"></a>不需要截断</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>($_GET[<span class="string">'file'</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="需要截断"><a href="#需要截断" class="headerlink" title="需要截断"></a>需要截断</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>($_GET[<span class="string">'file'</span>].<span class="string">'.php'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="0x00-是否截断问题"><a href="#0x00-是否截断问题" class="headerlink" title="0x00 是否截断问题:"></a>0x00 是否截断问题:</h1><h2 id="不需要截断"><a href="#不需要截断" class="headerlink" title="不需要截断"></a>不需要截断</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><br><span class="hljs-keyword">include</span>($_GET[<span class="hljs-string">'file'</span>])<br><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="需要截断"><a href="#需要截断" class="headerlink" title="需要截断"></a>需要截断</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><br><span class="hljs-keyword">include</span>($_GET[<span class="hljs-string">'file'</span>].<span class="hljs-string">'.php'</span>)<br><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 <h1 id="0x01-allow-url-fopen与allow-url-include是否开启的问题："><a href="#0x01-allow-url-fopen与allow-url-include是否开启的问题：" class="headerlink" title="0x01 allow_url_fopen与allow_url_include是否开启的问题："></a>0x01 allow_url_fopen与allow_url_include是否开启的问题：</h1><h2 id="file-协议"><a href="#file-协议" class="headerlink" title="file://协议"></a>file://协议</h2><p>file:// 用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受allow_url_fopen与allow_url_include的影响。</p>
 <p>使用方法：<br>file:// [文件的绝对路径和文件名]<br><img src="https://img-blog.csdnimg.cn/20191009204203130.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h2 id="php-协议"><a href="#php-协议" class="headerlink" title="php://协议"></a>php://协议</h2><p>条件：<br>不需要开启allow_url_fopen，仅php://input、 php://stdin、 php://memory 和 php://temp 需要开启allow_url_include。</p>
@@ -283,7 +324,7 @@
 <h2 id="data-协议"><a href="#data-协议" class="headerlink" title="data://协议"></a>data://协议</h2><p>PHP.ini：</p>
 <p>data://协议必须双在on才能正常使用；</p>
 <p>allow_url_fopen ：on<br>allow_url_include：on<br>例：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//localhost/test.php?file=data://text/plain,<span class="meta">&lt;?php</span> phpinfo()<span class="meta">?&gt;</span></span></span><br><span class="line">http:<span class="comment">//localhost/test.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpPz4=</span></span><br><span class="line">http:<span class="comment">//localhost/test.php?file=data:text/plain,<span class="meta">&lt;?php</span> phpinfo()<span class="meta">?&gt;</span></span></span><br><span class="line">http:<span class="comment">//localhost/test.php?file=data:text/plain;base64,PD9waHAgcGhwaW5mbygpPz4=</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php">http:<span class="hljs-comment">//localhost/test.php?file=data://text/plain,<span class="hljs-meta">&lt;?php</span> phpinfo()<span class="hljs-meta">?&gt;</span></span><br>http:<span class="hljs-comment">//localhost/test.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpPz4=</span><br>http:<span class="hljs-comment">//localhost/test.php?file=data:text/plain,<span class="hljs-meta">&lt;?php</span> phpinfo()<span class="hljs-meta">?&gt;</span></span><br>http:<span class="hljs-comment">//localhost/test.php?file=data:text/plain;base64,PD9waHAgcGhwaW5mbygpPz4=</span><br></code></pre></td></tr></table></figure>
 <hr>
 <p>借用一下FreeBuf的图最后总结一下<br><img src="https://img-blog.csdnimg.cn/2019100920385028.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>文章转载自FreeBuf一个大佬的文章<a href="https://www.freebuf.com/column/148886.html" target="_blank" rel="noopener">https://www.freebuf.com/column/148886.html</a></p>
 
@@ -331,12 +372,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/XSS/" rel="prev" title="XSS">
-      <i class="fa fa-chevron-left"></i> XSS
+    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/robots%E5%8D%8F%E8%AE%AE/" rel="prev" title="robots协议">
+      <i class="fa fa-chevron-left"></i> robots协议
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/CTF%20WP/NWUCTF-misc/" rel="next" title="NWUCTF misc">
-      NWUCTF misc <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/Referer/" rel="next" title="Referer">
+      Referer <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -418,7 +459,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -498,7 +539,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

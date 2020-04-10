@@ -111,6 +111,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -243,14 +284,14 @@
         <p>二刷Bugku web题~~</p>
 <a id="more"></a>
 <h1 id="过狗一句话"><a href="#过狗一句话" class="headerlink" title="过狗一句话"></a>过狗一句话</h1><p>首先题目给了一段话，</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">送给大家一个过狗一句话</span><br><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">$poc=<span class="string">"a#s#s#e#r#t"</span>; </span><br><span class="line">$poc_1=explode(<span class="string">"#"</span>,$poc); </span><br><span class="line">$poc_2=$poc_1[<span class="number">0</span>].$poc_1[<span class="number">1</span>].$poc_1[<span class="number">2</span>].$poc_1[<span class="number">3</span>].$poc_1[<span class="number">4</span>].$poc_1[<span class="number">5</span>]; </span><br><span class="line">$poc_2($_GET[<span class="string">'s'</span>]) </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php">送给大家一个过狗一句话<br><span class="hljs-meta">&lt;?php</span> <br>$poc=<span class="hljs-string">"a#s#s#e#r#t"</span>; <br>$poc_1=explode(<span class="hljs-string">"#"</span>,$poc); <br>$poc_2=$poc_1[<span class="hljs-number">0</span>].$poc_1[<span class="hljs-number">1</span>].$poc_1[<span class="hljs-number">2</span>].$poc_1[<span class="hljs-number">3</span>].$poc_1[<span class="hljs-number">4</span>].$poc_1[<span class="hljs-number">5</span>]; <br>$poc_2($_GET[<span class="hljs-string">'s'</span>]) <br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 <p>链接点开好像是挂了。。。暂时先放着吧</p>
-<h1 id="字符？正则？"><a href="#字符？正则？" class="headerlink" title="字符？正则？"></a>字符？正则？</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span> </span><br><span class="line">highlight_file(<span class="string">'2.php'</span>);</span><br><span class="line">$key=<span class="string">'KEY&#123;********************************&#125;'</span>;</span><br><span class="line">$IM= preg_match(<span class="string">"/key.*key.&#123;4,7&#125;key:\/.\/(.*key)[a-z][[:punct:]]/i"</span>, trim($_GET[<span class="string">"id"</span>]), $match);</span><br><span class="line"><span class="keyword">if</span>( $IM )&#123; </span><br><span class="line">  <span class="keyword">die</span>(<span class="string">'key is: '</span>.$key);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="字符？正则？"><a href="#字符？正则？" class="headerlink" title="字符？正则？"></a>字符？正则？</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"> <span class="hljs-meta">&lt;?php</span> <br>highlight_file(<span class="hljs-string">'2.php'</span>);<br>$key=<span class="hljs-string">'KEY&#123;********************************&#125;'</span>;<br>$IM= preg_match(<span class="hljs-string">"/key.*key.&#123;4,7&#125;key:\/.\/(.*key)[a-z][[:punct:]]/i"</span>, trim($_GET[<span class="hljs-string">"id"</span>]), $match);<br><span class="hljs-keyword">if</span>( $IM )&#123; <br>  <span class="hljs-keyword">die</span>(<span class="hljs-string">'key is: '</span>.$key);<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 <p>简单分析下代码</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">preg_match （要搜索的模式，字符串，参数）   在字符串里搜索符合 要搜索的模式 的字符，并返回给参数。</span><br></pre></td></tr></table></figure>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trim(字符串,字符)   移除字符串两侧的空白字符或其他预定义字符。</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs py">preg_match （要搜索的模式，字符串，参数）   在字符串里搜索符合 要搜索的模式 的字符，并返回给参数。<br></code></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs py">trim(字符串,字符)   移除字符串两侧的空白字符或其他预定义字符。<br></code></pre></td></tr></table></figure>
 <p>还有要复习一下正则,</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/key.*key.&#123;<span class="number">4</span>,<span class="number">7</span>&#125;key:\/.\/(.*key)[a-z][[:punct:]]/i</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs py">/key.*key.&#123;<span class="hljs-number">4</span>,<span class="hljs-number">7</span>&#125;key:\/.\/(.*key)[a-z][[:punct:]]/i<br></code></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -284,24 +325,24 @@
 </tr>
 </tbody></table>
 <p>就是要通过 id 传参，并且要符合上面的正则表达式，key就会显示，构造payload如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;123.206.87.240:8002&#x2F;web10&#x2F;?id&#x3D;keyakeyaaaakey:&#x2F;a&#x2F;keya:</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">http:&#x2F;&#x2F;123.206.87.240:8002&#x2F;web10&#x2F;?id&#x3D;keyakeyaaaakey:&#x2F;a&#x2F;keya:<br></code></pre></td></tr></table></figure>
 <h1 id="前女友-SKCTF"><a href="#前女友-SKCTF" class="headerlink" title="前女友(SKCTF)"></a>前女友(SKCTF)</h1><p><img src="https://img-blog.csdnimg.cn/20191008230425241.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>查看源码，查看一下code.txt，得到一串php源码<br><img src="https://img-blog.csdnimg.cn/20191008231018794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'v1'</span>]) &amp;&amp; <span class="keyword">isset</span>($_GET[<span class="string">'v2'</span>]) &amp;&amp; <span class="keyword">isset</span>($_GET[<span class="string">'v3'</span>]))&#123;</span><br><span class="line">    $v1 = $_GET[<span class="string">'v1'</span>];</span><br><span class="line">    $v2 = $_GET[<span class="string">'v2'</span>];</span><br><span class="line">    $v3 = $_GET[<span class="string">'v3'</span>];</span><br><span class="line">    <span class="keyword">if</span>($v1 != $v2 &amp;&amp; md5($v1) == md5($v2))&#123;</span><br><span class="line">        <span class="keyword">if</span>(!strcmp($v3, $flag))&#123;</span><br><span class="line">            <span class="keyword">echo</span> $flag;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>($_GET[<span class="hljs-string">'v1'</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>($_GET[<span class="hljs-string">'v2'</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>($_GET[<span class="hljs-string">'v3'</span>]))&#123;<br>    $v1 = $_GET[<span class="hljs-string">'v1'</span>];<br>    $v2 = $_GET[<span class="hljs-string">'v2'</span>];<br>    $v3 = $_GET[<span class="hljs-string">'v3'</span>];<br>    <span class="hljs-keyword">if</span>($v1 != $v2 &amp;&amp; md5($v1) == md5($v2))&#123;<br>        <span class="hljs-keyword">if</span>(!strcmp($v3, $flag))&#123;<br>            <span class="hljs-keyword">echo</span> $flag;<br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 <p>想起之前的PHP弱类型，我们需要构造三个参数，v1，v2，v3，其中v1和v2需要值不同但md5的值相同，看起来是找md5碰撞的问题，但是问题却不在这里，利用md5函数的特性，如果使用一个不可md5的数据类型传入的话那么md5函数将返回false，这个也是返回值，题目要求的是md5函数的返回值相等，所以就可以用两个值不同但不可md5的数据类型传入即可。此处我们使用v1[]=1&amp;v2[]=2。<br>第二个是strcmp函数，需要v3和flag的值相同才返回flag的值，貌似是一个鸡生蛋问题，但是我们依旧使用函数特性，strcmp函数如果出错，那么它的返回值也会是0，和字符串相等时返回值一致。那么如何出错呢，猜测不可比较时出错，那么传入一个数组试试。<br>所以最后构造参数并用get方法传入,构造payload:<code>?v1[]=1&amp;v2[]=2&amp;v3[]=3</code></p>
-<h1 id="login1-SKCTF"><a href="#login1-SKCTF" class="headerlink" title="login1(SKCTF)"></a>login1(SKCTF)</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hint:SQL约束攻击</span><br></pre></td></tr></table></figure>
+<h1 id="login1-SKCTF"><a href="#login1-SKCTF" class="headerlink" title="login1(SKCTF)"></a>login1(SKCTF)</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">hint:SQL约束攻击<br></code></pre></td></tr></table></figure>
 <p><img src="https://img-blog.csdnimg.cn/20191008233337371.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>SQL约束注入：<br>SQL服务器在进行查询字符串的时候会把字符串后面的空白（也就是空格之类的东西）删除，因为SQL会在内部使用空格来填充字符串，以便在比较之前使其它们的长度保持一致。<br>在任意INSERT查询中，SQL会根据varchar(n)来限制字符串的最大长度，也就是说，如果字符串的长度大于“n”个字符的话，那么仅使用字符串的前“n”个字符。</p>
 <p>也就是说我注册的时候可以构造一个很长的字符串，但是在SQL进行insert查询的时候，会出来两个用户名，当我们用我们构造的用户来访问的时候，会返回原始用户的信息，也就是使用原始用户的身份登录。</p>
 <p>用<code>admin                    （我注册的admin后面有20个空格）</code>注册，密码随便弄一个，但要符合要求，之后登录即可。</p>
 <h1 id="你从哪里来"><a href="#你从哪里来" class="headerlink" title="你从哪里来"></a>你从哪里来</h1><p>链接打开只给了一句话</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">are you from google?</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">are you from google?<br></code></pre></td></tr></table></figure>
 <p>用burp抓包，加上Referer头<br><img src="https://img-blog.csdnimg.cn/20191009184300323.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h1 id="md5-collision-NUPT-CTF"><a href="#md5-collision-NUPT-CTF" class="headerlink" title="md5 collision(NUPT_CTF)"></a>md5 collision(NUPT_CTF)</h1><p>根据题目提示，想到md5碰撞，参照我这篇博客<a href="https://blog.csdn.net/ITmincherry/article/details/96966702" target="_blank" rel="noopener">https://blog.csdn.net/ITmincherry/article/details/96966702</a></p>
 <h1 id="程序员本地网站"><a href="#程序员本地网站" class="headerlink" title="程序员本地网站"></a>程序员本地网站</h1><p>题目要求请从本地访问！用burp抓包，加上<code>X-Forwarded-For:127.0.0.1</code>就好了。关于XFF头详见<a href="https://blog.csdn.net/ITmincherry/article/details/89140086" target="_blank" rel="noopener">https://blog.csdn.net/ITmincherry/article/details/89140086</a><br><img src="https://img-blog.csdnimg.cn/20191009190414119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h1 id="各种绕过"><a href="#各种绕过" class="headerlink" title="各种绕过"></a>各种绕过</h1><p>题目给了一段代码，</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">highlight_file(<span class="string">'flag.php'</span>);</span><br><span class="line">$_GET[<span class="string">'id'</span>] = urldecode($_GET[<span class="string">'id'</span>]);</span><br><span class="line">$flag = <span class="string">'flag&#123;xxxxxxxxxxxxxxxxxx&#125;'</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'uname'</span>]) <span class="keyword">and</span> <span class="keyword">isset</span>($_POST[<span class="string">'passwd'</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> ($_GET[<span class="string">'uname'</span>] == $_POST[<span class="string">'passwd'</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'passwd can not be uname.'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (sha1($_GET[<span class="string">'uname'</span>]) === sha1($_POST[<span class="string">'passwd'</span>])&amp;($_GET[<span class="string">'id'</span>]==<span class="string">'margin'</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'Flag: '</span>.$flag);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'sorry!'</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs php"> <span class="hljs-meta">&lt;?php</span><br>highlight_file(<span class="hljs-string">'flag.php'</span>);<br>$_GET[<span class="hljs-string">'id'</span>] = urldecode($_GET[<span class="hljs-string">'id'</span>]);<br>$flag = <span class="hljs-string">'flag&#123;xxxxxxxxxxxxxxxxxx&#125;'</span>;<br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>($_GET[<span class="hljs-string">'uname'</span>]) <span class="hljs-keyword">and</span> <span class="hljs-keyword">isset</span>($_POST[<span class="hljs-string">'passwd'</span>])) &#123;<br>    <span class="hljs-keyword">if</span> ($_GET[<span class="hljs-string">'uname'</span>] == $_POST[<span class="hljs-string">'passwd'</span>])<br><br>        <span class="hljs-keyword">print</span> <span class="hljs-string">'passwd can not be uname.'</span>;<br><br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sha1($_GET[<span class="hljs-string">'uname'</span>]) === sha1($_POST[<span class="hljs-string">'passwd'</span>])&amp;($_GET[<span class="hljs-string">'id'</span>]==<span class="hljs-string">'margin'</span>))<br><br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">'Flag: '</span>.$flag);<br><br>    <span class="hljs-keyword">else</span><br><br>        <span class="hljs-keyword">print</span> <span class="hljs-string">'sorry!'</span>;<br><br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 <p>看到sha1()函数，百度了一下和md5()一样，也有漏洞，要用数组绕过。审计一下代码，要求uname和passwd是相通的，把这两个字段构造成数组来绕过。（数组数字任意，不同即可）因为后面有个&amp;，所以要传<code>id=margin&amp;uname[]=1</code>，再postdata <code>passwd[]=2</code><br><img src="https://img-blog.csdnimg.cn/20191009192231559.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h1 id="web8"><a href="#web8" class="headerlink" title="web8"></a>web8</h1><p>txt???</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">extract($_GET);</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>($ac))</span><br><span class="line">&#123;</span><br><span class="line">$f = trim(file_get_contents($fn));</span><br><span class="line"><span class="keyword">if</span> ($ac === $f)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;p&gt;This is flag:"</span> .<span class="string">" $flag&lt;/p&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;p&gt;sorry!&lt;/p&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"> <span class="hljs-meta">&lt;?php</span><br>extract($_GET);<br><span class="hljs-keyword">if</span> (!<span class="hljs-keyword">empty</span>($ac))<br>&#123;<br>$f = trim(file_get_contents($fn));<br><span class="hljs-keyword">if</span> ($ac === $f)<br>&#123;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;p&gt;This is flag:"</span> .<span class="hljs-string">" $flag&lt;/p&gt;"</span>;<br>&#125;<br><span class="hljs-keyword">else</span><br>&#123;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;p&gt;sorry!&lt;/p&gt;"</span>;<br>&#125;<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 <p>先访问一下flag.txt，得到<code>flags</code>，结合一下代码来看，$ ac应该指的是flag.txt的内容flags，而$fn就是flag.txt了。构造payload:<code>?ac=flags&amp;fn=flag.txt</code><br>还有一种方法就是：因为ac不能为空，f的值从文件fn中获取，ac的值等于f，于是构造<code>ac=1&amp;fn=php://input</code>，然后post 1<br><img src="https://img-blog.csdnimg.cn/20191009195617386.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 
     </div>
@@ -348,12 +389,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/03/CTF%20WP/i%E6%98%A5%E7%A7%8BWeb%20wp/" rel="prev" title="i春秋Web wp">
-      <i class="fa fa-chevron-left"></i> i春秋Web wp
+    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/Cookie/" rel="prev" title="Cookie">
+      <i class="fa fa-chevron-left"></i> Cookie
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/CTF%20WP/i%E6%98%A5%E7%A7%8B%20web%E2%80%9C%E7%99%BE%E5%BA%A6%E6%9D%AF%E2%80%9DCTF%E6%AF%94%E8%B5%9B%20%E4%B9%9D%E6%9C%88%E5%9C%BA-Upload%20&%20code/" rel="next" title="i春秋 web“百度杯”CTF比赛九月场-Upload & code">
-      i春秋 web“百度杯”CTF比赛九月场-Upload & code <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/CSRF&SSRF%E7%AE%80%E6%9E%90/" rel="next" title="PHP伪协议">
+      PHP伪协议 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -435,7 +476,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -515,7 +556,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         

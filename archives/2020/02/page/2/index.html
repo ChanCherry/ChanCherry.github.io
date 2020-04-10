@@ -99,6 +99,47 @@
   </style>
 </noscript>
 
+  
+  $(document).ready(function () {
+    var SelectText = function(element) {
+        var doc = document
+            , text = element
+            , range, selection
+        ;    
+        if (doc.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();        
+            range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
+
+    $(".code").each(function() {
+        var code = $(this).get(0);
+        var button_html = 
+            '<div style="position: fixed;'                                                               +
+                        'right: 2%;'                                                                     +
+                        'margin-top: 5px;'                                                               +
+                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
+                        'font-size: 10px;'                                                               +
+                        'cursor: pointer;'                                                               +
+                        'color: #000000;'                                                                +
+                        '">'                                                                             +
+            '<span>全选</span>'                                                                          +
+            '</div>';
+        var button = $(button_html);
+
+        $(button).click(function() {
+            SelectText(code);
+        });
+        $(button).insertBefore(this);
+    });
+});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -181,7 +222,7 @@
     <div class="posts-collapse">
       <div class="collection-title">
         
-        <span class="collection-header">还行! 目前共计 49 篇日志。 继续努力。</span>
+        <span class="collection-header">还行! 目前共计 50 篇日志。 继续努力。</span>
       </div>
 
       
@@ -201,8 +242,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/02/03/Web%E5%AE%89%E5%85%A8/HTTP%E5%8D%8F%E8%AE%AE/" itemprop="url">
-            <span itemprop="name">HTTP协议</span>
+          <a class="post-title-link" href="/2020/02/03/CTF%20WP/Bugku%20web1/" itemprop="url">
+            <span itemprop="name">Bugku web1</span>
           </a>
       </h2>
 
@@ -221,8 +262,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/02/03/CTF%20WP/Bugku%20pwn/" itemprop="url">
-            <span itemprop="name">Bugku pwn</span>
+          <a class="post-title-link" href="/2020/02/03/CTF%20WP/Bugku%20INSERT-INTO%E6%B3%A8%E5%85%A5/" itemprop="url">
+            <span itemprop="name">Bugku INSERT-INTO注入</span>
           </a>
       </h2>
 
@@ -306,7 +347,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -386,7 +427,7 @@
 	本站访客数:<span id="busuanzi_value_site_uv"></span>
 	</span>
   </div>
-  <span class="post-count">博客全站共50.9k字</span>
+  <span class="post-count">博客全站共51.6k字</span>
 </div>
 
         
