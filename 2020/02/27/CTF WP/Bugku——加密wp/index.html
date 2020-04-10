@@ -120,47 +120,6 @@
   </style>
 </noscript>
 
-  
-  $(document).ready(function () {
-    var SelectText = function(element) {
-        var doc = document
-            , text = element
-            , range, selection
-        ;    
-        if (doc.body.createTextRange) {
-            range = document.body.createTextRange();
-            range.moveToElementText(text);
-            range.select();
-        } else if (window.getSelection) {
-            selection = window.getSelection();        
-            range = document.createRange();
-            range.selectNodeContents(text);
-            selection.removeAllRanges();
-            selection.addRange(range);
-        }
-    };
-
-    $(".code").each(function() {
-        var code = $(this).get(0);
-        var button_html = 
-            '<div style="position: fixed;'                                                               +
-                        'right: 2%;'                                                                     +
-                        'margin-top: 5px;'                                                               +
-                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
-                        'font-size: 10px;'                                                               +
-                        'cursor: pointer;'                                                               +
-                        'color: #000000;'                                                                +
-                        '">'                                                                             +
-            '<span>全选</span>'                                                                          +
-            '</div>';
-        var button = $(button_html);
-
-        $(button).click(function() {
-            SelectText(code);
-        });
-        $(button).insertBefore(this);
-    });
-});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -168,6 +127,7 @@
   <div class="container use-motion">
     <div class="headband"></div>
 
+	<a href="https://github.com/ChanCherry" target="_blank" rel="noopener"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
@@ -471,8 +431,8 @@
       <i class="fa fa-chevron-left"></i> 高考志愿填报の思考
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20FJ%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="next" title="基础练习 FJ的字符串">
-      基础练习 FJ的字符串 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" rel="next" title="基础练习 矩阵乘法">
+      基础练习 矩阵乘法 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

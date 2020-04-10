@@ -99,47 +99,6 @@
   </style>
 </noscript>
 
-  
-  $(document).ready(function () {
-    var SelectText = function(element) {
-        var doc = document
-            , text = element
-            , range, selection
-        ;    
-        if (doc.body.createTextRange) {
-            range = document.body.createTextRange();
-            range.moveToElementText(text);
-            range.select();
-        } else if (window.getSelection) {
-            selection = window.getSelection();        
-            range = document.createRange();
-            range.selectNodeContents(text);
-            selection.removeAllRanges();
-            selection.addRange(range);
-        }
-    };
-
-    $(".code").each(function() {
-        var code = $(this).get(0);
-        var button_html = 
-            '<div style="position: fixed;'                                                               +
-                        'right: 2%;'                                                                     +
-                        'margin-top: 5px;'                                                               +
-                        'font-family: consolas, Menlo, \'PingFang SC\', \'Microsoft YaHei\', monospace;' +
-                        'font-size: 10px;'                                                               +
-                        'cursor: pointer;'                                                               +
-                        'color: #000000;'                                                                +
-                        '">'                                                                             +
-            '<span>全选</span>'                                                                          +
-            '</div>';
-        var button = $(button_html);
-
-        $(button).click(function() {
-            SelectText(code);
-        });
-        $(button).insertBefore(this);
-    });
-});
 <link rel="alternate" href="/atom.xml" title="ChanCherry's Blog" type="application/atom+xml">
 </head>
 
@@ -147,6 +106,7 @@
   <div class="container use-motion">
     <div class="headband"></div>
 
+	<a href="https://github.com/ChanCherry" target="_blank" rel="noopener"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
@@ -263,8 +223,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E8%8A%AF%E7%89%87%E6%B5%8B%E8%AF%95/" itemprop="url">
-            <span itemprop="name">基础练习 芯片测试</span>
+          <a class="post-title-link" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%AB%98%E6%96%AF%E6%97%A5%E8%AE%B0/" itemprop="url">
+            <span itemprop="name">高斯日记</span>
           </a>
       </h2>
 
@@ -303,46 +263,6 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E5%AE%8C%E7%BE%8E%E7%9A%84%E4%BB%A3%E4%BB%B7/" itemprop="url">
-            <span itemprop="name">基础练习 完美的代价</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-09T00:00:00+08:00"
-              content="2020-04-09">
-          04-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20Sine%E4%B9%8B%E8%88%9E/" itemprop="url">
-            <span itemprop="name">基础练习 Sine之舞</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-09T00:00:00+08:00"
-              content="2020-04-09">
-          04-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
           <a class="post-title-link" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF%E4%BA%A4/" itemprop="url">
             <span itemprop="name">基础练习 矩形面积交</span>
           </a>
@@ -363,8 +283,48 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" itemprop="url">
-            <span itemprop="name">基础练习 矩阵乘法</span>
+          <a class="post-title-link" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E5%AE%8C%E7%BE%8E%E7%9A%84%E4%BB%A3%E4%BB%B7/" itemprop="url">
+            <span itemprop="name">基础练习 完美的代价</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-04-09T00:00:00+08:00"
+              content="2020-04-09">
+          04-09
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E8%8A%AF%E7%89%87%E6%B5%8B%E8%AF%95/" itemprop="url">
+            <span itemprop="name">基础练习 芯片测试</span>
+          </a>
+      </h2>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-04-09T00:00:00+08:00"
+              content="2020-04-09">
+          04-09
+        </time>
+      </div>
+
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20Sine%E4%B9%8B%E8%88%9E/" itemprop="url">
+            <span itemprop="name">基础练习 Sine之舞</span>
           </a>
       </h2>
 
@@ -423,8 +383,8 @@
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%8A%A5%E6%95%B0%E6%B8%B8%E6%88%8F%EF%BC%88%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF%E9%97%AE%E9%A2%98%EF%BC%89/" itemprop="url">
-            <span itemprop="name">报数游戏（约瑟夫环问题）</span>
+          <a class="post-title-link" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" itemprop="url">
+            <span itemprop="name">基础练习 矩阵乘法</span>
           </a>
       </h2>
 
