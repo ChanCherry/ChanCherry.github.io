@@ -347,431 +347,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%20%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%20%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F/" class="post-title-link" itemprop="url">算法训练 数字游戏</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:26:44" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">蓝桥杯</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>问题描述<br>　　给定一个1～N的排列a[i]，每次将相邻两个数相加，得到新序列，再对新序列重复这样的操作，显然每次得到的序列都比上一次的序列长度少1，最终只剩一个数字。<br>　　例如:<br>　　3 1 2 4<br>　　4 3 6<br>　　7 9<br>　　16<br>　　现在如果知道N和最后得到的数字sum，请求出最初序列a[i]，为1～N的一个排列。若有多种答案，则输出字典序最小的那一个。数据保证有解。<br>输入格式<br>　　第1行为两个正整数n，sum<br>输出格式<br>　　一个1～N的一个排列<br>样例输入<br>4 16<br>样例输出<br>3 1 2 4<br>数据规模和约定<br>　　0&lt;n&lt;=10</p>
-</blockquote>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>一看 n&lt;=10那直接暴力了。<br>使用vector容器，借助C++中next_permutation()函数，升序列举出所有的全排列序列，然后循环对每个序列都<strong>操作</strong>并判断，如果找到，就break即可。<br>这里一次操作其实就是把<code>1~n-1</code>下标的元素，依次加上它后面的元素，这个操作重复n-1次即可，最后判断数组下标0和结果sum是否相等即可。</p>
-<p>用到的函数：<br>next_permutation函数将按字母表顺序生成给定序列的下一个较大的排列，直到整个序列为降序为止。prev_permutation函数与之相反，是生成给定序列的上一个较小的排列。<br>这是一个求一个排序的下一个排列的函数，可以遍历全排列,要包含头文件<code>&lt;algorithm&gt;</code><br>使用方法：next_permutation(数组头地址，数组尾地址);若下一个排列存在，则返回真，如果不存在则返回假。</p>
-<p>百度解释：<br>boolean next_permutation(a.begin(),a.end())<br>该函数是以输入字符串中的字符所构建的按字典顺序全排列中，判断当前字符串之后是否还有下一个字符串。如果next_permutation的执行次数少于全排列的个数，返回true。</p>
-<p>例如 a=”abc” 全排列有 “abc” “acb” “bac” “bca” “cab” “cba”<br>执行一次next_permutation 返回true a变成 “acb”<br>再执行一次next_permutation 返回true a变成 “bac”<br>…<br>当执行到a=”cba” 时 由于这已经是全排列的最后一个字符串，所以 再次执行next_permutation 则返回false</p>
-<h1 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n,sum,i,j,sum1=<span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">cin</span>&gt;&gt;n&gt;&gt;sum;<br>	<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">a</span><span class="hljs-params">(n)</span></span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>		a[i]=i+<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">do</span>&#123;<br>		<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; b=a;<span class="hljs-comment">//将数组a复制给b </span><br>		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n<span class="hljs-number">-1</span>;i++)<br>			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;n-i<span class="hljs-number">-1</span>;j++)<br>				b[j]+=b[j+<span class="hljs-number">1</span>];<span class="hljs-comment">//b[0]=b[0]+b[1],b[1]=b[1]+b[2]...</span><br>		<span class="hljs-keyword">if</span>(b[<span class="hljs-number">0</span>]==sum)&#123;<br>			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>				<span class="hljs-built_in">cout</span>&lt;&lt;a[i]&lt;&lt;<span class="hljs-string">" "</span>;<br>			<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>			<span class="hljs-keyword">break</span>;<br>		&#125;<br>	&#125;<span class="hljs-keyword">while</span>(next_permutation(a.begin(),a.end()));<span class="hljs-comment">//产生下一个排列，循环即进行全排列</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-	  
-	  
-		  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%A2%A0%E5%80%92%E7%9A%84%E4%BB%B7%E7%89%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%A2%A0%E5%80%92%E7%9A%84%E4%BB%B7%E7%89%8C/" class="post-title-link" itemprop="url">颠倒的价牌</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：18:54:34" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">蓝桥杯</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Description</p>
-<p>小李的店里专卖其它店中下架的样品电视机，可称为：样品电视专卖店。<br>其标价都是4位数字（即千元不等）。<br>小李为了标价清晰、方便，使用了预制的类似数码管的标价签，只要用颜色笔涂数字就可以了（参见图片）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%A2%A0%E5%80%92%E7%9A%84%E4%BB%B7%E7%89%8C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-	  
-	  
-		  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%AB%98%E6%96%AF%E6%97%A5%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%AB%98%E6%96%AF%E6%97%A5%E8%AE%B0/" class="post-title-link" itemprop="url">高斯日记</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：18:56:01" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">蓝桥杯</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Description</p>
-<p>大数学家高斯有个好习惯：无论如何都要记日记。</p>
-<p>他的日记有个与众不同的地方，他从不注明年月日，而是用一个整数代替，比如：4210</p>
-<p>后来人们知道，那个整数就是日期，它表示那一天是高斯出生后的第几天。这或许也是个好习惯，它时时刻刻提醒着主人：日子又过去一天，还有多少时光可以用于浪费呢？</p>
-<p>高斯出生于：1777年4月30日。</p>
-<p>在高斯发现的一个重要定理的日记上标注着：5343，因此可算出那天是：1791年12月15日。</p>
-<p>高斯获得博士学位的那天日记上标着：8113</p>
-<p>请你算出高斯获得博士学位的年月日。</p>
-<p>注意：只提交这个日期，不要输出其它附加内容，比如：说明性的文字。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E9%AB%98%E6%96%AF%E6%97%A5%E8%AE%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-	  
-	  
-		  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%9D%AD%E7%94%B52044%E2%80%94%E2%80%94%E4%B8%80%E5%8F%AA%E5%B0%8F%E8%9C%9C%E8%9C%82.../">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%9D%AD%E7%94%B52044%E2%80%94%E2%80%94%E4%B8%80%E5%8F%AA%E5%B0%8F%E8%9C%9C%E8%9C%82.../" class="post-title-link" itemprop="url">杭电2044——一只小蜜蜂</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：18:56:55" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">蓝桥杯</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Problem Description<br>有一只经过训练的蜜蜂只能爬向右侧相邻的蜂房，不能反向爬行。请编程计算蜜蜂从蜂房a爬到蜂房b的可能路线数。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%9D%AD%E7%94%B52044%E2%80%94%E2%80%94%E4%B8%80%E5%8F%AA%E5%B0%8F%E8%9C%9C%E8%9C%82.../#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-	  
-	  
-		  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/" class="post-title-link" itemprop="url">斐波那契数列</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：18:38:30" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">蓝桥杯</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前言：<br>编程渣渣报名了蓝桥杯，不得不刷题来求个心理安慰，祈求获奖。同时也会更新一些刷题中遇到的问题blog作为笔记，便于日后复习，希望能做到每天刷题呀！附上我们学校的刷题OJ：<a href="https://oj.ncutea.com/problems" target="_blank" rel="noopener">https://oj.ncutea.com/problems</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-	  
-	  
-		  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%8A%A5%E6%95%B0%E6%B8%B8%E6%88%8F%EF%BC%88%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF%E9%97%AE%E9%A2%98%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -859,7 +434,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%A4%9A%E7%BB%84%E6%95%B0%E9%98%B6%E4%B9%98/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF%E4%BA%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -873,7 +448,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%A4%9A%E7%BB%84%E6%95%B0%E9%98%B6%E4%B9%98/" class="post-title-link" itemprop="url">多组数阶乘</a>
+            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF%E4%BA%A4/" class="post-title-link" itemprop="url">基础练习 矩形面积交</a>
         </h1>
 
         <div class="post-meta">
@@ -884,7 +459,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：18:55:09" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
+              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:26:01" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -910,11 +485,428 @@
 
       
           <blockquote>
-<p>Description<br>筒子想求出若干个数每个数的阶乘，请你帮他吧！<br>Input<br>若干数N（0&lt;=N&lt;=20）<br>Output<br>每个数的阶乘</p>
+<p>问题描述<br>　　平面上有两个矩形，它们的边平行于直角坐标系的X轴或Y轴。对于每个矩形，我们给出它的一对相对顶点的坐标，请你编程算出两个矩形的交的面积。<br>输入格式<br>　　输入仅包含两行，每行描述一个矩形。<br>　　在每行中，给出矩形的一对相对顶点的坐标，每个点的坐标都用两个绝对值不超过10^7的实数表示。<br>输出格式<br>　　输出仅包含一个实数，为交的面积，保留到小数后两位。<br>样例输入<br>1 1 3 3<br>2 2 4 4<br>样例输出<br>1.00</p>
 </blockquote>
+<p>思路：<br>（1）如果两个矩形相交，<br><img src="https://img-blog.csdnimg.cn/20200404164531312.png" alt="在这里插入图片描述"><br>如图，可以发现，我们只要求出两个矩形相交的主对角线的交点坐标，然后计算面积即可。观察图可以发现，A点横坐标是两个矩形两个小的横坐标的最大值，而B点横坐标是两个矩形两个大的横坐标的最小值，纵坐标类似，就可以求出矩形的长和宽了。<br>（2）若两个矩形不相交，上面的方法就不行了，通过计算得到的交点坐标如下图，很明显是不对滴，所以需要另行判断<br><img src="https://img-blog.csdnimg.cn/20200404170518309.png" alt="在这里插入图片描述"><br>AC代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">double</span> a,<span class="hljs-keyword">double</span> b)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(a&gt;b)<br>		<span class="hljs-keyword">return</span> a;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> b;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">min</span><span class="hljs-params">(<span class="hljs-keyword">double</span> a,<span class="hljs-keyword">double</span> b)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(a&lt;b)<br>		<span class="hljs-keyword">return</span> a;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> b;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">double</span> x1,x2,x3,x4,y1,y2,y3,y4,s;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lf%lf%lf%lf"</span>,&amp;x1,&amp;y1,&amp;x2,&amp;y2);<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lf%lf%lf%lf"</span>,&amp;x3,&amp;y3,&amp;x4,&amp;y4);<br>	<span class="hljs-keyword">double</span> m1,n1,m2,n2;<span class="hljs-comment">//两个交点的坐标 </span><br>	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">max</span>(x1,x2)&lt;=<span class="hljs-built_in">min</span>(x3,x4) || <span class="hljs-built_in">max</span>(x3,x4)&lt;=<span class="hljs-built_in">min</span>(x1,x2))<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"0.00\n"</span>);<br>	<span class="hljs-keyword">else</span>&#123;<br>		m1=<span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(x1,x2),<span class="hljs-built_in">min</span>(x3,x4));<br>		m2=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">max</span>(x1,x2),<span class="hljs-built_in">max</span>(x3,x4));<br>		n1=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">max</span>(y1,y2),<span class="hljs-built_in">max</span>(y3,y4));<br>		n2=<span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(y1,y2),<span class="hljs-built_in">min</span>(y3,y4));<br>		s=(m2-m1)*(n1-n2);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%.2lf\n"</span>,s);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+	  
+	  
+		  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E5%AE%8C%E7%BE%8E%E7%9A%84%E4%BB%A3%E4%BB%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E5%AE%8C%E7%BE%8E%E7%9A%84%E4%BB%A3%E4%BB%B7/" class="post-title-link" itemprop="url">基础练习 完美的代价</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:26:27" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">蓝桥杯</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>问题描述<br>　　回文串，是一种特殊的字符串，它从左往右读和从右往左读是一样的。小龙龙认为回文串才是完美的。现在给你一个串，它不一定是回文的，请你计算最少的交换次数使得该串变成一个完美的回文串。<br>　　交换的定义是：交换两个相邻的字符<br>　　例如mamad<br>　　第一次交换 ad : mamda<br>　　第二次交换 md : madma<br>　　第三次交换 ma : madam (回文！完美！)<br>输入格式<br>　　第一行是一个整数N，表示接下来的字符串的长度(N &lt;= 8000)<br>　　第二行是一个字符串，长度为N.只包含小写字母<br>输出格式<br>　　如果可能，输出最少的交换次数。<br>　　否则输出Impossible<br>样例输入<br>5<br>mamad<br>样例输出<br>3</p>
+</blockquote>
+<p><strong>思路</strong>：<br>贪心法，从左边起依次扫描，每记录一个字母，就寻找从右边起最近的与它相同的字母，移动到回文的位置，记录步数，如果最近的与它相同的字母是它本身，说明它在字串里单独存在，可以根据单独存在的字母的个数以及字串的长度来判断impossible的情况，如果排除impossible的情况，则记录它到字串中间的步数，并不需要移动它。<br>其中有两个注意点：</p>
+<ol>
+<li><strong>impossible的情况：如果有一个字符出现的次数是奇数次数，而且n是偶数，那么不可能构成回文；如果n是奇数，但是已经有一个字符出现的次数是奇数次数了，那么如果又有一个字符是奇数次数，就不可能构成回文。</strong></li>
+<li><strong>如果n是奇数，计算中间那个字符交换的次数的时候，不需要模拟把这个数移动到中间去，先把所有的回文数移动到位，再移动中间的奇数</strong>。因为，假设有一对数都在左边或者都在右边，那么交换成回文的时候就要经过中间，就会每次把cnt多加了1，而这个1是没有必要的，因为可以所有的回文移动完了之后再把这个独立的奇数移动过去，才能保证交换次数最少。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n;<br>	<span class="hljs-built_in">cin</span>&gt;&gt;n;<br>	<span class="hljs-built_in">string</span> s;<br>	<span class="hljs-built_in">cin</span>&gt;&gt;s;<br>	<span class="hljs-keyword">int</span> j=n<span class="hljs-number">-1</span>;<br>	<span class="hljs-keyword">int</span> cnt=<span class="hljs-number">0</span>;<span class="hljs-comment">//cnt用来统计交换的次数</span><br>	<span class="hljs-keyword">int</span> flag=<span class="hljs-number">0</span>;<span class="hljs-comment">//flag判断是否已经有一个单独的奇个数的字符了</span><br>	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;j;i++)&#123;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=j;k&gt;=i;k--)&#123;<br>			<span class="hljs-keyword">if</span>(k==i)&#123;<br>				<span class="hljs-keyword">if</span>(n%<span class="hljs-number">2</span>==<span class="hljs-number">0</span> || flag==<span class="hljs-number">1</span>)&#123;<br>					<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Impossible"</span>;<br>					<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>				&#125;<br>				flag=<span class="hljs-number">1</span>;<br>				cnt+=n/<span class="hljs-number">2</span>-i;<br>			&#125;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(s[k]==s[i])&#123;<br>				<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> l=k;l&lt;j;l++)&#123;<br>					swap(s[l],s[l+<span class="hljs-number">1</span>]);<span class="hljs-comment">//把s[k]换到s[j]处</span><br>					cnt++;<span class="hljs-comment">//统计交换次数 </span><br>				&#125;<br>				j--;<br>				<span class="hljs-keyword">break</span>; <br>			&#125;<br>		&#125;<br>	&#125; <br>	<span class="hljs-built_in">cout</span>&lt;&lt;cnt;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+	  
+	  
+		  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E6%95%B0%E7%9A%84%E8%AF%BB%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E6%95%B0%E7%9A%84%E8%AF%BB%E6%B3%95/" class="post-title-link" itemprop="url">基础练习 数的读法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:26:17" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">蓝桥杯</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>问题描述<br>　　Tom教授正在给研究生讲授一门关于基因的课程，有一件事情让他颇为头疼：一条染色体上有成千上万个碱基对，它们从0开始编号，到几百万，几千万，甚至上亿。<br>　　比如说，在对学生讲解第1234567009号位置上的碱基时，光看着数字是很难准确的念出来的。<br>　　所以，他迫切地需要一个系统，然后当他输入12 3456 7009时，会给出相应的念法：<br>　　十二亿三千四百五十六万七千零九<br>　　用汉语拼音表示为<br>　　shi er yi san qian si bai wu shi liu wan qi qian ling jiu<br>　　这样他只需要照着念就可以了。<br>　　你的任务是帮他设计这样一个系统：给定一个阿拉伯数字串，你帮他按照中文读写的规范转为汉语拼音字串，相邻的两个音节用一个空格符格开。<br>　　注意必须严格按照规范，比如说“10010”读作“yi wan ling yi shi”而不是“yi wan ling shi”，“100000”读作“shi wan”而不是“yi shi wan”，“2000”读作“er qian”而不是“liang qian”。<br>输入格式<br>　　有一个数字串，数值大小不超过2,000,000,000。<br>输出格式<br>　　是一个由小写英文字母，逗号和空格组成的字符串，表示该数的英文读法。<br>样例输入<br>1234567009<br>样例输出<br>shi er yi san qian si bai wu shi liu wan qi qian ling jiu</p>
+</blockquote>
+<p>思路：</p>
+<ol>
+<li>首先用一个数组来存放0-9，另一个数组存放单位，单位要注意万以上的单位都只要前一个数字单位了，十万用“十”，百万用“百”等。</li>
+<li>然后考虑几种特殊情况，当0的下一位不是0才会输出ling；</li>
+<li>因为大多数情况都是数字+单位输出的，但是当数字是1，而单位是十、十万、十亿的时候只输出shi，而不是yi shi</li>
+<li>其余的就数字+单位输出了。</li>
+</ol>
+<p>AC代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-built_in">string</span> s;<br>	<span class="hljs-built_in">cin</span>&gt;&gt;s;<br>	<span class="hljs-keyword">int</span> n=s.length();<br>	<br>	<span class="hljs-built_in">string</span> nums[<span class="hljs-number">10</span>]=&#123;<span class="hljs-string">"ling"</span>,<span class="hljs-string">"yi"</span>,<span class="hljs-string">"er"</span>,<span class="hljs-string">"san"</span>,<span class="hljs-string">"si"</span>,<span class="hljs-string">"wu"</span>,<span class="hljs-string">"liu"</span>,<span class="hljs-string">"qi"</span>,<span class="hljs-string">"ba"</span>,<span class="hljs-string">"jiu"</span>&#125;;<span class="hljs-comment">//每一位上的数字 </span><br>	<span class="hljs-built_in">string</span> units[<span class="hljs-number">11</span>]=&#123;<span class="hljs-string">""</span>,<span class="hljs-string">""</span>,<span class="hljs-string">"shi"</span>,<span class="hljs-string">"bai"</span>,<span class="hljs-string">"qian"</span>,<span class="hljs-string">"wan"</span>,<span class="hljs-string">"shi"</span>,<span class="hljs-string">"bai"</span>,<span class="hljs-string">"qian"</span>,<span class="hljs-string">"yi"</span>,<span class="hljs-string">"shi"</span>&#125;;<span class="hljs-comment">//单位 </span><br>	<br>	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>		<span class="hljs-keyword">int</span> num=s[i]-<span class="hljs-string">'0'</span>;<span class="hljs-comment">//字符转换成数字 </span><br>		<span class="hljs-keyword">if</span>(num==<span class="hljs-number">0</span>)&#123;<br>			<span class="hljs-comment">//这里要注意C++ string的长度陷阱 </span><br>			<span class="hljs-keyword">if</span>(i+<span class="hljs-number">1</span>&lt;n &amp;&amp; s[i+<span class="hljs-number">1</span>]!=<span class="hljs-string">'0'</span>)<span class="hljs-comment">//下一个不是0才输出ling </span><br>				<span class="hljs-built_in">cout</span>&lt;&lt;nums[num]&lt;&lt;<span class="hljs-string">" "</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>((n-i==<span class="hljs-number">2</span> || n-i==<span class="hljs-number">6</span> || n-i==<span class="hljs-number">10</span>) &amp;&amp; num==<span class="hljs-number">1</span>)&#123;<br>			<span class="hljs-comment">//十、十万、十亿位上有1的时候输出shi，而不是yi shi </span><br>			<span class="hljs-built_in">cout</span>&lt;&lt;units[n-i]&lt;&lt;<span class="hljs-string">" "</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span>&#123;<br>			<span class="hljs-built_in">cout</span>&lt;&lt;nums[num]&lt;&lt;<span class="hljs-string">" "</span>&lt;&lt;units[n-i]&lt;&lt;<span class="hljs-string">" "</span>;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>总的来说，这题还是比较坑的orz</p>
+<p>参考自<a href="https://blog.csdn.net/qq_40691051/article/details/105001465" target="_blank" rel="noopener">https://blog.csdn.net/qq_40691051/article/details/105001465</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+	  
+	  
+		  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E8%8A%AF%E7%89%87%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E8%8A%AF%E7%89%87%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">基础练习 芯片测试</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:26:35" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">蓝桥杯</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>问题描述<br>　　有n（2≤n≤20）块芯片，有好有坏，已知好芯片比坏芯片多。<br>　　每个芯片都能用来测试其他芯片。用好芯片测试其他芯片时，能正确给出被测试芯片是好还是坏。而用坏芯片测试其他芯片时，会随机给出好或是坏的测试结果（即此结果与被测试芯片实际的好坏无关）。<br>　　给出所有芯片的测试结果，问哪些芯片是好芯片。<br>输入格式<br>　　输入数据第一行为一个整数n，表示芯片个数。<br>　　第二行到第n+1行为n*n的一张表，每行n个数据。表中的每个数据为0或1，在这n行中的第i行第j列（1≤i, j≤n）的数据表示用第i块芯片测试第j块芯片时得到的测试结果，1表示好，0表示坏，i=j时一律为1（并不表示该芯片对本身的测试结果。芯片不能对本身进行测试）。<br>输出格式<br>　　按从小到大的顺序输出所有好芯片的编号<br>样例输入<br>3<br>1 0 1<br>0 1 0<br>1 0 1<br>样例输出<br>1 3</p>
+</blockquote>
+<p>思路：<br>刚看到这道题是没有思路的，想着假设1号芯片是好的再一一比对，有点麻烦。后来在网上搜，发现简便方法，利用离散中的抽屉原理（还没学过）。</p>
+<p>抽屉原理：如果把n+1个物体放入n个抽屉里，则必有一个抽屉里至少放了两个物体。</p>
+<p>在这道题中的应用就是假如有n/2个芯片说某一个芯片是好的的话，那该芯片就是好的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt; </span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n,i,j;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n);<br>	<span class="hljs-keyword">int</span> a[<span class="hljs-number">22</span>][<span class="hljs-number">22</span>],count[<span class="hljs-number">22</span>];<br>	<span class="hljs-built_in">memset</span>(count,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(count));<span class="hljs-comment">//初始化 </span><br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)<br>			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i][j]);<br><br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)&#123;<br>			<span class="hljs-keyword">if</span>(i!=j &amp;&amp; a[i][j]==<span class="hljs-number">1</span>)<br>				count[j]++;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)<br>		<span class="hljs-keyword">if</span>(count[j]&gt;=n/<span class="hljs-number">2</span>)<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,j);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+	  
+	  
+		  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" class="post-title-link" itemprop="url">基础练习 矩阵乘法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:26:09" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">蓝桥杯</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>问题描述<br>　　给定一个N阶矩阵A，输出A的M次幂（M是非负整数）<br>　　例如：<br>　　A =<br>　　1 2<br>　　3 4<br>　　A的2次幂<br>　　7 10<br>　　15 22<br>输入格式<br>　　第一行是一个正整数N、M（1&lt;=N&lt;=30, 0&lt;=M&lt;=5），表示矩阵A的阶数和要求的幂数<br>　　接下来N行，每行N个绝对值不超过10的非负整数，描述矩阵A的值<br>输出格式<br>　　输出共N行，每行N个整数，表示A的M次幂所对应的矩阵。相邻的数之间用一个空格隔开<br>样例输入<br>2 2<br>1 2<br>3 4<br>样例输出<br>7 10<br>15 22</p>
+</blockquote>
+<p>–这个题其实不难，就是一开始我忘了矩阵乘法的相关知识Orz(⊙﹏⊙)</p>
+<p>要注意分类讨论，矩阵的0次幂是单位矩阵，1次幂是矩阵本身，2+次幂就要借用另外两个数组来计算了。<br><img src="https://img-blog.csdnimg.cn/20200403225835598.png" alt="在这里插入图片描述"><br>AC代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-keyword">int</span> a[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><span class="hljs-keyword">int</span> b[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><span class="hljs-keyword">int</span> t[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n,m,i,j,k;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m);<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i][j]);<br>			b[i][j]=a[i][j];<br>		&#125;	<br>	&#125;<br>	<span class="hljs-keyword">if</span>(m==<span class="hljs-number">0</span>)&#123;<span class="hljs-comment">//矩阵的0次幂为单位矩阵 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123; <br>			<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>				<span class="hljs-keyword">if</span>(i==j)<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"1 "</span>);<br>				<span class="hljs-keyword">else</span><br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"0 "</span>);<br>			&#125;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//要结束程序 </span><br>	&#125;<br>	<span class="hljs-keyword">if</span>(m==<span class="hljs-number">1</span>)&#123;<span class="hljs-comment">//矩阵的1次幂为它本身 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>			<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,a[i][j]);<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//要结束程序 </span><br>	&#125;<br>		<br>	<span class="hljs-keyword">while</span>(m&gt;=<span class="hljs-number">2</span>)&#123;<span class="hljs-comment">//矩阵2次幂及以上需要做运算 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++) <br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-keyword">int</span> k=n;<br>			<span class="hljs-keyword">while</span>(k)&#123;<br>				t[i][j]+=b[i][k<span class="hljs-number">-1</span>]*a[k<span class="hljs-number">-1</span>][j];<span class="hljs-comment">//t[i][j]作为中间数组 </span><br>				k--;<br>			&#125;<br>		&#125; <br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			b[i][j]=t[i][j];<span class="hljs-comment">//将中间计算得到的数组再赋给b[][]，便于下一次乘法 </span><br>			t[i][j]=<span class="hljs-number">0</span>;<br>		&#125;<br>		m--;	<br>	&#125;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,b[i][j]);<br>		&#125;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>	&#125; <br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>一定要注意当m=0和m=1时，要注意结束程序，不然会出错。<br>例如，输入10 0：<br><img src="https://img-blog.csdnimg.cn/20200403230131278.png" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+	  
+	  
+		  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E9%BE%9F%E5%85%94%E8%B5%9B%E8%B7%91%E9%A2%84%E6%B5%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E9%BE%9F%E5%85%94%E8%B5%9B%E8%B7%91%E9%A2%84%E6%B5%8B/" class="post-title-link" itemprop="url">基础练习 龟兔赛跑预测</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:25:52" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">蓝桥杯</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>话说这个世界上有各种各样的兔子和乌龟，但是研究发现，所有的兔子和乌龟都有一个共同的特点——喜欢赛跑。于是世界上各个角落都不断在发生着乌龟和兔子的比赛，小华对此很感兴趣，于是决定研究不同兔子和乌龟的赛跑。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%A4%9A%E7%BB%84%E6%95%B0%E9%98%B6%E4%B9%98/#more" rel="contents">
+              <a class="btn" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E9%BE%9F%E5%85%94%E8%B5%9B%E8%B7%91%E9%A2%84%E6%B5%8B/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
