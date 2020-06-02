@@ -267,18 +267,18 @@
 </li>
 <li><p>错误信息可以直接给攻击者提供下一步攻击帮助</p>
 <h4 id="（4）不安全的数据库配置"><a href="#（4）不安全的数据库配置" class="headerlink" title="（4）不安全的数据库配置"></a>（4）不安全的数据库配置</h4></li>
-<li><input disabled="" type="checkbox"> <p>默认账户<br>SQL Server “sa”作为数据库系统管理员账户<br>MySQL使用”root”和”anonymous”用户账户<br>Oracle在创建数据库时通常默认会创建SYS、SYSTEMS DBSNMP和OUTLN账户</p>
+<li><input disabled type="checkbox"> <p>默认账户<br>SQL Server “sa”作为数据库系统管理员账户<br>MySQL使用”root”和”anonymous”用户账户<br>Oracle在创建数据库时通常默认会创建SYS、SYSTEMS DBSNMP和OUTLN账户</p>
 </li>
-<li><input disabled="" type="checkbox"> <p>权限<br>问题：系统和数据库管理员在安装数据库服务器时允许以roots SYSTEM或Administrator特权系统用户账户身份执行操作。<br>正确方法：应该始终以普通用户身份运行服务器上的服务，降低用户权限，将用户权限仅限于本服务</p>
+<li><input disabled type="checkbox"> <p>权限<br>问题：系统和数据库管理员在安装数据库服务器时允许以roots SYSTEM或Administrator特权系统用户账户身份执行操作。<br>正确方法：应该始终以普通用户身份运行服务器上的服务，降低用户权限，将用户权限仅限于本服务</p>
 <h2 id="SQL注入方法"><a href="#SQL注入方法" class="headerlink" title="SQL注入方法"></a>SQL注入方法</h2></li>
-<li><input disabled="" type="checkbox"> <p>自动化注入工具</p>
+<li><input disabled type="checkbox"> <p>自动化注入工具</p>
 <ol>
 <li>SQL注入工具<br>Sqlmap   Havij   Sqlid</li>
 <li>ASP/JSP注入工具<br>NBSI   阿D注入软件   明小子注入软件</li>
 <li>PHP注入工具<br>穿山甲注入软件    海阳顶端注入软件</li>
 </ol>
 </li>
-<li><input disabled="" type="checkbox"> <p>手工注入过程</p>
+<li><input disabled type="checkbox"> <p>手工注入过程</p>
 <ol>
 <li>判断是否存在注入点</li>
 <li>判断字段长度</li>
@@ -295,8 +295,8 @@
 <p>—————————————————————————————————</p>
 <h1 id="0x01-SQL注入技术"><a href="#0x01-SQL注入技术" class="headerlink" title="0x01 SQL注入技术"></a>0x01 SQL注入技术</h1><p>（1）常见SQL语法</p>
 <ul>
-<li><input disabled="" type="checkbox"> 用于与关系型数据库交互的标准SQL命令有：<br>Create、Select、Insert、Update、Delete 和 Drop</li>
-<li><input disabled="" type="checkbox"> 分为三组：<ol>
+<li><input disabled type="checkbox"> 用于与关系型数据库交互的标准SQL命令有：<br>Create、Select、Insert、Update、Delete 和 Drop</li>
+<li><input disabled type="checkbox"> 分为三组：<ol>
 <li>数据定义（Create、Drop）</li>
 <li>数据操纵（Select、Insert、Update、Delete）</li>
 <li>数据控制（Grant、Revoke）</li>
@@ -356,7 +356,7 @@
 </tr>
 </tbody></table>
 <ul>
-<li><input disabled="" type="checkbox"> SQL高级操作：排序、分组、限定条数</li>
+<li><input disabled type="checkbox"> SQL高级操作：排序、分组、限定条数</li>
 </ul>
 <p>排序Order by</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">SELECT * FROM test_table ORDER BY userid;<br></code></pre></td></tr></table></figure>
@@ -371,9 +371,9 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">SELECT * FROM test_table LIMIT <span class="hljs-number">0</span>,<span class="hljs-number">5</span> ORDER BY userid;<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li><input disabled="" type="checkbox"> <p>SQL高级操作：联合查询union：<br><img src="https://img-blog.csdnimg.cn/20191015085021731.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>因为查询语句构造问题，可直接否认掉之前的查询，执行一个全新的查询语句，查询的列应当与之前的列对应。</p>
+<li><input disabled type="checkbox"> <p>SQL高级操作：联合查询union：<br><img src="https://img-blog.csdnimg.cn/20191015085021731.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>因为查询语句构造问题，可直接否认掉之前的查询，执行一个全新的查询语句，查询的列应当与之前的列对应。</p>
 </li>
-<li><input disabled="" type="checkbox"> <p>SQL高级操作：结合其他函数操作：<br>在MySQL中，把information_schema（MySQL自带的）看作是一个信息数据库，其中保存着关于MySQL服务器所维护的所有其他数据库的信息。如数据库名，数据库的表，表栏的数据类型与访问权限等。<br>information_schema.SCHEMATA表中的SCHEMA_NAME查看所有的数据库：</p>
+<li><input disabled type="checkbox"> <p>SQL高级操作：结合其他函数操作：<br>在MySQL中，把information_schema（MySQL自带的）看作是一个信息数据库，其中保存着关于MySQL服务器所维护的所有其他数据库的信息。如数据库名，数据库的表，表栏的数据类型与访问权限等。<br>information_schema.SCHEMATA表中的SCHEMA_NAME查看所有的数据库：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs py">select * <span class="hljs-keyword">from</span> hehe where id=<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> <span class="hljs-number">1</span>=<span class="hljs-number">2</span> union select <span class="hljs-number">0</span>,<span class="hljs-number">0</span> SCHEMA_NAME <span class="hljs-keyword">from</span> information_schema.SCHEMATA limit <span class="hljs-number">1</span>,<span class="hljs-number">2</span>;<br></code></pre></td></tr></table></figure>
 
 </li>
@@ -381,13 +381,13 @@
 <p>（2）万能密码绕过登录</p>
 <p>通过在用户名处传入参数 ‘ or 1=1 # 进行万能密码登录。<br>SELECT username, password FROM users WHERE username=’textvalue’ or 1=1 # ‘ AND password=’textvalue2’</p>
 <ul>
-<li><input disabled="" type="checkbox"> 输入字符<br>formusr = ‘ or 1=1 - -<br>formpwd = anything</li>
-<li><input disabled="" type="checkbox"> 实际的查询代码<br>SELECT * FROM users WHERE username=’ ‘ or 1=1 - - AND password= ‘anything’</li>
+<li><input disabled type="checkbox"> 输入字符<br>formusr = ‘ or 1=1 - -<br>formpwd = anything</li>
+<li><input disabled type="checkbox"> 实际的查询代码<br>SELECT * FROM users WHERE username=’ ‘ or 1=1 - - AND password= ‘anything’</li>
 </ul>
 <p>（3）数字型注入</p>
 <ul>
-<li><input disabled="" type="checkbox"> 输入的参数为<strong>整数</strong>，如ID、年龄、页码等，如果存在注入型漏洞，则为数字型注入。<br><a href="http://www.testweb.com/user.php?id=8" target="_blank" rel="noopener">http://www.testweb.com/user.php?id=8</a></li>
-<li><input disabled="" type="checkbox"> 存在数字型注入测试方法</li>
+<li><input disabled type="checkbox"> 输入的参数为<strong>整数</strong>，如ID、年龄、页码等，如果存在注入型漏洞，则为数字型注入。<br><a href="http://www.testweb.com/user.php?id=8" target="_blank" rel="noopener">http://www.testweb.com/user.php?id=8</a></li>
+<li><input disabled type="checkbox"> 存在数字型注入测试方法</li>
 </ul>
 <table>
 <thead>
@@ -407,9 +407,9 @@
 </tbody></table>
 <p>（4）字符型注入</p>
 <ul>
-<li><input disabled="" type="checkbox"> <p>输入的参数为字符串<br>与数组型注入的区别在于：字符型注入一般要用单引号或双引号等来闭合<br><a href="http://www.testweb.com/user.php?user=admin&#39;" target="_blank" rel="noopener">http://www.testweb.com/user.php?user=admin&#39;</a></p>
+<li><input disabled type="checkbox"> <p>输入的参数为字符串<br>与数组型注入的区别在于：字符型注入一般要用单引号或双引号等来闭合<br><a href="http://www.testweb.com/user.php?user=admin&#39;" target="_blank" rel="noopener">http://www.testweb.com/user.php?user=admin&#39;</a></p>
 </li>
-<li><input disabled="" type="checkbox"> <p>存在字符型注入测试方法</p>
+<li><input disabled type="checkbox"> <p>存在字符型注入测试方法</p>
 </li>
 </ul>
 <table>
@@ -491,29 +491,29 @@
 </ol>
 <p>sqlmap中有一个tamper目录，主要存放的是waf绕过脚本，比如：base64encode.py，between.py，greatest.py等。<br><img src="https://img-blog.csdnimg.cn/2019101508105169.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <ul>
-<li><input disabled="" type="checkbox"> <p>等号被过滤了—-&gt;<a href="">[equaltolike.py]</a>—-&gt;like代替等号</p>
+<li><input disabled type="checkbox"> <p>等号被过滤了—-&gt;<a href>[equaltolike.py]</a>—-&gt;like代替等号</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">Example:<br>Input: SELECT * FROM users WHERE **id=<span class="hljs-number">1</span>**<br>Output: SELECT * FROM users WHERE **id LIKE <span class="hljs-number">1</span>**<br></code></pre></td></tr></table></figure>
 </li>
-<li><input disabled="" type="checkbox"> <p>替换字符和单引号被过滤—-&gt;<a href="">[apostrophenullencode.py]</a></p>
+<li><input disabled type="checkbox"> <p>替换字符和单引号被过滤—-&gt;<a href>[apostrophenullencode.py]</a></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">Example:<br>(<span class="hljs-string">"1 AND '1'='1"</span>)<br><span class="hljs-string">"1 AND %00%271%00%27=%00%271"</span><br></code></pre></td></tr></table></figure>
 
 </li>
 </ul>
 <p>———————————————————————————————————</p>
 <h1 id="0x03-SQL注入的防护策略"><a href="#0x03-SQL注入的防护策略" class="headerlink" title="0x03 SQL注入的防护策略"></a>0x03 SQL注入的防护策略</h1><ul>
-<li><input disabled="" type="checkbox"> 使用参数化查询，检查变量数据类型和格式</li>
+<li><input disabled type="checkbox"> 使用参数化查询，检查变量数据类型和格式</li>
 </ul>
 <p>SQL注入因为要操作数据库，所以一般会查找SQL语句关键字：insert,delete,update,select，查看传递的变量参数是否为用户可控，有无做过安全处理</p>
 <ul>
-<li><input disabled="" type="checkbox"> 采用sql语句预编译和绑定变量</li>
+<li><input disabled type="checkbox"> 采用sql语句预编译和绑定变量</li>
 </ul>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs py">String sql=<span class="hljs-string">"select id,no from user where id=?"</span>;<br>PreparedStatement ps =conn.prepareStatement(sql);<br>ps.setInt(<span class="hljs-number">1</span>,id);<br>ps.executeQuery();<br></code></pre></td></tr></table></figure>
 <p>采用了PreparedStatement，将sql语句<code>&quot;select id,no from user where id=?&quot;</code>预先编译好，即SQL引擎会先进行语法分析，产生语法树，生成执行计划，这样后面无论你输入什么参数，都不会影响该sql语句的语法结构了。</p>
 <ul>
-<li><input disabled="" type="checkbox"> 不要随意开启生产环境中Webserver的错误显示</li>
-<li><input disabled="" type="checkbox"> 做好数据库账号权限管理</li>
-<li><input disabled="" type="checkbox"> 严格加密处理用户的机密信息</li>
-<li><input disabled="" type="checkbox"> 使用WAF等专业的防护软件系统</li>
+<li><input disabled type="checkbox"> 不要随意开启生产环境中Webserver的错误显示</li>
+<li><input disabled type="checkbox"> 做好数据库账号权限管理</li>
+<li><input disabled type="checkbox"> 严格加密处理用户的机密信息</li>
+<li><input disabled type="checkbox"> 使用WAF等专业的防护软件系统</li>
 </ul>
 <p>————————————————————<br>以上来自360网络安全学院课程，侵权删~~</p>
 
@@ -561,12 +561,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/03/CTF%20WP/JACTF%20misc%20wp/" rel="prev" title="JACTF misc wp">
-      <i class="fa fa-chevron-left"></i> JACTF misc wp
+    <a href="/2020/02/03/CTF%20WP/BUUCTF%20MISC%20wp/" rel="prev" title="BUUCTF misc wp">
+      <i class="fa fa-chevron-left"></i> BUUCTF misc wp
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/CTF%20WP/Bugku%E6%9D%82%E9%A1%B9%20wp/" rel="next" title="Bugku misc wp">
-      Bugku misc wp <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/Cookie/" rel="next" title="Cookie">
+      Cookie <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

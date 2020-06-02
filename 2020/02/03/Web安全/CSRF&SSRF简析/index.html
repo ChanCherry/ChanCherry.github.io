@@ -246,15 +246,15 @@
 <li>诱使用户主动访问或登录恶意链接，触发非法操作。</li>
 </ol>
 <ul>
-<li><input disabled="" type="checkbox"> 第一部分    漏洞的存在</li>
+<li><input disabled type="checkbox"> 第一部分    漏洞的存在</li>
 </ul>
 <p>关键字：跨站请求漏洞（CSR:Cross Site Request）<br>如果需要CSRF攻击能够成功，首先就需要目标站点或系统存在一个可以进行数据修改或新增操作，且此操作被提交后台之后的过程中，其未提供任何身份识别和校验的参数。后台只要收到请求，就立即下发数据修改或新增的操作。<br>以上漏洞情况的存在，出现场景比较多的用户密码的修改、购物地址的修改或后台管理账户的新增等操作过程中。</p>
 <ul>
-<li><input disabled="" type="checkbox"> 第二部分    漏洞利用的伪装</li>
+<li><input disabled type="checkbox"> 第二部分    漏洞利用的伪装</li>
 </ul>
 <p>关键字：伪装请求（F:Forgery）<br>CSRF漏洞存在了，如果需要真正的被利用，还需要对“修改或新增”数据操作请求的伪装，此时恶意攻击者只要将伪装好的“数据修改或新增”的请求发送给被攻击者，或者通过社工的方式诱使被攻击者在其cookie还生效的情况下点击该请求链接，即可触发CSRF漏洞，成功修改或新增当前用户的数据信息，如修改当前用户的密码，又或者是当前用户为后台管理员，触发漏洞后又新增了一个后台管理员。</p>
 <ul>
-<li><input disabled="" type="checkbox"> 第三部分    用户非本意的操作</li>
+<li><input disabled type="checkbox"> 第三部分    用户非本意的操作</li>
 </ul>
 <p>关键字：非本意的操作<br>当前用户在不知情的情况下，访问了黑客恶意构造的页面或链接，即在非本意的情况下完成黑客想完成的非法操作，实现了对当前用户个人信息的恶意操作。后台审计只能审计到用户的信息，并不能审计到黑客的信息。</p>
 <h2 id="简单实验"><a href="#简单实验" class="headerlink" title="简单实验"></a>简单实验</h2><p>首先需要一个简单的登录来实现基于session的会话访问控制<br>登录页面：没有用到数据库，账号密码固定<br>登出界面：logout.php，session_destroy()</p>
@@ -342,13 +342,10 @@
 
         
     <div class="post-nav">
+      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/Cookie/" rel="prev" title="Cookie">
-      <i class="fa fa-chevron-left"></i> Cookie
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="next" title="Java中的序列化和反序列化">
-      Java中的序列化和反序列化 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/CTF%20WP/JACTF%20misc%20wp/" rel="next" title="JACTF misc wp">
+      JACTF misc wp <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

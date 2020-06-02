@@ -243,7 +243,7 @@
         <p>BUU misc刷题~~</p>
 <a id="more"></a>
 
-<h1 id="gakki"><a href="#gakki" class="headerlink" title="gakki"></a>gakki</h1><p>下载压缩包之后是一张gakki的图片，<br><img src="https://img-blog.csdnimg.cn/2020013115185922.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_14,color_FFFFFF,t_70" width="300" height="300" align=center><br>foremost一下，得到一个压缩包，包里有flag.txt，但是需要密码才能打开。尝试数字爆破，得到密码8864，打开之后得到一串奇奇怪怪的字符，<br><img src="https://img-blog.csdnimg.cn/20200131154247216.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_14,color_FFFFFF,t_70" width="500" height="380"><br>看了大佬的wp，对于这种无规律的字符集要尝试字频统计，附上字频统计exp：</p>
+<h1 id="gakki"><a href="#gakki" class="headerlink" title="gakki"></a>gakki</h1><p>下载压缩包之后是一张gakki的图片，<br><img src="https://img-blog.csdnimg.cn/2020013115185922.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_14,color_FFFFFF,t_70" width="300" height="300" align="center"><br>foremost一下，得到一个压缩包，包里有flag.txt，但是需要密码才能打开。尝试数字爆破，得到密码8864，打开之后得到一串奇奇怪怪的字符，<br><img src="https://img-blog.csdnimg.cn/20200131154247216.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0lUbWluY2hlcnJ5,size_14,color_FFFFFF,t_70" width="500" height="380"><br>看了大佬的wp，对于这种无规律的字符集要尝试字频统计，附上字频统计exp：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python">alphabet = <span class="hljs-string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&amp;*()_+- =&#123;&#125;[]"</span><br>f = open(<span class="hljs-string">"flag.txt"</span>, <span class="hljs-string">"r"</span>)<br>data = f.read()<br>result = &#123;d:<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> alphabet&#125;<br> <br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sort_by_value</span><span class="hljs-params">(d)</span>:</span><br>    items = d.items()<br>    backitems = [[v[<span class="hljs-number">1</span>],v[<span class="hljs-number">0</span>]] <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> items]<br>    backitems.sort(reverse=<span class="hljs-literal">True</span>)<br>    <span class="hljs-keyword">return</span> [ backitems[i][<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,len(backitems))]<br> <br><span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> data:<br>    <span class="hljs-keyword">for</span> alpha <span class="hljs-keyword">in</span> alphabet:<br>        <span class="hljs-keyword">if</span> d == alpha:<br>            result[alpha] = result[alpha] + <span class="hljs-number">1</span><br> <br>print(sort_by_value(result))<br></code></pre></td></tr></table></figure>
 <p>跑一遍就能得到flag了。<br><img src="https://img-blog.csdnimg.cn/20200131160731725.png" alt="在这里插入图片描述"></p>
 <h1 id="SXMgdGhpcyBiYXNlPw"><a href="#SXMgdGhpcyBiYXNlPw" class="headerlink" title="SXMgdGhpcyBiYXNlPw=="></a>SXMgdGhpcyBiYXNlPw==</h1><p>题目base64解密一下，得到<code>Is this base?</code><br>下载文件得到一个压缩包，里面是flag.txt，打开一看是base64字符，写脚本跑一下，得到<code>b&#39;Cette nuit,\nIntenable insomnie,\n&#39;</code>。</p>
@@ -303,12 +303,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/X-Forwarded-For/" rel="prev" title="X-Forwarded-For">
-      <i class="fa fa-chevron-left"></i> X-Forwarded-For
+    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/robots%E5%8D%8F%E8%AE%AE/" rel="prev" title="robots协议">
+      <i class="fa fa-chevron-left"></i> robots协议
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/03/Web%E5%AE%89%E5%85%A8/XSS/" rel="next" title="XSS">
-      XSS <i class="fa fa-chevron-right"></i>
+    <a href="/2020/02/03/CTF%20WP/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CMISC%20%E5%8A%9F%E5%A4%AB%E5%86%8D%E9%AB%98%E4%B9%9F%E6%80%95%E8%8F%9C%E5%88%80/" rel="next" title="攻防世界misc 功夫再高也怕菜刀">
+      攻防世界misc 功夫再高也怕菜刀 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
