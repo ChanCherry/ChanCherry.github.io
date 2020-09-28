@@ -106,7 +106,6 @@
   <div class="container use-motion">
     <div class="headband"></div>
 
-	<a href="https://github.com/ChanCherry" target="_blank" rel="noopener"><img style="position: absolute;top: 0; left: 0; border: 0;" width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
@@ -347,7 +346,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%8A%A5%E6%95%B0%E6%B8%B8%E6%88%8F%EF%BC%88%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF%E9%97%AE%E9%A2%98%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -361,7 +360,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%8A%A5%E6%95%B0%E6%B8%B8%E6%88%8F%EF%BC%88%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF%E9%97%AE%E9%A2%98%EF%BC%89/" class="post-title-link" itemprop="url">报数游戏（约瑟夫环问题）</a>
+            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" class="post-title-link" itemprop="url">基础练习 矩阵乘法</a>
         </h1>
 
         <div class="post-meta">
@@ -372,7 +371,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：18:55:22" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
+              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:26:09" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -398,13 +397,91 @@
 
       
           <blockquote>
-<p>题目描述：</p>
-<p>有n个小朋友做游戏，他们的编号分别是1,2,3…n。他们按照编号从小到大依次顺时针围成一个圆圈，第一个小朋友从1开始报数，依次按照顺时针方向报数（报数的值加一），每个报m的人会离开队伍，然后下一个小朋友会继续从1开始报数，直到只剩下一个小朋友为止。</p>
-<p>求最后一位小朋友的编号。</p>
+<p>问题描述<br>　　给定一个N阶矩阵A，输出A的M次幂（M是非负整数）<br>　　例如：<br>　　A =<br>　　1 2<br>　　3 4<br>　　A的2次幂<br>　　7 10<br>　　15 22<br>输入格式<br>　　第一行是一个正整数N、M（1&lt;=N&lt;=30, 0&lt;=M&lt;=5），表示矩阵A的阶数和要求的幂数<br>　　接下来N行，每行N个绝对值不超过10的非负整数，描述矩阵A的值<br>输出格式<br>　　输出共N行，每行N个整数，表示A的M次幂所对应的矩阵。相邻的数之间用一个空格隔开<br>样例输入<br>2 2<br>1 2<br>3 4<br>样例输出<br>7 10<br>15 22</p>
 </blockquote>
+<p>–这个题其实不难，就是一开始我忘了矩阵乘法的相关知识Orz(⊙﹏⊙)</p>
+<p>要注意分类讨论，矩阵的0次幂是单位矩阵，1次幂是矩阵本身，2+次幂就要借用另外两个数组来计算了。<br><img src="https://img-blog.csdnimg.cn/20200403225835598.png" alt="在这里插入图片描述"><br>AC代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-keyword">int</span> a[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><span class="hljs-keyword">int</span> b[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><span class="hljs-keyword">int</span> t[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n,m,i,j,k;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m);<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i][j]);<br>			b[i][j]=a[i][j];<br>		&#125;	<br>	&#125;<br>	<span class="hljs-keyword">if</span>(m==<span class="hljs-number">0</span>)&#123;<span class="hljs-comment">//矩阵的0次幂为单位矩阵 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123; <br>			<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>				<span class="hljs-keyword">if</span>(i==j)<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"1 "</span>);<br>				<span class="hljs-keyword">else</span><br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"0 "</span>);<br>			&#125;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//要结束程序 </span><br>	&#125;<br>	<span class="hljs-keyword">if</span>(m==<span class="hljs-number">1</span>)&#123;<span class="hljs-comment">//矩阵的1次幂为它本身 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>			<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,a[i][j]);<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//要结束程序 </span><br>	&#125;<br>		<br>	<span class="hljs-keyword">while</span>(m&gt;=<span class="hljs-number">2</span>)&#123;<span class="hljs-comment">//矩阵2次幂及以上需要做运算 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++) <br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-keyword">int</span> k=n;<br>			<span class="hljs-keyword">while</span>(k)&#123;<br>				t[i][j]+=b[i][k<span class="hljs-number">-1</span>]*a[k<span class="hljs-number">-1</span>][j];<span class="hljs-comment">//t[i][j]作为中间数组 </span><br>				k--;<br>			&#125;<br>		&#125; <br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			b[i][j]=t[i][j];<span class="hljs-comment">//将中间计算得到的数组再赋给b[][]，便于下一次乘法 </span><br>			t[i][j]=<span class="hljs-number">0</span>;<br>		&#125;<br>		m--;	<br>	&#125;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,b[i][j]);<br>		&#125;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>	&#125; <br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>一定要注意当m=0和m=1时，要注意结束程序，不然会出错。<br>例如，输入10 0：<br><img src="https://img-blog.csdnimg.cn/20200403230131278.png" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+	  
+	  
+		  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/%E5%8D%8E%E4%B8%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88linux%E7%B3%BB%E7%BB%9F%EF%BC%89%E5%AE%8C%E6%95%B4%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E5%8C%85%E5%90%ABjdk%E3%80%81Tomcat%E9%85%8D%E7%BD%AE%E3%80%81%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE%E7%AD%89%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/09/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/%E5%8D%8E%E4%B8%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88linux%E7%B3%BB%E7%BB%9F%EF%BC%89%E5%AE%8C%E6%95%B4%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E5%8C%85%E5%90%ABjdk%E3%80%81Tomcat%E9%85%8D%E7%BD%AE%E3%80%81%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE%E7%AD%89%EF%BC%89/" class="post-title-link" itemprop="url">华为云服务器（linux系统）完整配置流程（包含jdk,Tomcat,网页配置等）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：18:09:36" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">软件配置</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>去年华为云服务器做活动，白嫖了一个弹性云服务器，一直没有用，今天着手来配置一下，不然要过期了。一边配置一边记录流程，亲测有效哦！</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E6%8A%A5%E6%95%B0%E6%B8%B8%E6%88%8F%EF%BC%88%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF%E9%97%AE%E9%A2%98%EF%BC%89/#more" rel="contents">
+              <a class="btn" href="/2020/04/09/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/%E5%8D%8E%E4%B8%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88linux%E7%B3%BB%E7%BB%9F%EF%BC%89%E5%AE%8C%E6%95%B4%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E5%8C%85%E5%90%ABjdk%E3%80%81Tomcat%E9%85%8D%E7%BD%AE%E3%80%81%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE%E7%AD%89%EF%BC%89/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -434,7 +511,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF%E4%BA%A4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20FJ%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -448,7 +525,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E5%BD%A2%E9%9D%A2%E7%A7%AF%E4%BA%A4/" class="post-title-link" itemprop="url">基础练习 矩形面积交</a>
+            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20FJ%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="post-title-link" itemprop="url">基础练习 FJ的字符串</a>
         </h1>
 
         <div class="post-meta">
@@ -459,7 +536,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:26:01" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
+              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:25:35" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -485,10 +562,9 @@
 
       
           <blockquote>
-<p>问题描述<br>　　平面上有两个矩形，它们的边平行于直角坐标系的X轴或Y轴。对于每个矩形，我们给出它的一对相对顶点的坐标，请你编程算出两个矩形的交的面积。<br>输入格式<br>　　输入仅包含两行，每行描述一个矩形。<br>　　在每行中，给出矩形的一对相对顶点的坐标，每个点的坐标都用两个绝对值不超过10^7的实数表示。<br>输出格式<br>　　输出仅包含一个实数，为交的面积，保留到小数后两位。<br>样例输入<br>1 1 3 3<br>2 2 4 4<br>样例输出<br>1.00</p>
+<p>问题描述<br>　　FJ在沙盘上写了这样一些字符串：<br>　　A1 = “A”<br>　　A2 = “ABA”<br>　　A3 = “ABACABA”<br>　　A4 = “ABACABADABACABA”<br>　　… …<br>　　你能找出其中的规律并写所有的数列AN吗？<br>输入格式<br>　　仅有一个数：N ≤ 26。<br>输出格式<br>　　请输出相应的字符串AN，以一个换行符结束。输出中不得含有多余的空格或换行、回车符。<br>样例输入<br>3<br>样例输出<br>ABACABA</p>
 </blockquote>
-<p>思路：<br>（1）如果两个矩形相交，<br><img src="https://img-blog.csdnimg.cn/20200404164531312.png" alt="在这里插入图片描述"><br>如图，可以发现，我们只要求出两个矩形相交的主对角线的交点坐标，然后计算面积即可。观察图可以发现，A点横坐标是两个矩形两个小的横坐标的最大值，而B点横坐标是两个矩形两个大的横坐标的最小值，纵坐标类似，就可以求出矩形的长和宽了。<br>（2）若两个矩形不相交，上面的方法就不行了，通过计算得到的交点坐标如下图，很明显是不对滴，所以需要另行判断<br><img src="https://img-blog.csdnimg.cn/20200404170518309.png" alt="在这里插入图片描述"><br>AC代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">double</span> a,<span class="hljs-keyword">double</span> b)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(a&gt;b)<br>		<span class="hljs-keyword">return</span> a;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> b;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">min</span><span class="hljs-params">(<span class="hljs-keyword">double</span> a,<span class="hljs-keyword">double</span> b)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(a&lt;b)<br>		<span class="hljs-keyword">return</span> a;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> b;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">double</span> x1,x2,x3,x4,y1,y2,y3,y4,s;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lf%lf%lf%lf"</span>,&amp;x1,&amp;y1,&amp;x2,&amp;y2);<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lf%lf%lf%lf"</span>,&amp;x3,&amp;y3,&amp;x4,&amp;y4);<br>	<span class="hljs-keyword">double</span> m1,n1,m2,n2;<span class="hljs-comment">//两个交点的坐标 </span><br>	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">max</span>(x1,x2)&lt;=<span class="hljs-built_in">min</span>(x3,x4) || <span class="hljs-built_in">max</span>(x3,x4)&lt;=<span class="hljs-built_in">min</span>(x1,x2))<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"0.00\n"</span>);<br>	<span class="hljs-keyword">else</span>&#123;<br>		m1=<span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(x1,x2),<span class="hljs-built_in">min</span>(x3,x4));<br>		m2=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">max</span>(x1,x2),<span class="hljs-built_in">max</span>(x3,x4));<br>		n1=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">max</span>(y1,y2),<span class="hljs-built_in">max</span>(y3,y4));<br>		n2=<span class="hljs-built_in">max</span>(<span class="hljs-built_in">min</span>(y1,y2),<span class="hljs-built_in">min</span>(y3,y4));<br>		s=(m2-m1)*(n1-n2);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%.2lf\n"</span>,s);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">FJ</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;<span class="hljs-comment">//递归</span><br>	<span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>)<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>,<span class="hljs-string">'A'</span>);<br>	<span class="hljs-keyword">else</span>&#123;<br>		FJ(n<span class="hljs-number">-1</span>);<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>,n+<span class="hljs-string">'A'</span>);<span class="hljs-comment">//ASCII美国信息交换标准代码表述字母</span><br>		FJ(n<span class="hljs-number">-1</span>);<br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n);<br>	FJ(n<span class="hljs-number">-1</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
       
@@ -689,170 +765,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E8%8A%AF%E7%89%87%E6%B5%8B%E8%AF%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E8%8A%AF%E7%89%87%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">基础练习 芯片测试</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:26:35" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">蓝桥杯</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>问题描述<br>　　有n（2≤n≤20）块芯片，有好有坏，已知好芯片比坏芯片多。<br>　　每个芯片都能用来测试其他芯片。用好芯片测试其他芯片时，能正确给出被测试芯片是好还是坏。而用坏芯片测试其他芯片时，会随机给出好或是坏的测试结果（即此结果与被测试芯片实际的好坏无关）。<br>　　给出所有芯片的测试结果，问哪些芯片是好芯片。<br>输入格式<br>　　输入数据第一行为一个整数n，表示芯片个数。<br>　　第二行到第n+1行为n*n的一张表，每行n个数据。表中的每个数据为0或1，在这n行中的第i行第j列（1≤i, j≤n）的数据表示用第i块芯片测试第j块芯片时得到的测试结果，1表示好，0表示坏，i=j时一律为1（并不表示该芯片对本身的测试结果。芯片不能对本身进行测试）。<br>输出格式<br>　　按从小到大的顺序输出所有好芯片的编号<br>样例输入<br>3<br>1 0 1<br>0 1 0<br>1 0 1<br>样例输出<br>1 3</p>
-</blockquote>
-<p>思路：<br>刚看到这道题是没有思路的，想着假设1号芯片是好的再一一比对，有点麻烦。后来在网上搜，发现简便方法，利用离散中的抽屉原理（还没学过）。</p>
-<p>抽屉原理：如果把n+1个物体放入n个抽屉里，则必有一个抽屉里至少放了两个物体。</p>
-<p>在这道题中的应用就是假如有n/2个芯片说某一个芯片是好的的话，那该芯片就是好的。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt; </span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n,i,j;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n);<br>	<span class="hljs-keyword">int</span> a[<span class="hljs-number">22</span>][<span class="hljs-number">22</span>],count[<span class="hljs-number">22</span>];<br>	<span class="hljs-built_in">memset</span>(count,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(count));<span class="hljs-comment">//初始化 </span><br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)<br>			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i][j]);<br><br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)&#123;<br>			<span class="hljs-keyword">if</span>(i!=j &amp;&amp; a[i][j]==<span class="hljs-number">1</span>)<br>				count[j]++;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)<br>		<span class="hljs-keyword">if</span>(count[j]&gt;=n/<span class="hljs-number">2</span>)<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,j);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-	  
-	  
-		  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ChanCherry">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChanCherry's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" class="post-title-link" itemprop="url">基础练习 矩阵乘法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:26:09" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">蓝桥杯</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>问题描述<br>　　给定一个N阶矩阵A，输出A的M次幂（M是非负整数）<br>　　例如：<br>　　A =<br>　　1 2<br>　　3 4<br>　　A的2次幂<br>　　7 10<br>　　15 22<br>输入格式<br>　　第一行是一个正整数N、M（1&lt;=N&lt;=30, 0&lt;=M&lt;=5），表示矩阵A的阶数和要求的幂数<br>　　接下来N行，每行N个绝对值不超过10的非负整数，描述矩阵A的值<br>输出格式<br>　　输出共N行，每行N个整数，表示A的M次幂所对应的矩阵。相邻的数之间用一个空格隔开<br>样例输入<br>2 2<br>1 2<br>3 4<br>样例输出<br>7 10<br>15 22</p>
-</blockquote>
-<p>–这个题其实不难，就是一开始我忘了矩阵乘法的相关知识Orz(⊙﹏⊙)</p>
-<p>要注意分类讨论，矩阵的0次幂是单位矩阵，1次幂是矩阵本身，2+次幂就要借用另外两个数组来计算了。<br><img src="https://img-blog.csdnimg.cn/20200403225835598.png" alt="在这里插入图片描述"><br>AC代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-keyword">int</span> a[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><span class="hljs-keyword">int</span> b[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><span class="hljs-keyword">int</span> t[<span class="hljs-number">35</span>][<span class="hljs-number">35</span>];<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n,m,i,j,k;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m);<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i][j]);<br>			b[i][j]=a[i][j];<br>		&#125;	<br>	&#125;<br>	<span class="hljs-keyword">if</span>(m==<span class="hljs-number">0</span>)&#123;<span class="hljs-comment">//矩阵的0次幂为单位矩阵 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123; <br>			<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>				<span class="hljs-keyword">if</span>(i==j)<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"1 "</span>);<br>				<span class="hljs-keyword">else</span><br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"0 "</span>);<br>			&#125;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//要结束程序 </span><br>	&#125;<br>	<span class="hljs-keyword">if</span>(m==<span class="hljs-number">1</span>)&#123;<span class="hljs-comment">//矩阵的1次幂为它本身 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>			<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,a[i][j]);<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//要结束程序 </span><br>	&#125;<br>		<br>	<span class="hljs-keyword">while</span>(m&gt;=<span class="hljs-number">2</span>)&#123;<span class="hljs-comment">//矩阵2次幂及以上需要做运算 </span><br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++) <br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-keyword">int</span> k=n;<br>			<span class="hljs-keyword">while</span>(k)&#123;<br>				t[i][j]+=b[i][k<span class="hljs-number">-1</span>]*a[k<span class="hljs-number">-1</span>][j];<span class="hljs-comment">//t[i][j]作为中间数组 </span><br>				k--;<br>			&#125;<br>		&#125; <br>		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			b[i][j]=t[i][j];<span class="hljs-comment">//将中间计算得到的数组再赋给b[][]，便于下一次乘法 </span><br>			t[i][j]=<span class="hljs-number">0</span>;<br>		&#125;<br>		m--;	<br>	&#125;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;n;j++)&#123;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,b[i][j]);<br>		&#125;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>	&#125; <br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>一定要注意当m=0和m=1时，要注意结束程序，不然会出错。<br>例如，输入10 0：<br><img src="https://img-blog.csdnimg.cn/20200403230131278.png" alt="在这里插入图片描述"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-	  
-	  
-		  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E9%BE%9F%E5%85%94%E8%B5%9B%E8%B7%91%E9%A2%84%E6%B5%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -912,6 +824,88 @@
             </div>
           <!--/noindex-->
         
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+	  
+	  
+		  
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E8%8A%AF%E7%89%87%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ChanCherry">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChanCherry's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/09/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%20%E8%8A%AF%E7%89%87%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">基础练习 芯片测试</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-09 00:00:00 / 修改时间：20:26:35" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">2020-04-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">蓝桥杯</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>问题描述<br>　　有n（2≤n≤20）块芯片，有好有坏，已知好芯片比坏芯片多。<br>　　每个芯片都能用来测试其他芯片。用好芯片测试其他芯片时，能正确给出被测试芯片是好还是坏。而用坏芯片测试其他芯片时，会随机给出好或是坏的测试结果（即此结果与被测试芯片实际的好坏无关）。<br>　　给出所有芯片的测试结果，问哪些芯片是好芯片。<br>输入格式<br>　　输入数据第一行为一个整数n，表示芯片个数。<br>　　第二行到第n+1行为n*n的一张表，每行n个数据。表中的每个数据为0或1，在这n行中的第i行第j列（1≤i, j≤n）的数据表示用第i块芯片测试第j块芯片时得到的测试结果，1表示好，0表示坏，i=j时一律为1（并不表示该芯片对本身的测试结果。芯片不能对本身进行测试）。<br>输出格式<br>　　按从小到大的顺序输出所有好芯片的编号<br>样例输入<br>3<br>1 0 1<br>0 1 0<br>1 0 1<br>样例输出<br>1 3</p>
+</blockquote>
+<p>思路：<br>刚看到这道题是没有思路的，想着假设1号芯片是好的再一一比对，有点麻烦。后来在网上搜，发现简便方法，利用离散中的抽屉原理（还没学过）。</p>
+<p>抽屉原理：如果把n+1个物体放入n个抽屉里，则必有一个抽屉里至少放了两个物体。</p>
+<p>在这道题中的应用就是假如有n/2个芯片说某一个芯片是好的的话，那该芯片就是好的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt; </span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> n,i,j;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n);<br>	<span class="hljs-keyword">int</span> a[<span class="hljs-number">22</span>][<span class="hljs-number">22</span>],count[<span class="hljs-number">22</span>];<br>	<span class="hljs-built_in">memset</span>(count,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(count));<span class="hljs-comment">//初始化 </span><br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)<br>			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;a[i][j]);<br><br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>		<span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)&#123;<br>			<span class="hljs-keyword">if</span>(i!=j &amp;&amp; a[i][j]==<span class="hljs-number">1</span>)<br>				count[j]++;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>;j&lt;=n;j++)<br>		<span class="hljs-keyword">if</span>(count[j]&gt;=n/<span class="hljs-number">2</span>)<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,j);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
       
     </div>
 
